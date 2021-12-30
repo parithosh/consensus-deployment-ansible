@@ -1,0 +1,17 @@
+version: "3.4"
+services:
+  prysm_beacon:
+    image: gcr.io/prysmaticlabs/prysm/beacon-chain:kintsugi-30ed0d
+    container_name: prysm_beacon
+    volumes:
+      - ./beacon_data:/consensus_data
+      - ../../../$TESTNET_NAME/custom_config_data:/custom_config_data
+    command: >
+      --accept-terms-of-use
+      --genesis-state /custom_config_data/genesis.ssz
+      --datadir /consensus_data
+      --http-web3provider=http://localhost:8545
+      --min-sync-peers=1
+      --chain-config-file /custom_config_data/config.yaml
+      --bootstrap-node "enr:-Iq4QKuNB_wHmWon7hv5HntHiSsyE1a6cUTK1aT7xDSU_hNTLW3R4mowUboCsqYoh1kN9v3ZoSu_WuvW9Aw0tQ0Dxv6GAXxQ7Nv5gmlkgnY0gmlwhLKAlv6Jc2VjcDI1NmsxoQK6S-Cii_KmfFdUJL2TANL3ksaKUnNXvTCv1tLwXs0QgIN1ZHCCIyk"
+    network_mode: host
