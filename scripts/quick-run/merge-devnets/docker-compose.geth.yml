@@ -12,8 +12,6 @@ services:
   geth:
     image: parithoshj/geth:merge-d99ac5a
     container_name: geth
-    ports:
-      - "8545:8545"
     depends_on:
       - init_geth
     volumes:
