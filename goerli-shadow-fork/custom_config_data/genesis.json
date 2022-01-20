@@ -13,8 +13,8 @@
     "istanbulBlock": 1561651,
     "berlinBlock": 4460644,
     "londonBlock": 5062605,
-    "mergeForkBlock": 6234066,
-    "terminalTotalDifficulty": 9147676,
+    "mergeForkBlock": 6234874,
+    "terminalTotalDifficulty": 9149384,
     "clique": { "period": 15, "epoch": 30000 },
     "trustedCheckpoint": {
       "sectionIndex": 66,
