@@ -12,10 +12,9 @@ services:
   geth:
     image: parithoshj/geth:merge-d99ac5a
     container_name: geth
-    ports:
-      - "8545:8545"
     depends_on:
-      - init_geth
+      init_geth:
+        condition: service_completed_successfully
     volumes:
       - ./execution_data:/execution_data
     command: >
