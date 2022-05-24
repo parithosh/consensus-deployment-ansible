@@ -18,7 +18,7 @@
   when: _node_exporter_system_user != "root"
 
 - block:
-    - name: Download node_exporter binary to local folder
+    - name: Download node_exporter binary to remote folder
       become: false
       get_url:
         url: "https://github.com/prometheus/node_exporter/releases/download/v{{ node_exporter_version }}/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
@@ -28,7 +28,6 @@
       until: _download_binary is succeeded
       retries: 5
       delay: 2
-      delegate_to: localhost
       check_mode: false
 
     - name: Unpack node_exporter binary
@@ -37,7 +36,7 @@
         src: "/tmp/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
         dest: "/tmp"
         creates: "/tmp/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}/node_exporter"
-      delegate_to: localhost
+        remote_src: yes
       check_mode: false
 
     - name: Propagate node_exporter binaries
@@ -47,6 +46,7 @@
         mode: 0755
         owner: root
         group: root
+        remote_src: yes
       notify: restart node_exporter
       when: not ansible_check_mode
   when: node_exporter_binary_local_dir | length == 0
@@ -58,5 +58,6 @@
     mode: 0755
     owner: root
     group: root
+    remote_src: yes
   when: node_exporter_binary_local_dir | length > 0
   notify: restart node_exporter
