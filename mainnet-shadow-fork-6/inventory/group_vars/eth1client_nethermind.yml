@@ -38,7 +38,7 @@ eth1_start_args: >
   --Merge.TerminalTotalDifficulty={{terminal_total_difficulty}}
   --Init.DiagnosticMode="None"
   --Init.IsMining=true
-  --JsonRpc.JwtSecretFile=/jwtsecret
+  --JsonRpc.JwtSecretFile=/jwtsecret/jwtsecret.hex
   --JsonRpc.AdditionalRpcUrls="http://localhost:{{eth1_engine_port_no_auth}}|http;ws|net;eth;subscribe;engine;web3;client|no-auth,http://localhost:{{eth1_engine_port}}|http;ws|net;eth;subscribe;engine;web3;client"
   --EthStats.Enabled=true
   --EthStats.Name={{inventory_hostname}}

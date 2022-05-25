@@ -30,7 +30,7 @@ eth1_start_args: >
   --ws
   --engine.port={{eth1_engine_port}}
   --engine.addr=0.0.0.0
-  --authrpc.jwtsecret=/jwtsecret
+  --authrpc.jwtsecret=/jwtsecret/jwtsecret.hex
   --nat extip:{{ansible_host}}
   --allow-insecure-unlock
   --prune=htrc

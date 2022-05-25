@@ -33,7 +33,7 @@ eth1_start_args: >
   --authrpc.port={{eth1_engine_port}}
   --authrpc.addr=0.0.0.0
   --authrpc.vhosts="*"
-  --authrpc.jwtsecret=/jwtsecret
+  --authrpc.jwtsecret=/jwtsecret/jwtsecret.hex
   --nat extip:{{ansible_host}}
   --allow-insecure-unlock
   --metrics --pprof --pprof.addr 0.0.0.0 --pprof.port={{eth1_metrics_port}}
