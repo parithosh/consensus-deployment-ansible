@@ -57,7 +57,7 @@ beacon_start_args: >
   --eth1-endpoints={{eth1endpoint}}
   --terminal-total-difficulty-override={{terminal_total_difficulty}}
   --suggested-fee-recipient={{fee_recipient}}
-  --jwt-secrets="/jwtsecret"
+  --jwt-secrets="/jwtsecret/jwtsecret.hex"
 
 # in case of eth1 deposit endpoint problems: --dummy-eth1
 

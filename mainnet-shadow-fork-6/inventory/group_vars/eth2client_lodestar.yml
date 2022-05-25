@@ -60,7 +60,7 @@ beacon_start_args: >
         --metrics.enabled
         --metrics.serverPort={{ beacon_metrics_port }}
         --eth1.depositContractDeployBlock=14675001
-        --jwt-secret="/jwtsecret"
+        --jwt-secret="/jwtsecret/jwtsecret.hex"
 
 validator_start_args: >
   validator

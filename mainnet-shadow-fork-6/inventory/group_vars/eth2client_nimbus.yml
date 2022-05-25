@@ -50,7 +50,7 @@ beacon_start_args: >
   --secrets-dir="/validatordata/secrets"
   {% endif %}
   --terminal-total-difficulty-override={{terminal_total_difficulty}}
-  --jwt-secret=/jwtsecret
+  --jwt-secret=/jwtsecret/jwtsecret.hex
   --dump:on
 
 ##############################################

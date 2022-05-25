@@ -59,7 +59,7 @@ beacon_start_args: >
   --grpc-gateway-host=0.0.0.0
   --grpc-gateway-port={{beacon_api_port}}
   --enable-debug-rpc-endpoints
-  --jwt-secret=/jwtsecret
+  --jwt-secret=/jwtsecret/jwtsecret.hex
   --suggested-fee-recipient={{ fee_recipient }}
   --contract-deployment-block=14675001
 

@@ -2,8 +2,8 @@
 # image name and image location
 ##############################################
 eth2_client_name: teku
-beacon_image_name: consensys/teku:develop
-validator_image_name: consensys/teku:develop
+beacon_image_name: jtraglia/teku-asan
+validator_image_name: jtraglia/teku-asan
 beacon_endpoint: "http://127.0.0.1:{{beacon_api_port}}"
 
 eth2_github_external_user_pubkeys:
@@ -53,7 +53,7 @@ beacon_start_args: >
   --validator-keys="/validatordata/keys:/validatordata/secrets"
   --validators-keystore-locking-enabled=false
   {% endif %}
-  --ee-jwt-secret-file="/jwtsecret"
+  --ee-jwt-secret-file="/jwtsecret/jwtsecret.hex"
   --Xnetwork-total-terminal-difficulty-override="{{terminal_total_difficulty}}"
   --Xlog-include-p2p-warnings-enabled
   --Xmetrics-block-timing-tracking-enabled
