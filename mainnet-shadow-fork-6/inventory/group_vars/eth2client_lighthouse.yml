@@ -17,12 +17,12 @@ eth2_github_external_user_pubkeys:
 # volume mappings on remote host
 ##############################################
 beacon_volumes:
-  - "{{beacon_node_dir}}:/beacondata"
+  - "/home/devops/lighthouse/beacon:/beacondata"
   - "{{testnet_dir}}:/custom_config_data"
   - "{{home_dir}}/jwtsecret:/jwtsecret"
 
 validator_volumes:
-  - "{{validator_node_dir}}:/validatordata"
+  - "/home/devops/lighthouse/validator:/validatordata"
   - "{{testnet_dir}}:/custom_config_data"
 
 ##############################################

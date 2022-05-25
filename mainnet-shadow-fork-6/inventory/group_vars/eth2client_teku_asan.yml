@@ -1,7 +1,7 @@
 ##############################################
 # image name and image location
 ##############################################
-eth2_client_name: teku
+eth2_client_name: teku-asan
 beacon_image_name: jtraglia/teku-asan
 validator_image_name: jtraglia/teku-asan
 beacon_endpoint: "http://127.0.0.1:{{beacon_api_port}}"
@@ -14,9 +14,9 @@ eth2_github_external_user_pubkeys:
 # volume mappings on remote host
 ##############################################
 beacon_volumes:
-  - "{{beacon_node_dir}}:/beacondata"
+  - "/home/devops/teku/beacon:/beacondata"
   - "{{testnet_dir}}:/custom_config_data"
-  - "{{validator_node_dir}}:/validatordata"
+  - "/home/devops/teku/validator:/validatordata"
   - "{{home_dir}}/jwtsecret:/jwtsecret"
 
 ##############################################

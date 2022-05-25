@@ -16,9 +16,9 @@ eth2_github_external_user_pubkeys:
 # volume mappings on remote host
 ##############################################
 beacon_volumes:
-  - "{{beacon_node_dir}}:/beacondata"
+  - "/home/devops/nimbus/beacon:/beacondata"
   - "{{testnet_dir}}:/custom_config_data"
-  - "{{validator_node_dir}}:/validatordata"
+  - "/home/devops/nimbus/validator:/validatordata"
   - "{{home_dir}}/jwtsecret:/jwtsecret"
 
 beacon_log_level: debug
