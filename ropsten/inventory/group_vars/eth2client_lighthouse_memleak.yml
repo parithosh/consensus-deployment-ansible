@@ -36,8 +36,8 @@ beacon_start_args: >
   bn
   --disable-enr-auto-update
   --enr-address={{ansible_host}}
-  --enr-tcp-port={{beacon_p2p_port}} --enr-udp-port={{beacon_p2p_port}}
-  --port={{beacon_p2p_port}} --discovery-port={{beacon_p2p_port}}
+  --enr-tcp-port={{lighthouse_beacon_p2p_port}} --enr-udp-port={{lighthouse_beacon_p2p_port}}
+  --port={{lighthouse_beacon_p2p_port}} --discovery-port={{lighthouse_beacon_p2p_port}}
   --eth1
   {% if (bootnode_enrs is defined) and bootnode_enrs %}
   --boot-nodes="{{ bootnode_enrs | join(',') }}"

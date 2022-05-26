@@ -53,7 +53,7 @@ beacon_start_args: >
   --pprof
   --p2p-host-ip={{ansible_host}}
   --p2p-max-peers={{hi_peer_count}}
-  --p2p-udp-port={{beacon_p2p_port}} --p2p-tcp-port={{beacon_p2p_port}}
+  --p2p-udp-port={{prysm_beacon_p2p_port}} --p2p-tcp-port={{prysm_beacon_p2p_port}}
   --monitoring-host=0.0.0.0 --monitoring-port={{beacon_metrics_port}}
   --rpc-host=0.0.0.0 --rpc-port={{beacon_grpc_port}}
   --grpc-gateway-host=0.0.0.0

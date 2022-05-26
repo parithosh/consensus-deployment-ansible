@@ -64,6 +64,10 @@ beacon_api_port: 4000
 beacon_grpc_port: 4001
 beacon_metrics_port: 8000
 beacon_p2p_port: 9000
+nimbus_beacon_p2p_port: 9000
+teku_beacon_p2p_port: 9001
+prysm_beacon_p2p_port: 9002
+lighthouse_beacon_p2p_port: 9003
 validator_metrics_port: 8001
 validator_rpc_port: 4002
 node_exporter_web_listen_address: "0.0.0.0:9100"

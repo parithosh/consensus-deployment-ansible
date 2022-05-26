@@ -35,8 +35,8 @@ beacon_start_args: >
   {% if (bootnode_enrs is defined) and bootnode_enrs %}
   --bootstrap-node="{{ bootnode_enrs | join(',') }}"
   {% endif %}
-  --udp-port={{beacon_p2p_port}}
-  --tcp-port={{beacon_p2p_port}}
+  --udp-port={{nimbus_beacon_p2p_port}}
+  --tcp-port={{nimbus_beacon_p2p_port}}
   --listen-address=0.0.0.0
   --graffiti="{{graffiti}}"
   --nat="extip:{{ansible_host}}"
