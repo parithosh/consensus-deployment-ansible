@@ -23,9 +23,8 @@ eth1_volumes:
   - "{{home_dir}}/jwtsecret:/jwtsecret"
 
 eth1_start_args: >
-  --config=mainnet_shadowfork
+  --config=ropsten
   --datadir="/eth1data"
-  --Init.ChainSpecPath="/networkdata/nethermind_genesis.json"
   --Init.WebSocketsEnabled=true
   --JsonRpc.Enabled=true
   --JsonRpc.EnabledModules="net,eth,consensus,subscribe,web3,admin"
