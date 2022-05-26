@@ -38,16 +38,12 @@ validator_volumes:
 # arguments to run the containers with
 ##############################################
 beacon_start_args: >
+  --dev
   --accept-terms-of-use=true
   --datadir="/beacondata"
   --chain-config-file="/custom_config_data/config.yaml"
   --genesis-state="/custom_config_data/genesis.ssz"
   --http-web3provider="{{execution_endpoint}}"
-    {% if (bootnode_enrs is defined) and bootnode_enrs %}
-    {% for bootnode_enrs in bootnode_enrs %}
-    --bootstrap-node="{{ bootnode_enrs }}"
-    {% endfor %}
-    {% endif %}
   --verbosity="{{ beacon_log_level | lower }}"
   --min-sync-peers=1
   --pprof
@@ -64,6 +60,7 @@ beacon_start_args: >
   --contract-deployment-block=14675001
 
 validator_start_args: >
+  --dev
   --accept-terms-of-use=true
   --datadir="/validatordata"
   --chain-config-file="/custom_config_data/config.yaml"
