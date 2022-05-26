@@ -1,7 +1,7 @@
 ##############################################
 # image name and image location
 ##############################################
-eth2_client_name: prysm
+eth2_client_name: prysm-race
 beacon_image_name:  infosecual/instrumented-prysm-bn
 validator_image_name: infosecual/instrumented-prysm-vc
 # GRPC, not REST JSON

@@ -1,7 +1,7 @@
 ##############################################
 # image name and image location
 ##############################################
-eth2_client_name: nimbus
+eth2_client_name: nimbus-tsan
 
 beacon_image_name: parithoshj/nimbus:merge-79452b7
 validator_image_name: parithoshj/nimbus:merge-79452b7

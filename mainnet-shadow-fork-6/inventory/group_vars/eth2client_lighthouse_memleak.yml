@@ -1,7 +1,7 @@
 ##############################################
 # image name and image location
 ##############################################
-eth2_client_name: lighthouse
+eth2_client_name: lighthouse-memleak
 
 beacon_image_name: sigp/lighthouse:latest-unstable
 validator_image_name: sigp/lighthouse:latest-unstable
