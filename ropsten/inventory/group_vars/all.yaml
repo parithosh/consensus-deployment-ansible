@@ -48,23 +48,7 @@ bootnode_enrs:
 eth1_bootnode_enode:
   - "enode://d6551a0f8a22447c7263a25376e2fd80bc6016188e5cdc91f4ac4c91c11678690d8586aa381f705617e94638cb30144d8422d12fe15d851c4bdb81ee55dff248@165.232.93.228:30303"
 
-##############################################
-# metric information
-##############################################
-# enter pushgateway config if needed
-#prometheus_config_file: "prometheus/prometheus.yml.j2"
-#push_url: "https://victoriametrics.ethdevops.io/insert/0/prometheus/api/v1/write"
-#push_metrics_enabled: true
-#remote_write_auth: true
-#eth_metrics_exporter_enabled: true
-#eth_metrics_exporter_name: "metrics-exporter"
-#eth_metrics_exporter_image: "samcm/ethereum-metrics-exporter"
-#remote_write_username: "{{ lookup('pipe', 'keybase fs read /keybase/team/ethereum.devops/eth2/monitoring/observability-cluster/metrics-ingress-users/shadow-mainnet-6.json | jq .username') }}"
-#remote_write_password: "{{ lookup('pipe', 'keybase fs read /keybase/team/ethereum.devops/eth2/monitoring/observability-cluster/metrics-ingress-users/shadow-mainnet-6.json | jq .password') }}"
-
-#no_validator_keys: false
-#ethstats_url: "ethstats.mainnetshadowfork6.ethdevops.io"
-#ethstats_password: "mainnetshadowfork6"
+no_validator_keys: false
 
 ##############################################
 # ports to configure
