@@ -33,6 +33,7 @@ beacon_start_args: >
   --p2p-port="{{beacon_p2p_port}}"
   --p2p-advertised-port={{beacon_p2p_port}}
   --logging={{beacon_log_level}}
+  --log-file="/beacondata/logs/teku_asan_{{lookup('pipe', 'date +%Y-%m-%d-%T')}}.log"
   --p2p-peer-upper-bound={{hi_peer_count}}
   --eth1-endpoints="{{eth1endpoint}}"
   --ee-endpoint="{{execution_endpoint}}"
