@@ -18,10 +18,12 @@ eth1_volumes:
   - "{{home_dir}}/jwtsecret:/jwtsecret"
 
 geth_init_args: >
-  erigon --datadir=/eth1data init /networkdata/genesis.json
+  erigon --chain ropsten --datadir=/eth1data init /networkdata/genesis.json
 
 eth1_start_args: >
-  erigon --datadir=/eth1data
+  erigon
+  --chain ropsten
+  --datadir=/eth1data
   --networkid={{chainID}}
   --http --http.api "admin,engine,net,eth"
   --http.port {{eth1_rpc_port}}
