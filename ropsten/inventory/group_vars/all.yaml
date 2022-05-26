@@ -38,7 +38,7 @@ eth1endpoint: http://127.0.0.1:8545
 testnet_type: custom
 eth2_network_name: ropsten
 chainID: 3
-terminal_total_difficulty: "43531756765713534"
+terminal_total_difficulty: "100000000000000000000000"
 fee_recipient: "0x6a7aA9b882d50Bb7bc5Da1a244719C99f12F06a3"
 # enter bootnodes here if needed
 bootnode_enrs:
