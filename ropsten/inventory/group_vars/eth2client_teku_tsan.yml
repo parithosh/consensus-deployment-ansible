@@ -2,9 +2,12 @@
 # image name and image location
 ##############################################
 eth2_client_name: teku-tsan
-beacon_image_name: jtraglia/teku-tsan
-validator_image_name: jtraglia/teku-tsan
+#beacon_image_name: jtraglia/teku-asan
+#validator_image_name: jtraglia/teku-asan
+beacon_image_name: consensys/teku:develop
+validator_image_name: consensys/teku:develop
 beacon_endpoint: "http://127.0.0.1:{{beacon_api_port}}"
+beacon_container_name: teku-beacon-validator
 
 eth2_github_external_user_pubkeys:
   - tbenr
