@@ -70,7 +70,7 @@ validator_start_args: >
   --beacon-rpc-provider={{beacon_endpoint}}
   --monitoring-host=0.0.0.0 --monitoring-port={{validator_metrics_port}}
   --graffiti="{{graffiti}}"
-  --wallet-dir=/validatordata/wallet
+  --wallet-dir=/validatordata
   --wallet-password-file="/validatordata/wallet_pass.txt"
 
 
