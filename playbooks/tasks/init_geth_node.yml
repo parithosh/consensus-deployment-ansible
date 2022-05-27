@@ -1,5 +1,5 @@
 - name: Init geth,erigon node
-  hosts: eth1client_geth,eth1client_erigon
+  hosts: geth,erigon
   gather_facts: true
   serial: 20
   tasks:

@@ -38,6 +38,10 @@
         state: "present"
         regexp: "^%{{ bootstrap_user }}"
         line: "%{{ bootstrap_user }} ALL=(ALL) NOPASSWD: ALL"
+    - name: Run "apt-get update" to ensure available packages are up to date
+      apt:
+        update_cache: yes
+        upgrade: yes
 
 - name: Run bootstrap playbook to ensure basic stuff works and add oh-my-zsh
   hosts: all
