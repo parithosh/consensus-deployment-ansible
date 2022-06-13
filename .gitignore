@@ -17,3 +17,9 @@ mergenet.yaml
 faucet.yml
 reverse_proxy.yml
 dshackle.yml
+
+remote_write_username
+remote_write_password
+secrets.yaml
+enodes.json
+enrs.json
