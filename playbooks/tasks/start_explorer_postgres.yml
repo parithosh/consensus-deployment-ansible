@@ -18,9 +18,9 @@
         network_mode: bridge
         networks:
           - name: "{{explorer_docker_network_name}}"
-            ipv4_address: "172.1.1.100"
+            ipv4_address: "{{explorer_postgres_ip}}"
         expose:
-          - "5432"
+          - "{{explorer_postgres_port}}"
         restart: "{{ explorer_postgres_require_restart | default(false) }}"
         memory: "{{explorer_postgres_memory}}"
         command: "{{ explorer_postgres_start_args }}"
@@ -28,6 +28,6 @@
         env:
           POSTGRES_PASSWORD: "{{ explorer_postgres_password }}"
           POSTGRES_USER: postgres
-          POSTGRES_PORT: "5432"
+          POSTGRES_PORT: "{{explorer_postgres_port}}"
           POSTGRES_DB: db
           PGDATA: "/postgresql/data"
