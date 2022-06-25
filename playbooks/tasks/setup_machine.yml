@@ -48,6 +48,7 @@
           apt:
             update_cache: yes
             upgrade: yes
+
     - name: Docker with dependencies and user role
       block:
         - name: Docker
@@ -59,6 +60,9 @@
             state: present
         - name: Add ansible user to docker group
           shell: "usermod -aG docker {{ ansible_user }}"
+        - name: Add ansible user to docker group
+          shell: "usermod -aG docker {{ bootstrap_user }}"
+
     - name: Reload service docker, in all cases
       ansible.builtin.service:
         name: docker
