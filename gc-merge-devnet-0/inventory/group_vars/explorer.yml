@@ -40,13 +40,15 @@ explorer_postgres_init_args: >
 
 explorer_host_dir: "{{home_dir}}/explorer_data"
 
+execution_explorer_genesis_host_path: "{{explorer_host_dir}}/genesis.json"
+execution_explorer_genesis_cont_path: /data/genesis.json
 execution_explorer_volumes:
   - "{{explorer_host_dir}}:/data"
-  - "{{testnet_dir}}:/custom_config_data"
 
+beacon_explorer_config_host_path: "{{explorer_host_dir}}/eth2_config.yaml"
+beacon_explorer_config_cont_path: /data/eth2_config.yaml
 beacon_explorer_volumes:
   - "{{explorer_host_dir}}:/data"
-  - "{{testnet_dir}}/config.yaml:/app/eth2_config.yaml"
 
 beacon_explorer_start_args: "./explorer --config=/data/config.yaml"
 

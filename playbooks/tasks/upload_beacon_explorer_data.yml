@@ -24,3 +24,7 @@
       copy:
         src: "./templates/beaconchain_explorer/tables.sql"
         dest: "{{explorer_host_dir}}/tables.sql"
+    - name: Copy eth2 config
+      copy:
+        src: "{{local_eth2_config_filepath}}"
+        dest: "{{beacon_explorer_config_host_path}}"

@@ -12,7 +12,7 @@ chain:
   minGenesisActiveValidatorCount: {{eth2_config['MIN_GENESIS_ACTIVE_VALIDATOR_COUNT']}}
   genesisTimestamp: {{ eth2_config['MIN_GENESIS_TIME']|int + eth2_config['GENESIS_DELAY']|int }}
   mainnet: false # hide mainnet staking pool etc. info
-  phase0path: "./eth2_config.yaml"
+  phase0path: "{{beacon_explorer_config_cont_path}}"
   altairForkEpoch: {{eth2_config['ALTAIR_FORK_EPOCH']}}
 # Note: It is possible to run either the frontend or the indexer or both at the same time
 # Frontend config
