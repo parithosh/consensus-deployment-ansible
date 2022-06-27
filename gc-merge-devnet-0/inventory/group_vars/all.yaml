@@ -23,6 +23,8 @@ consensus_endpoint_nimbus: ws://127.0.0.1:8551
 
 eth1endpoint: http://127.0.0.1:8545
 
+beacon_api_endpoint: "http://127.0.0.1:{{beacon_api_port}}"
+
 # Merge Engine endpoints
 # TODO change IP?
 # TODO: some engines might start using the 8550 port (or 8551 for ws)
@@ -78,7 +80,7 @@ remote_write_auth: true
 eth2_validator_metrics_enabled: true
 eth_metrics_exporter_enabled: true
 eth_metrics_exporter_name: "metrics-exporter"
-eth_metrics_exporter_image: "samcm/ethereum-metrics-exporter:0.9.0"
+eth_metrics_exporter_image: samcm/ethereum-metrics-exporter:0.11.0"
 
 no_validator_keys: false
 ethstats_url: "ethstats.gcmergedevnet0.ethdevops.io"

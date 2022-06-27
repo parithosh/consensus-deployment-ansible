@@ -24,3 +24,6 @@ remote_write_password
 secrets.yaml
 enodes.json
 enrs.json
+
+.vscode/settings.json
+
