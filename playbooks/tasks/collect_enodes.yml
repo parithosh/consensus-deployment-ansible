@@ -1,0 +1,23 @@
+- name: Collect enodes
+  hosts: execution
+  gather_facts: false
+  serial: 20
+  tasks:
+    - name: Get enode from logs
+      shell: docker logs {{execution_container_name}} | grep enode:// | sed 's/.*enode:\/\///'
+      register: enode_noprefix_cmd
+    - name: Set each node's own enode
+      set_fact:
+        execution_enode: "enode://{{enode_noprefix_cmd.stdout}}"
+- name: Write enodes
+  hosts: localhost
+  gather_facts: true
+  tasks:
+    - name: Create a map with all node's enodes
+      with_items: "{{ groups['execution'] }}"
+      set_fact:
+        execution_enodes: "{{ execution_enodes|default({}) | combine( {item: hostvars[item]['execution_enode']} ) }}"
+    - name: Write enodes
+      copy:
+        content: "{{ execution_enodes.values() | list | to_nice_json }}"
+        dest: "../../enodes.json"
