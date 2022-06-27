@@ -9,5 +9,11 @@
     - name: Move the execution explorer config j2 template to remote
       template:
         src: blockscout_data/blockscout.env.j2
-        dest:  "{{explorer_host_dir}}/blockscout.env"
-        mode: '755'
+        dest: "{{explorer_host_dir}}/blockscout.env"
+        mode: "755"
+    # Note: explicitly copying the file instead of relying on uploading the entire custom_config_data tar
+    # ensures that the playbook errors if paths are not correct.
+    - name: Copy genesis JSON file
+      copy:
+        src: "{{local_eth1_genesis_filepath}}"
+        dest: "{{execution_explorer_genesis_host_path}}"
