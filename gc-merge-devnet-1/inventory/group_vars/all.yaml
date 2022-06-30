@@ -36,10 +36,9 @@ testnet_type: custom
 eth2_network_name: gc-merge-devnet-1
 eth2_network_name_pretty: GC merge devnet 1
 chainID: 1
-# TTD 0x9ffffffffffffffffffffffffffffffec = 10 * 0xfffffffffffffffffffffffffffffffe = 3402823669209384634633746074317682114540
-# TTD 0x63ffffffffffffffffffffffffffffff38 = 100 * 0xfffffffffffffffffffffffffffffffe = 34028236692093846346337460743176821145400
-# 442367076997220002502386989661298674890200 = 2160 blocks = 10800 seconds = 3 hours
-terminal_total_difficulty: "7350099125492270810808891520526193367406400"
+# 0xfffffffffffffffffffffffffffffffe difficulty / block
+# 735009912549227081080889152052619336740640 = 2160 blocks = 10800 seconds = 3 hours
+terminal_total_difficulty: "735009912549227081080889152052619336740640"
 fee_recipient: "0xf97e180c050e5Ab072211Ad2C213Eb5AEE4DF134"
 # enter bootnodes here if needed
 bootnode_enrs:
