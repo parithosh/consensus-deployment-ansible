@@ -22,6 +22,7 @@ dshackle.yml
 remote_write_username
 remote_write_password
 secrets.yaml
+secrets.yml
 enodes.json
 enrs.json
 
