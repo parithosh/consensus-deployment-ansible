@@ -39,8 +39,8 @@ frontend:
 # Indexer config
 indexer:
   enabled: true # Enable or disable the indexing service
-  fullIndexOnStartup: false # Perform a one time full db index on startup
-  indexMissingEpochsOnStartup: false # Check for missing epochs and export them after startup
+  fullIndexOnStartup: true # Perform a one time full db index on startup
+  indexMissingEpochsOnStartup: true # Check for missing epochs and export them after startup
   node:
     host: "{{explorer_eth2_source_ip_address}}" # Address of the backend node
     port: {{beacon_api_port}} # GRPC port of the Prysm node
