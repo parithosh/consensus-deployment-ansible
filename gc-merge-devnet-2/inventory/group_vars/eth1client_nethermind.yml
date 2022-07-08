@@ -54,6 +54,9 @@ eth1_start_args: >
   --Aura.TxPriorityContractAddress=0x4100000000000000000000000000000000000000
   --Aura.ForceSealing=true
   --Aura.AllowAuRaPrivateChains=true
+  --Seq.MinLevel="Info"
+  --Seq.ServerUrl="https://seq.nethermind.io/"
+  --Seq.ApiKey="{{nethermind_seq_api_key}}"
   {% if mining_index is defined %}
   --Init.IsMining=true
   --Mining.Enabled=true
