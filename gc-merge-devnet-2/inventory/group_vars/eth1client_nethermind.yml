@@ -44,10 +44,7 @@ eth1_start_args: >
   --Init.DiagnosticMode="None"
   --JsonRpc.JwtSecretFile=/jwtsecret
   --JsonRpc.AdditionalRpcUrls="http://localhost:{{eth1_engine_port_no_auth}}|http;ws|net;eth;subscribe;engine;web3;client|no-auth,http://localhost:{{eth1_engine_port}}|http;ws|net;eth;subscribe;engine;web3;client"
-  --EthStats.Enabled=true
-  --EthStats.Name={{inventory_hostname}}
-  --EthStats.Secret={{ethstats_password}}
-  --EthStats.Server=wss://{{ethstats_url}}/api/
+  --EthStats.Enabled=false
   --Metrics.ExposePort={{eth1_metrics_port}}
   --Metrics.Enabled=true
   --AuRaMerge.Enabled=true
