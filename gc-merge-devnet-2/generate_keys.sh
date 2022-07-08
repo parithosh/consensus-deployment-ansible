@@ -49,5 +49,5 @@ function prep_group {
 # validators_per_host
 prep_group 1 "$VALIDATORS_MNEMONIC" 0 4 "merge-devnet-1-lighthouse-nethermind" 1000
 prep_group 1 "$VALIDATORS_MNEMONIC" 4 4 "merge-devnet-1-prysm-nethermind" 1000
-prep_group 1 "$VALIDATORS_MNEMONIC" 8 1 "merge-devnet-1-lodestar-nethermind" 1000
-prep_group 1 "$VALIDATORS_MNEMONIC" 9 1 "merge-devnet-1-teku-nethermind" 1000
+prep_group 1 "$VALIDATORS_MNEMONIC" 8 2 "merge-devnet-1-lodestar-nethermind" 1000
+prep_group 1 "$VALIDATORS_MNEMONIC" 10 1 "merge-devnet-1-teku-nethermind" 1000

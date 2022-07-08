@@ -4,9 +4,8 @@
 eth2_client_name: lodestar
 
 # TODO: switch to merge f2f, but mainnet preset
-# next tag from Jun29 https://hub.docker.com/layers/chainsafe/lodestar/next/images/sha256-692b747613b784dfdc9a177c0ebf61a619005f9cb691e6e5175515bff4bda9e1?context=explore
-beacon_image_name: chainsafe/lodestar@sha256:692b747613b784dfdc9a177c0ebf61a619005f9cb691e6e5175515bff4bda9e1
-validator_image_name: chainsafe/lodestar@sha256:692b747613b784dfdc9a177c0ebf61a619005f9cb691e6e5175515bff4bda9e1
+beacon_image_name: chainsafe/lodestar:next
+validator_image_name: chainsafe/lodestar:next
 beacon_endpoint: "http://127.0.0.1:{{beacon_api_port}}"
 
 eth2_github_external_user_pubkeys:

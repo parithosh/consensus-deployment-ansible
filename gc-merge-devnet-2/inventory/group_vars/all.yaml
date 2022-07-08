@@ -34,8 +34,8 @@ beacon_api_endpoint: "http://127.0.0.1:{{beacon_api_port}}"
 # testnet specific information
 ##############################################
 testnet_type: custom
-eth2_network_name: gc-merge-devnet-1
-eth2_network_name_pretty: GC merge devnet 1
+eth2_network_name: gc-merge-devnet-2
+eth2_network_name_pretty: GC merge devnet 2
 chainID: 1
 # 0xfffffffffffffffffffffffffffffffe difficulty / block
 # 735009912549227081080889152052619336740640 = 2160 blocks = 10800 seconds = 3 hours
