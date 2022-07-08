@@ -133,6 +133,7 @@ local_eth1_genesis_filepath: "{{local_custom_config_data_host_dir}}/nethermind_g
 # Validator assignments
 local_validator_host_dir: "{{inventory_dir}}/../validator_prep/{{inventory_hostname}}"
 local_validator_host_archive: "{{inventory_dir}}/../validator_prep/{{inventory_hostname}}.tar.gz"
+local_logs_archive: "{{inventory_dir}}/../logs_archive"
 
 ##############################################
 # remote host data directories
@@ -142,6 +143,7 @@ beacon_node_dir: "{{home_dir}}/beacon"
 validator_node_dir: "{{home_dir}}/validator"
 testnet_dir: "{{home_dir}}/custom_config_data"
 eth1_node_dir: "{{home_dir}}/eth1data"
+archived_logs_dir: "{{home_dir}}/archived_logs"
 
 ##############################################
 # common log config

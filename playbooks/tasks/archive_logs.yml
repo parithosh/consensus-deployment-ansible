@@ -1,0 +1,52 @@
+- name: Archive beacon logs
+  hosts: beacon
+  gather_facts: false
+  serial: 20
+  tasks:
+    - name: Creates archived_logs_dir
+      file:
+        path: "{{archived_logs_dir}}/beacon"
+        state: directory
+    - name: Archive lodestar logs
+      when: eth2_client_name == 'lodestar'
+      shell: cp -r {{beacon_node_dir}}/beacon*.log {{archived_logs_dir}}/beacon/
+    - name: Archive non-lodestar logs
+      when: not eth2_client_name == 'lodestar'
+      shell: docker logs {{beacon_container_name}} >& {{archived_logs_dir}}/beacon/docker_logs.txt
+      args:
+        executable: /bin/bash
+
+- name: Archive execution logs
+  hosts: execution
+  gather_facts: false
+  serial: 20
+  tasks:
+    - name: Creates archived_logs_dir
+      file:
+        path: "{{archived_logs_dir}}/execution"
+        state: directory
+    # ~ ls eth1data/logs
+    # log.27.txt  log.28.txt
+    - name: Archive nethermind logs
+      when: eth1_client_name == 'nethermind'
+      shell: cp -r {{eth1_node_dir}}/logs/. {{archived_logs_dir}}/execution/
+    - name: Archive non-nethermind logs
+      when: not eth1_client_name == 'nethermind'
+      shell: docker logs {{execution_container_name}} >& {{archived_logs_dir}}/beacon/docker_logs.txt
+      args:
+        executable: /bin/bash
+
+- name: Download archived logs
+  hosts: beacon, execution
+  gather_facts: false
+  serial: 20
+  tasks:
+    - name: Archive logs to prepare for download
+      archive:
+        path: "{{archived_logs_dir}}"
+        dest: "{{archived_logs_dir}}.tar.gz"
+    - name: Download archived logs .tar.gz
+      fetch:
+        src: "{{archived_logs_dir}}.tar.gz"
+        dest: "{{local_logs_archive}}/{{inventory_hostname}}_archived_logs.tar.gz"
+        flat: true
