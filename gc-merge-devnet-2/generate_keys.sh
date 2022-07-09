@@ -41,12 +41,6 @@ function prep_group {
   done
 }
 
-# group_base = 1
-# mnemonic = $VALIDATORS_MNEMONIC
-# offset = 0
-# keys_to_create = 15
-# naming_prefix = "merge-devnet-1-lighthouse-geth"
-# validators_per_host
 prep_group 1 "$VALIDATORS_MNEMONIC" 0 4 "merge-devnet-2-lighthouse-nethermind" 1000
 prep_group 1 "$VALIDATORS_MNEMONIC" 4 4 "merge-devnet-2-prysm-nethermind" 1000
 prep_group 1 "$VALIDATORS_MNEMONIC" 8 2 "merge-devnet-2-lodestar-nethermind" 1000

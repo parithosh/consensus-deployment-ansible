@@ -1,5 +1,5 @@
 {
-  "name": "merge-devnet-1",
+  "name": "merge-devnet-2",
   "engine": {
     "authorityRound": {
       "params": {
@@ -31,7 +31,7 @@
     "gasLimitBoundDivisor": "0x400",
     "maximumExtraDataSize": "0x20",
     "minGasLimit": "0x1388",
-    "networkID": 100991,
+    "networkID": 100992,
     "eip140Transition": "0x0",
     "eip211Transition": "0x0",
     "eip214Transition": "0x0",
