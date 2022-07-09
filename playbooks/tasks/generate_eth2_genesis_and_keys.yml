@@ -54,6 +54,7 @@
     - name: Clear directory
       become: true
       shell: rm -rf {{output_keys_dirpath}}
+    # {{output_keys_dirpath}} is created by the docker bind below when running the container
 
     - name: Generate keys
       shell: >
@@ -66,6 +67,12 @@
         --source-max={{from_index}} \
         --source-min={{to_index}} \
         --source-mnemonic="{{mnemonic}}"
+
+    # {{validator_node_dir}} must be created manually
+    - name: Creates validator dir
+      file:
+        path: "{{validator_node_dir}}"
+        state: directory
 
     # Grab the right keys for each eth2 client
 
