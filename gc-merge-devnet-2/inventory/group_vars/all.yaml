@@ -133,6 +133,7 @@ local_custom_config_data_host_dir: "{{inventory_dir}}/../custom_config_data"
 local_custom_config_data_host_archive: "{{inventory_dir}}/../custom_config_data.tar.gz"
 local_eth2_config_filepath: "{{local_custom_config_data_host_dir}}/config.yaml"
 local_eth1_genesis_filepath: "{{local_custom_config_data_host_dir}}/nethermind_genesis.json"
+local_mnemonics_filepath: "{{local_custom_config_data_host_dir}}/mnemonics.yaml"
 # private dirs
 # Validator assignments
 local_validator_host_dir: "{{inventory_dir}}/../validator_prep/{{inventory_hostname}}"
