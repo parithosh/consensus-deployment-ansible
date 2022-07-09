@@ -103,7 +103,7 @@ node_exporter_web_listen_address: "0.0.0.0:9100"
 prometheus_web_listen_address: "0.0.0.0:9090"
 eth1_metrics_port: 8002
 eth_metrics_exporter_port: 8003
-cadvisor_port: 9100
+cadvisor_port: 9280
 
 ##############################################
 # Command for JSON RPC snooper
