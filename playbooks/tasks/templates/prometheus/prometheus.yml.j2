@@ -83,3 +83,15 @@ scrape_configs:
       - localhost:{{ eth1_metrics_port }}
 
 {% endif %}
+
+{% if cadvisor_enabled is defined %}
+
+  - job_name: cadvisor
+    static_configs:
+    - labels:
+        instance: "{{ inventory_hostname }}"
+        scrape_location: cadvisor
+      targets:
+      - localhost:{{ cadvisor_port }}
+
+{% endif %}

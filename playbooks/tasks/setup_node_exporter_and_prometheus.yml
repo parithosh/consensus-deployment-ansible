@@ -4,6 +4,8 @@
   roles:
     - cloudalchemy.node_exporter
     - cloudalchemy.prometheus
+    - role: ome.cadvisor
+      when: cadvisor_enabled|bool == true
   tasks:
     - name: Start exporter container
       when:

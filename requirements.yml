@@ -12,3 +12,5 @@
   version: "6.0.3"
 - name: robertdebock.fail2ban
   version: "4.2.3"
+- name: ome.cadvisor
+  version: "0.4.0"
