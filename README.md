@@ -55,11 +55,11 @@ Provision instances and allocate hosts in `$testnet/inventory/inventory.ini`
 
 ```yaml
 # Setup name and keys
-tasks/create_bootstrap_user_and_provision_machine.yml
+playbooks/tasks/create_bootstrap_user_and_provision_machine.yml
 # Setup the firewall rules for the machine
-tasks/start_firewall.yml
+playbooks/tasks/start_firewall.yml
 # Setup the machine with docker, updates apt cache, adds user keys
-tasks/setup_machine.yml
+playbooks/tasks/setup_machine.yml
 ```
 
 **3. Generate keys**
@@ -103,9 +103,9 @@ Generate eth2 keys. Set correct offsets in `$testnet/generate_keys.sh`. Then run
 
 ```yaml
 # Upload keys + config, then deploy EL + CL + snooper
-tasks/setup_execution_and_consensus_full.yml
+playbooks/setup_execution_and_consensus_full.yml
 # Install node_exporter and metric pusher
-tasks/setup_node_exporter_and_prometheus.yml
+playbooks/setup_node_exporter_and_prometheus.yml
 ```
 
 **6. Deploy tooling**
