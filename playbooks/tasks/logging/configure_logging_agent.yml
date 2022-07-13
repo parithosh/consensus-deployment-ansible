@@ -1,0 +1,105 @@
+---
+- name: Configure Logging Agent
+  hosts: hetzner
+  gather_facts: false
+  vars_prompt:
+    - name: aws_access_key
+      prompt: Enter the AWS access key
+    - name: aws_secret_key
+      prompt: Enter the AWS secret key
+  serial: 20  
+  tasks:
+    - name: Add systemd source
+      become: yes
+      blockinfile:
+        path: "/etc/td-agent/td-agent.conf"
+        insertafter: EOF
+        marker: "# ANSIBLE MANAGED BLOCK - systemd source {mark}"
+        state: present
+        block: |2
+          <source>
+            @type systemd
+            tag log.systemd
+            path /var/log/journal
+            read_from_head true
+
+            <storage>
+                @type local
+                path /var/tmp/td-agent/tail_positions/systemd-cursor.json
+            </storage>
+
+            <entry>
+              fields_strip_underscores true
+              fields_lowercase true
+            </entry> 
+
+          </source>
+
+    - name: Create tail position file consul
+      file:
+        path: /var/tmp/td-agent/tail_positions/systemd-cursor.json
+        state: touch
+        owner: td-agent
+        group: td-agent
+      become: yes
+
+    - name: Add syslog logger
+      become: yes
+      blockinfile:
+        path: "/etc/td-agent/td-agent.conf"
+        insertafter: EOF
+        marker: "# ANSIBLE MANAGED BLOCK - syslog logger {mark}"
+        state: present
+        block: |2
+          <source>
+            @type tail
+            format none
+            path /var/log/syslog
+            pos_file /var/tmp/td-agent/tail_positions/syslog-cursor.pos
+            tag log.sre.syslog
+            path_key tailed_path
+            <parse>
+              @type syslog
+            </parse>
+          </source>
+
+    - name: Create tail position file
+      file:
+        path: /var/tmp/td-agent/tail_positions/syslog-cursor.pos
+        state: touch
+        owner: td-agent
+        group: td-agent
+      become: yes
+
+    # Elasticsearch
+    - name: Add elasticsearch store
+      become: yes
+      blockinfile:
+        path: "/etc/td-agent/td-agent.conf"
+        state: present
+        block: |2
+              <match es.**>
+                type opensearch
+                logstash_format true
+                include_tag_key true
+                flush_interval 10s
+
+                <endpoint>
+                  url https://search-gnosis-merge-nev36iek55lsofh2hz3evzkolq.eu-central-1.es.amazonaws.com
+                  region eu-central-1
+                  access_key_id      {{aws_access_key}}
+                  secret_access_key  {{aws_secret_key}}
+                </endpoint>
+              </match>
+
+    - name: Creates directory
+      file:
+        path: /var/log/elasticsearch_logs_buffer/
+        state: directory
+        owner: td-agent
+        group: td-agent
+      become: yes
+
+    - name: Install td agent grafana gem
+      shell: td-agent-gem install fluent-plugin-opensearch
+      become: yes

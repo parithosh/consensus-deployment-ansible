@@ -1,0 +1,74 @@
+---
+- name: Install logging agent 
+  hosts: hetzner
+  gather_facts: false
+  serial: 20
+  tasks:   
+    - name: Set facts
+      set_fact:
+        user_group: "sudo"
+    - name: Install apt-transport-https
+      apt:
+        name: apt-transport-https
+        state: present
+      become: yes
+
+    - name: Install GPG key
+      apt_key:
+        url: https://packages.treasuredata.com/GPG-KEY-td-agent
+        state: present
+      become: yes
+
+    - name: Install repo
+      apt_repository:
+        repo: deb http://packages.treasuredata.com/3/ubuntu/bionic/ bionic contrib
+        filename: /etc/apt/sources.list.d/treasure-data.list
+        state: present
+      become: yes
+
+    - name: Install fluentd as td-agent 
+      apt:
+        name: td-agent
+        state: present
+      become: yes
+      register: install
+
+    - name: Add fluentd log agent to os groups 
+      shell: usermod -aG "{{ item | default('root') }}" td-agent
+      become: yes
+      ignore_errors: yes
+      with_items:
+        - root 
+        - syslog
+        - adm
+        - systemd-journal
+
+    - name: Remove default configuration
+      become: yes
+      file:
+        path: /etc/td-agent/td-agent.conf
+        state: absent
+      when: install.changed
+
+    - name: Ensure config directories exist
+      file:
+        path: "{{ item }}"
+        state: directory
+      become: yes
+      with_items:
+        - /etc/td-agent
+
+    - name: Create new empty config
+      file:
+        path: /etc/td-agent/td-agent.conf
+        state: touch
+      become: yes
+      
+    - name: Create tail position directory
+      file:
+        path: /var/tmp/td-agent/tail
+        state: directory
+        owner: td-agent 
+        group: td-agent 
+      become: yes 
+      #notify: restart td-agent
