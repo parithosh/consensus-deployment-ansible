@@ -4,7 +4,7 @@
   gather_facts: false
   vars_prompt:
     - name: aws_access_key
-      prompt: Enter the AWS access key
+      prompt: Enter the AWS access key  
     - name: aws_secret_key
       prompt: Enter the AWS secret key
   serial: 20  
@@ -22,7 +22,6 @@
             tag log.systemd
             path /var/log/journal
             read_from_head true
-
             <storage>
                 @type local
                 path /var/tmp/td-agent/tail_positions/systemd-cursor.json
@@ -80,7 +79,7 @@
         block: |2
               <match es.**>
                 type opensearch
-                logstash_format true
+                #logstash_format true
                 include_tag_key true
                 flush_interval 10s
 

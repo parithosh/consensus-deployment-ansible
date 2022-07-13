@@ -1,0 +1,84 @@
+--- 
+- name: Install node exporter agent 
+  hosts: hetzner
+  gather_facts: false
+  serial: 20
+  vars: 
+    node_exporter_container_image: docker.io/prom/node-exporter:latest 
+    cadvisor_exporter_container_image: gcr.io/cadvisor/cadvisor:v0.36.0
+  tasks: 
+    - name: Install aptitude using apt
+      apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
+
+    - name: Install required system packages
+      apt: name={{ item }} state=latest update_cache=yes
+      loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools']
+
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker Repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu bionic stable
+        state: present
+
+    - name: Update apt and install docker-ce
+      apt: update_cache=yes name=docker-ce state=latest
+
+    - name: Install Docker Module for Python
+      pip:
+        name: docker
+
+    - name: Pull node metrics image 
+      docker_image:
+        name: "{{ node_exporter_container_image }}"
+        source: pull
+
+    - name: Create node exporter container
+      docker_container:
+        name: "node_exporter"
+        image: "{{ node_exporter_container_image }}"
+        state: started
+        network_mode: host 
+        pid_mode: host 
+        env: 
+           path.rootfs=/host
+        volumes:
+            - /:/host:ro,rslave
+
+    - name: Pull cadvisor metrics container 
+      docker_image: 
+         name: "{{ cadvisor_exporter_container_image }}"
+         source: pull 
+         
+    - name: Create cadvisor metrics exporter container 
+      docker_container: 
+        name: "cadvisor"
+        image: "{{ cadvisor_exporter_container_image }}"
+        state: started 
+        ports:
+            - "8080:8080"
+        privileged: yes  
+        volumes: 
+          - /:/rootfs:ro
+          - /var/run:/var/run:ro
+          - /sys:/sys:ro 
+          - /var/lib/docker/:/var/lib/docker:ro
+          - /dev/disk/:/dev/disk:ro 
+        devices: 
+          - "/dev/ksmg:/dev/ksmg:r"     
+
+  # sudo docker run 
+  # --volume=/:/rootfs:ro \
+  # --volume=/var/run:/var/run:ro \
+  # --volume=/sys:/sys:ro \
+  # --volume=/var/lib/docker/:/var/lib/docker:ro \
+  # --volume=/dev/disk/:/dev/disk:ro \
+  # --publish=8080:8080 \
+  # --detach=true \
+  # --name=cadvisor \
+  # --privileged \
+  # --device=/dev/kmsg \
+  # docker.io/google/cadvisor:latest
