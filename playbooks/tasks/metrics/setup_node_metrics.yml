@@ -59,7 +59,7 @@
         image: "{{ cadvisor_exporter_container_image }}"
         state: started 
         ports:
-            - "8080:8080"
+            - "8085:8080"
         privileged: yes  
         volumes: 
           - /:/rootfs:ro

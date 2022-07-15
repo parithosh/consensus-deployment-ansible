@@ -9,6 +9,19 @@
       prompt: Enter the Opensearch Password
   serial: 20  
   tasks:
+    - name: Add listener to get logs send locally
+      become: yes
+      blockinfile:
+        path: "/etc/td-agent/td-agent.conf"
+        marker: "# ANSIBLE MANAGED BLOCK - forwarding port {mark}"
+        state: present
+        block: |2
+           <source>
+             @type forward
+             port 24224
+             bind 0.0.0.0
+           </source>
+
     - name: Add systemd source
       become: yes
       blockinfile:
@@ -118,4 +131,6 @@
                     # Capture the 400 error reasons without all the other debug logs
                     log_es_400_reason false
               </match>
+
+
 
