@@ -1,0 +1,15 @@
+--- 
+- name: Place metrics pusher cron job
+  hosts: hetzner
+  gather_facts: false
+  serial: 20
+  tasks: 
+    - name: Creates a cron file under /etc/cron.d
+      ansible.builtin.cron:
+        name: metrics_pusher
+        weekday: "*"
+        minute: "*/10"
+        hour: "*"
+        user: root
+        job: "curl http://localhost:9100/metrics | curl -u prometheus:neboWcmRwkbuk60y --data-binary @- https://themerge-monitoring.gnosischainscan.com/pushgateway/metrics/job/node_metrics/instance/gbc-merge"
+        cron_file: metrics_pusher
