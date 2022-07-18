@@ -22,6 +22,49 @@
              bind 0.0.0.0
            </source>
 
+    - name: Install td agent fluentd prometheus gem
+      shell: td-agent-gem install fluent-plugin-prometheus
+      become: yes
+
+    - name: Add metrics for fluentd
+      become: yes
+      blockinfile:
+        path: "/etc/td-agent/td-agent.conf"
+        marker: "# ANSIBLE MANAGED BLOCK -  metrics exposure {mark}"
+        state: present
+        block: |2
+            <source> 
+              @type prometheus 
+              interval 10 
+              <labels> 
+                hostname $${hostname}
+              </labels> 
+            </source> 
+            <source> 
+              @type prometheus
+              bind 0.0.0.0 
+              port 24231 
+              metrics_path /metrics
+            </source> 
+          
+    - name: Add transformation to logs 
+      become: yes
+      blockinfile:
+        path: "/etc/td-agent/td-agent.conf"
+        marker: "# ANSIBLE MANAGED BLOCK -  log adaption {mark}"
+        state: present
+        block: |2
+            <filter es.**> 
+              @type record_transformer 
+              <record> 
+                fluentd_worker "#{worker_id}"
+                hostname_agent_machine "#{Socket.gethostname}" 
+                ip_address_agent_machine "#{Socket.ip_address_list[1].ip_address}"
+                tag $${tag}
+                timestamp $${time}
+              </record> 
+            </filter> 
+      
     - name: Add systemd source
       become: yes
       blockinfile:
@@ -100,6 +143,8 @@
       blockinfile:
         path: "/etc/td-agent/td-agent.conf"
         state: present
+        insertafter: EOF
+        marker: "# ANSIBLE MANAGED BLOCK - elasticsearch {mark}"
         block: |2
               <match es.**>
                     # https://docs.fluentd.org/output/elasticsearch#user-password-optional 
