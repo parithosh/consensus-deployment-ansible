@@ -54,15 +54,15 @@ eth1_start_args: >
   --Seq.MinLevel="Info"
   --Seq.ServerUrl="https://seq.nethermind.io/"
   --Seq.ApiKey="{{nethermind_seq_api_key}}"
-  {% if mining_index is defined %}
+  {% if mining_keyi is defined %}
   --Init.IsMining=true
   --Mining.Enabled=true
   --Mining.MinGasPrice=1000000000
   --Mining.TargetBlockGasLimit=30000000
-  --KeyStore.BlockAuthorAccount={{mining_addresses[mining_index]}}
+  --KeyStore.BlockAuthorAccount={{mining_addresses[mining_keyi]}}
   --KeyStore.PasswordFiles=/networkdata/keystores_password.txt
   --KeyStore.KeyStoreDirectory=/networkdata/keystores
-  --KeyStore.UnlockAccounts={{mining_addresses[mining_index]}}
+  --KeyStore.UnlockAccounts={{mining_addresses[mining_keyi]}}
   {% endif %}
 
 # run as root, the nethermind image doesn't handle running regular user well
