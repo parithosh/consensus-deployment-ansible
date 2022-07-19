@@ -1,0 +1,11 @@
+# Run this playbook on a deployed testnet
+# To update the TTD via config and flags
+
+# Upload new eth2 config
+- import_playbook: tasks/upload_custom_config_data.yml
+# Restart beacon
+- import_playbook: tasks/stop_beacon.yml
+- import_playbook: tasks/start_beacon.yml
+# Restart execution
+- import_playbook: tasks/stop_execution_node.yml
+- import_playbook: tasks/start_execution_node.yml

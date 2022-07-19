@@ -1,5 +1,5 @@
 - name: Setup name and keys
-  hosts: all
+  hosts: none
   become: true
   gather_facts: false
   tasks:
@@ -44,12 +44,19 @@
   remote_user: "{{ bootstrap_user }}"
   gather_facts: true
   become: true
+  pre_tasks:
+    - name: apt-update
+      become: true
+      apt:
+        update_cache: true
+        cache_valid_time: 3600
   roles:
     # Prepare system to be managed by Ansible.
     - role: robertdebock.bootstrap
       tags: [bootstrap]
+
     - role: robertdebock.fail2ban
-      tags: [ fail2ban ]
+      tags: [fail2ban]
       vars:
         - fail2ban_loglevel: INFO
         - fail2ban_logtarget: /var/log/fail2ban.log
@@ -65,7 +72,7 @@
         dest: "/home/{{ bootstrap_user }}/.zshrc"
         state: present
         regexp: "^{{ item.key }}="
-        line: "{{ item.key }}=\"{{ item.value }}\""
+        line: '{{ item.key }}="{{ item.value }}"'
       loop: "{{ oh_my_zsh_config | dict2items }}"
 
 - name: Log in as new user to disable root
@@ -75,7 +82,7 @@
   become: true
   tasks:
     - name: Disable root login over SSH
-      lineinfile: dest=/etc/ssh/sshd_config regexp="^PermitRootLogin" line="PermitRootLogin no" state=present
+      lineinfile: dest=/etc/ssh/sshd_config regexp="^PermitRootLogin" line="PermitRootLogin yes" state=present
       notify:
         - restart sshd
     - name: Disable password login

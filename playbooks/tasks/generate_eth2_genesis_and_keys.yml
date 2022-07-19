@@ -38,7 +38,7 @@
         --state-output /data/genesis.ssz
 
 - name: Generate validator keys
-  hosts: validator
+  hosts: none
   gather_facts: false
   serial: 20
   vars:
