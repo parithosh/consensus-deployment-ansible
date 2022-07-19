@@ -36,7 +36,6 @@ eth1_start_args: >
   --JsonRpc.Host=0.0.0.0
   --Network.DiscoveryPort=30303
   --Network.P2PPort=30303
-  --Network.DiagTracerEnabled=true
   --Network.Bootnodes="{{ eth1_bootnode_enode | join(',') }}"
   --Discovery.Bootnodes="{{ eth1_bootnode_enode | join(',') }}"
   --Merge.Enabled=true
