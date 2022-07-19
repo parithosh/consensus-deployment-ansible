@@ -63,6 +63,8 @@ mnemonic_0: "giant issue aisle success illegal bike spike question tent bar rely
 
 **2. Deploy**
 
+> **Note**: AuRa does not handle well starting with multiple validating nodes. Set a single `mining_keyi=0` on first deployment. Then after some blocks (enough to sync), edit inventory to add more validating nodes and re-deploy execution.
+
 Deploy everything from scratch
 
 ```
