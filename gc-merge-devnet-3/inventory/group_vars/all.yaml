@@ -162,7 +162,7 @@ common_log_driver: json-file
 ##############################################
 beacon_container_name: beacon
 validator_container_name: validator
-execution_container_name: nethermind
+execution_container_name: execution
 hi_peer_count: "{{ groups['beacon'] | length }}"
 separate_validator_process_enabled: true
 
