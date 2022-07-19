@@ -51,67 +51,51 @@ ansible-playbook -i pithos-testnet/inventory/inventory.ini playbooks/tasks/start
 
 Provision instances and allocate hosts in `$testnet/inventory/inventory.ini`
 
-**2. Setup hosts**
+```ini
+$network-$eth2client-$eth1client-1 ansible_host=159.223.195.87 mnemonic={{mnemonic_0}} indexes=2000..3000
+```
+
+Create a mnemonic with https://iancoleman.io/bip39/ and set it in a hidden `secrets.yml`, for example:
 
 ```yaml
-# Setup name and keys
-playbooks/tasks/create_bootstrap_user_and_provision_machine.yml
-# Setup the firewall rules for the machine
-playbooks/tasks/start_firewall.yml
-# Setup the machine with docker, updates apt cache, adds user keys
-playbooks/tasks/setup_machine.yml
+mnemonic_0: "giant issue aisle success illegal bike spike question tent bar rely arctic volcano long crawl hungry vocal artwork sniff fantasy very lucky have athlete"
 ```
 
-**3. Generate keys**
+**2. Deploy**
 
-Create a mnemonic for the network at `$testnet/custom_config_data/mnemonics.yaml`:
+> **Note**: AuRa does not handle well starting with multiple validating nodes. Set a single `mining_keyi=0` on first deployment. Then after some blocks (enough to sync), edit inventory to add more validating nodes and re-deploy execution.
 
-```yaml
-- mnemonic: "giant issue aisle success illegal bike spike question tent bar rely arctic volcano long crawl hungry vocal artwork sniff fantasy very lucky have athlete" # a 24 word BIP 39 mnemonic
-  count: 1000
-```
-
-Create a CL genesis state with mnemonic by running:
+Deploy everything from scratch
 
 ```
-cd $testnet
-
-docker run -it -u $UID -v $PWD/custom_config_data:/data -v $PWD/custom_config_data/config.yaml:/config/cl/config.yaml -v $PWD/custom_config_data/mnemonics.yaml:/config/cl/mnemonics.yaml skylenet/ethereum-genesis-generator:latest cl
-
-mv custom_config_data/cl/* custom_config_data/
+ansible-playbook -i $network/inventory/inventory.ini playbooks/deploy_devnet_from_scratch.yml
 ```
 
-Generate eth2 keys. Set correct offsets in `$testnet/generate_keys.sh`. Then run
+**3. Set bootnodes**
+
+Grab execution node's endoes with command below and paste some of them into `$network/inventory/group_vars/all.yaml` to act as bootnodes in variable `eth1_bootnode_enode`
 
 ```
-./generate_keys.sh
+ansible-playbook -i $network/inventory/inventory.ini playbooks/tasks/collect_enodes.yml
 ```
 
-(only for Clique and AuRa)
+Grab beacon node's ENRs with command below and paste some of them into `$network/inventory/group_vars/all.yaml` to act as bootnodes in variable `bootnode_enrs`
 
-- Generate eth1 keys
-- Generate eth1 genesis file
-
-**4. Deploy bootnode(s)**
-
-- Deploy regular Geth as eth1 bootnode
-- Deploy Eth2 dedicated bootnode
-- Grab their ENRs and enodes
-- Write them to local files
-
-**5. Deploy nodes**
-
-```yaml
-# Upload keys + config, then deploy EL + CL + snooper
-playbooks/setup_execution_and_consensus_full.yml
-# Install node_exporter and metric pusher
-playbooks/setup_node_exporter_and_prometheus.yml
+```
+ansible-playbook -i $network/inventory/inventory.ini playbooks/tasks/collect_enrs.yml
 ```
 
-**6. Deploy tooling**
+Then re-deploy execution and beacon nodes to connect them
 
-- Deploy eth1 explorer
-- Deploy eth2 explorer
-- Deploy ethstats
-- Deploy faucet
-- Deploy landing page
+```
+ansible-playbook -i $network/inventory/inventory.ini playbooks/tasks/start_beacon.yml
+ansible-playbook -i $network/inventory/inventory.ini playbooks/tasks/start_execution_node.yml
+```
+
+- **6. Extra tooling**
+
+* Deploy eth1 explorer
+* Deploy eth2 explorer
+* Deploy ethstats
+* Deploy faucet
+* Deploy landing page

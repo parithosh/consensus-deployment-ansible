@@ -64,8 +64,8 @@
         --insecure \
         --prysm-pass="prysm" \
         --out-loc="{{output_keys_dirpath_cont}}" \
-        --source-max={{from_index}} \
-        --source-min={{to_index}} \
+        --source-max={{to_index}} \
+        --source-min={{from_index}} \
         --source-mnemonic="{{mnemonic}}"
 
     # {{validator_node_dir}} must be created manually
