@@ -1,7 +1,7 @@
 ##############################################
 # generic ansible config information
 ##############################################
-ansible_user: "devops"
+ansible_user: "root"
 bootstrap_user: "devops"
 
 github_user_pubkeys:
