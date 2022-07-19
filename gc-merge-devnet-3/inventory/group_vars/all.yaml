@@ -106,6 +106,8 @@ eth1_metrics_port: 8002
 eth_metrics_exporter_port: 8003
 cadvisor_port: 9280
 promtail_port: 9080
+public_execution_explorer: 3334
+public_beacon_explorer: 3333
 
 ##############################################
 # Command for JSON RPC snooper
@@ -170,6 +172,8 @@ firewall_allowed_tcp_ports:
   - 9000
   - 80
   - 443
+  - "{{public_execution_explorer}}"
+  - "{{public_beacon_explorer}}"
 
 firewall_allowed_udp_ports:
   - 30303

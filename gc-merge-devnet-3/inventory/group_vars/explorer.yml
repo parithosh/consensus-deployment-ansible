@@ -16,7 +16,7 @@ explorer_postgres_container_name: postgres
 explorer_postgres_image_name: "postgres:12.0"
 explorer_postgres_memory: 9000m
 explorer_postgres_port: "5432"
-explorer_postgres_ip: "172.1.1.100"
+explorer_postgres_ip: "127.0.0.1"
 explorer_postgres_user: postgres
 
 # Set in secrets.yaml

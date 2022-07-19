@@ -1,6 +1,6 @@
 - name: Start execution explorer
   hosts: explorer
-  gather_facts: true
+  gather_facts: false
   serial: 20
   tasks:
     - name: Start execution explorer
@@ -10,12 +10,9 @@
         image: "{{ execution_explorer_image_name }}"
         pull: true
         restart_policy: unless-stopped
-        network_mode: bridge
-        networks:
-          - name: "{{explorer_docker_network_name}}"
-            ipv4_address: "172.1.1.102"
+        network_mode: host
         ports:
-          - "3334:4000"
+          - "{{public_execution_explorer}}:4000"
         restart: "{{ explorer_require_restart | default(false) }}"
         memory: "{{explorer_memory}}"
         command: "{{ execution_explorer_start_args }}"
