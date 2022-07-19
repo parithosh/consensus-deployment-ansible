@@ -1,6 +1,6 @@
 - name: Start explorer statistics
   hosts: explorer
-  gather_facts: true
+  gather_facts: false
   serial: 20
   tasks:
     - name: Start Eth2 explorer statistics
@@ -10,10 +10,7 @@
         image: "{{ beacon_explorer_image_name }}"
         pull: true
         restart_policy: unless-stopped
-        network_mode: bridge
-        networks:
-          - name: "{{explorer_docker_network_name}}"
-            ipv4_address: "172.1.1.104"
+        network_mode: host
         restart: "{{ explorer_stats_require_restart | default(false) }}"
         command: "{{ explorer_stats_start_args }}"
         volumes: "{{explorer_stats_volumes}}"

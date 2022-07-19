@@ -1,6 +1,6 @@
 - name: Start explorer postgres db
   hosts: explorer
-  gather_facts: true
+  gather_facts: false
   serial: 20
   tasks:
     - name: Create postgres storage dir
@@ -15,10 +15,7 @@
         image: "{{ explorer_postgres_image_name }}"
         pull: true
         restart_policy: unless-stopped
-        network_mode: bridge
-        networks:
-          - name: "{{explorer_docker_network_name}}"
-            ipv4_address: "{{explorer_postgres_ip}}"
+        network_mode: host
         expose:
           - "{{explorer_postgres_port}}"
         restart: "{{ explorer_postgres_require_restart | default(false) }}"
