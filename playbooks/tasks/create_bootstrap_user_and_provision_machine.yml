@@ -1,3 +1,13 @@
+- name: Replace mirros in sources
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Copy sources.list
+      become: true
+      copy:
+        src: "./templates/sources.list"
+        dest: "/etc/apt/sources.list"
+
 - name: Setup name and keys
   hosts: all
   become: true
@@ -49,7 +59,8 @@
     - role: robertdebock.bootstrap
       tags: [bootstrap]
     - role: robertdebock.fail2ban
-      tags: [ fail2ban ]
+      when: false
+      tags: [fail2ban]
       vars:
         - fail2ban_loglevel: INFO
         - fail2ban_logtarget: /var/log/fail2ban.log
@@ -65,7 +76,7 @@
         dest: "/home/{{ bootstrap_user }}/.zshrc"
         state: present
         regexp: "^{{ item.key }}="
-        line: "{{ item.key }}=\"{{ item.value }}\""
+        line: '{{ item.key }}="{{ item.value }}"'
       loop: "{{ oh_my_zsh_config | dict2items }}"
 
 - name: Log in as new user to disable root
@@ -74,10 +85,10 @@
   gather_facts: false
   become: true
   tasks:
-    - name: Disable root login over SSH
-      lineinfile: dest=/etc/ssh/sshd_config regexp="^PermitRootLogin" line="PermitRootLogin no" state=present
-      notify:
-        - restart sshd
+    # - name: Disable root login over SSH
+    #   lineinfile: dest=/etc/ssh/sshd_config regexp="^PermitRootLogin" line="PermitRootLogin yes" state=present
+    #   notify:
+    #     - restart sshd
     - name: Disable password login
       lineinfile: dest=/etc/ssh/sshd_config regexp="^PasswordAuthentication" line="PasswordAuthentication no" state=present
       notify:
