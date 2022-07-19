@@ -19,8 +19,8 @@ chain:
 frontend:
   enabled: true # Enable or disable to web frontend
   imprint: "./imprint.html" # Path to the imprint page content
-  siteName: "{{eth2_network_name_pretty}}" # Name of the site, displayed in the title tag
-  siteSubtitle: "{{eth2_network_name_pretty}}" # Subtitle shown on the main page
+  siteName: "{{eth2_network_name}}" # Name of the site, displayed in the title tag
+  siteSubtitle: "{{eth2_network_name}}" # Subtitle shown on the main page
   csrfAuthKey: "0123456789abcdef000000000000000000000000000000000000000000000000"
   jwtSigningSecret: "0123456789abcdef000000000000000000000000000000000000000000000000"
   jwtIssuer: "localblockexplorer"
