@@ -1,0 +1,9 @@
+---
+# handlers file for cadvisor
+
+- name: restart cadvisor
+  become: true
+  systemd:
+    name: cadvisor
+    state: restarted
+    daemon_reload: true

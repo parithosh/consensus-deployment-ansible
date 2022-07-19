@@ -1,0 +1,22 @@
+---
+# Version
+cadvisor_version: v0.32.0
+
+# Cadvisor source path if offline
+cadvisor_binary_local_dir: ""
+
+# SHA256 checksum
+cadvisor_checksum: >-
+  62419c0e06edb55a9c02e68fcae3a81abac2a2d98122c36a9124259e0ca8916c
+
+# Listen port
+cadvisor_port: 9280
+
+# Base cadvisor url
+cadvisor_url: https://github.com/google/cadvisor/releases/download/
+
+# Download url
+cadvisor_download: "{{ cadvisor_url }}/{{ cadvisor_version }}/cadvisor"
+
+# Extra runtime options
+cadvisor_runtime_options: ""

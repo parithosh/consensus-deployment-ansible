@@ -1,0 +1,9 @@
+[Unit]
+Description=Cadvisor Server
+
+[Service]
+#User=root
+ExecStart=/opt/cadvisor/cadvisor --port {{ cadvisor_port }} {{ cadvisor_runtime_options }}
+
+[Install]
+WantedBy=multi-user.target
