@@ -45,6 +45,37 @@ ansible-playbook -i pithos-testnet/inventory/inventory.ini playbooks/tasks/stop_
 ansible-playbook -i pithos-testnet/inventory/inventory.ini playbooks/tasks/start_execution_node.yml --limit=eth1client_ethereumjs
 ```
 
+## Working with secrets
+
+This repo uses [ansible-vault](https://www.digitalocean.com/community/tutorials/how-to-use-vault-to-protect-sensitive-ansible-data) to manage secrets. The secrets of each inventory are committed separately as a `secrets.yaml` file. This contains variables such as
+
+```yaml
+remote_write_username: ***********
+remote_write_password: ***********
+explorer_postgres_password: ***********
+nethermind_seq_api_key: ***********
+secret_keys: ***********
+```
+
+To have good UX working with secrets, do the following:
+
+1. Get the vault secret from @dapplion
+2. Write the vault secret in `./.vault_pass`
+3. Add this two lines in your `~/.bashrc` file to read the password automatically on each run (remember to also apply on current terminal)
+
+```
+# Specify editor for ansible vault
+export EDITOR=nano
+# Automatically read vault pass for ansible-vault
+export ANSIBLE_VAULT_PASSWORD_FILE=./.vault_pass
+```
+
+To add new secrets just do
+
+```
+ansible-vault edit gc-merge-devnet-3/inventory/group_vars/secrets.yaml
+```
+
 ## Instructions to deploy testnet
 
 **1. Provision**
