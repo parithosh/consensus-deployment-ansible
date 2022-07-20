@@ -1,5 +1,6 @@
 external_roles/
 !external_roles/ansible-haproxy
+roles/
 
 secret.sh
 validator_prep
@@ -27,4 +28,3 @@ enodes.json
 enrs.json
 
 .vscode/settings.json
-
