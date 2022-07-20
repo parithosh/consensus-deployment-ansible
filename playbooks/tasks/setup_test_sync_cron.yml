@@ -1,0 +1,28 @@
+- name: Setup recurring sync_test
+  hosts: sync_test
+  gather_facts: false
+  serial: 20
+  tasks:
+    - name: Template test_sync_cron
+      become: true
+      template:
+        src: ./scripts/test_sync_cron.sh
+        dest: /opt/test_sync_cron.sh
+        mode: "755"
+
+    - name: Enable test_sync_cron cronjob
+      cron:
+        name: "test_sync_cron"
+        minute: "*/2"
+        # arg1: EARLIEST_SYNCED_FILEPATH
+        # arg2: RESTART_EVERY_SEC
+        job: "/opt/test_sync_cron.sh /opt/.last_synced 600 &>> /tmp/test_sync_cron.log"
+        user: "{{ ansible_user }}"
+        # To debug if script is running by cron do
+        # ```
+        # sudo grep test_sync_cron /var/log/syslog
+        # ```
+        # to check the script logs
+        # ```
+        # cat /tmp/test_sync_cron.log
+        # ```
