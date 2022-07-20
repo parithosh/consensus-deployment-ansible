@@ -3,6 +3,18 @@
   become: true
   gather_facts: false
   tasks:
+    - name: Reconfigure dpkg
+      become: true
+      ansible.builtin.shell: dpkg --configure -a
+    - name: Update APT Cache
+      apt:
+        update_cache: yes
+        force_apt_get: yes
+    - name: Upgrade all packages to the latest version
+      apt:
+        name: "*"
+        state: latest
+        force_apt_get: yes
     - name: Ensure group "bootstrap_user" exists
       ansible.builtin.group:
         name: "{{ bootstrap_user }}"
@@ -44,12 +56,11 @@
   remote_user: "{{ bootstrap_user }}"
   gather_facts: true
   become: true
-
+  
   roles:
     # Prepare system to be managed by Ansible.
     - role: robertdebock.bootstrap
       tags: [bootstrap]
-
     - role: robertdebock.fail2ban
       tags: [fail2ban]
       vars:
