@@ -7,7 +7,7 @@ global:
     instance: "{{ inventory_hostname }}"
     ip_address: "{{ ansible_host }}"
     network: "{{ eth2_network_name }}"
-
+  
 
 remote_write:
   - queue_config:
@@ -18,11 +18,14 @@ remote_write:
       max_shards: 100
     url: {{ push_url }}
     remote_timeout: 10s
+    honor_labels: true 
 {% if remote_write_auth == true %}
     basic_auth:
       username: {{remote_write_username}}
       password: {{remote_write_password}}
 {% endif %}
+
+ 
 
 scrape_configs:
   - job_name: node

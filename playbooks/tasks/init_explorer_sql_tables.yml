@@ -21,3 +21,5 @@
         command: "{{ explorer_postgres_init_args }}"
         env:
           PGPASSWORD: "{{ explorer_postgres_password }}"
+        log_options: "{{ common_log_options }}"
+        log_driver: "{{ common_log_driver }}"

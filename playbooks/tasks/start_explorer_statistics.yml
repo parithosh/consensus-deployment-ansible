@@ -14,3 +14,5 @@
         restart: "{{ explorer_stats_require_restart | default(false) }}"
         command: "{{ explorer_stats_start_args }}"
         volumes: "{{explorer_stats_volumes}}"
+        log_options: "{{ common_log_options }}"
+        log_driver: "{{ common_log_driver }}"

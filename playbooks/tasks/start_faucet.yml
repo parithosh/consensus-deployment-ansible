@@ -18,3 +18,5 @@
         env:
           HCAPTCHA_SITEKEY: "{{ hcaptcha_site_key }}"
           HCAPTCHA_SECRET: "{{ hcaptcha_secret }}"
+        log_options: "{{ common_log_options }}"
+        log_driver: "{{ common_log_driver }}"

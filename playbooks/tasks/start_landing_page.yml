@@ -17,3 +17,5 @@
           - "{{landing_page_port}}:1313"
         restart: "{{ landing_page_require_restart | default(false) }}"
         volumes: "{{ landing_page_volumes }}"
+        log_options: "{{ common_log_options }}"
+        log_driver: "{{ common_log_driver }}"

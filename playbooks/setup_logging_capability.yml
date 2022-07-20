@@ -1,0 +1,4 @@
+---
+- import_playbook: tasks/logging/install_logging_agent.yml 
+- import_playbook: tasks/logging/configure_logging_agent.yml
+

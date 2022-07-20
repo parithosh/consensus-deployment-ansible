@@ -150,12 +150,17 @@ eth1_node_dir: "{{home_dir}}/eth1data"
 # common log config
 ##############################################
 beacon_log_level: info
-common_log_options:
-  max-file: "10"
-  max-size: 500m
-  mode: non-blocking
-  max-buffer-size: 4m
-common_log_driver: json-file
+logging_host: "search-gnosis-merge-nev36iek55lsofh2hz3evzkolq.eu-central-1.es.amazonaws.com/"
+common_log_driver: fluentd
+common_log_options: {}
+##### Not needed for fluentd driver
+# common_log_options:
+#   max-file: "10"
+#   max-size: 500m
+#   mode: non-blocking
+#   max-buffer-size: 4m
+#####
+
 
 ##############################################
 # container names
