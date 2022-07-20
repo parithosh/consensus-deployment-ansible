@@ -42,13 +42,13 @@ chainID: 1
 # xDAI TD on block 23255921 July-19-2022 9:52:45 PM UTC https://blockscout.com/xdai/mainnet/block/23255921
 # 7913579842806358152165626263839214415577252614
 
-# Jul 20 2022 10:00:00 GMT+0000 is 43635 sec from block 23255921
-# TTD = 7916549487022477182136271134038271456758611672 = 7913579842806358152165626263839214415577252614 + 43635/5 * 0xfffffffffffffffffffffffffffffffe
+# Projected for Jul 20 2022 12:00:00 GMT+0000
+# TTD = 7917039493630843333523658393472973202983105432 = 7913579842806358152165626263839214415577252614 + 43635/5 * 0xfffffffffffffffffffffffffffffffe
 # ```
-# node -e 'console.log(BigInt("7913579842806358152165626263839214415577252614") + BigInt((new Date("Jul 20 2022 10:00:00").getTime() - new Date("July-19-2022 9:52:45 PM"))/5000) * BigInt("0xfffffffffffffffffffffffffffffffe"))'
+# node -e 'console.log(BigInt("7913579842806358152165626263839214415577252614") + BigInt((new Date("Jul 20 2022 12:00:00").getTime() - new Date("July-19-2022 9:52:45 PM"))/5000) * BigInt("0xfffffffffffffffffffffffffffffffe"))'
 # ```
 
-terminal_total_difficulty: "7916549487022477182136271134038271456758611672"
+terminal_total_difficulty: "7917039493630843333523658393472973202983105432"
 fee_recipient: "0x88dFc82CF71fdeb23f82C33a202f6E2D19AC0541"
 # enter bootnodes here if needed
 bootnode_enrs:
