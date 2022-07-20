@@ -7,6 +7,8 @@
       prompt: Enter the Opensearch User
     - name: password
       prompt: Enter the Opensearch Password
+    - name: host
+      prompt: Pass the fluentd host 
   serial: 20  
   tasks:
     - name: Add listener to get logs send locally
@@ -150,8 +152,7 @@
               <match es.**>
                     # https://docs.fluentd.org/output/elasticsearch#user-password-optional 
                     @type elasticsearch
-                    @log_level debug
-                    host search-gnosis-merge-nev36iek55lsofh2hz3evzkolq.eu-central-1.es.amazonaws.com
+                    host {{ host }}
                     port 443
                     scheme https
                     user {{ user }}
