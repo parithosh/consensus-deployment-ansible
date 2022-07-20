@@ -1,0 +1,6 @@
+txfuzz_container_name: tx-fuzz
+txfuzz_image_name: kurtosistech/tx-fuzz:0.2.0
+
+txfuzz_rpc_url: http://127.0.0.1:{{eth1_rpc_port}}
+txfuzz_privkey: "{{ accounts_with_funds[fuzz_keyi].privkey }}"
+txfuzz_address: "{{ accounts_with_funds[fuzz_keyi].address }}"

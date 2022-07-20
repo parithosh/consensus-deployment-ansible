@@ -1,0 +1,68 @@
+eth1_client_name: nethermind
+eth1_image_name: nethermindeth/hive:latest
+execution_endpoint: http://127.0.0.1:{{eth1_engine_snoop_port}}
+snoop_command: "./json_rpc_snoop -p {{eth1_engine_snoop_port}} http://127.0.0.1:{{eth1_engine_port}}"
+
+home_dir: "/home/{{ansible_user}}"
+
+eth1_github_external_user_pubkeys:
+  - MarekM25
+  - avalonche
+  - DockBoss
+  - LukaszRozmej
+  - marcindsobczak
+  - jmederosalvarado
+
+eth1_memory: 5000M
+eth1_kernel_memory: 5500M
+
+# websocket with upgrade
+eth1endpoint_ws: http://127.0.0.1:8546
+
+eth1_volumes:
+  - "{{eth1_node_dir}}:/eth1data"
+  - "{{testnet_dir}}:/networkdata"
+  - "{{home_dir}}/jwtsecret:/jwtsecret"
+
+eth1_start_args: >
+  --config=/networkdata/nethermind_config.cfg
+  --datadir="/eth1data"
+  --Init.ChainSpecPath="/networkdata/nethermind_genesis.json"
+  --Init.WebSocketsEnabled=true
+  --JsonRpc.Enabled=true
+  --JsonRpc.EnabledModules="net,eth,consensus,subscribe,web3,admin"
+  --JsonRpc.Port={{eth1_rpc_port}}
+  --JsonRpc.WebSocketsPort={{eth1_ws_rpc_port}}
+  --JsonRpc.Host=0.0.0.0
+  --Network.DiscoveryPort=30303
+  --Network.P2PPort=30303
+  --Network.Bootnodes="{{ eth1_bootnode_enode | join(',') }}"
+  --Discovery.Bootnodes="{{ eth1_bootnode_enode | join(',') }}"
+  --Merge.Enabled=true
+  --Merge.TerminalTotalDifficulty={{terminal_total_difficulty}}
+  --Init.DiagnosticMode="None"
+  --JsonRpc.JwtSecretFile=/jwtsecret
+  --JsonRpc.AdditionalRpcUrls="http://localhost:{{eth1_engine_port_no_auth}}|http;ws|net;eth;subscribe;engine;web3;client|no-auth,http://localhost:{{eth1_engine_port}}|http;ws|net;eth;subscribe;engine;web3;client"
+  --EthStats.Enabled=false
+  --Metrics.ExposePort={{eth1_metrics_port}}
+  --Metrics.Enabled=true
+  --AuRaMerge.Enabled=true
+  --Aura.TxPriorityContractAddress=0x4100000000000000000000000000000000000000
+  --Aura.ForceSealing=true
+  --Aura.AllowAuRaPrivateChains=true
+  --Seq.MinLevel="Info"
+  --Seq.ServerUrl="https://seq.nethermind.io/"
+  --Seq.ApiKey="{{nethermind_seq_api_key}}"
+  {% if mining_keyi is defined %}
+  --Init.IsMining=true
+  --Mining.Enabled=true
+  --Mining.MinGasPrice=1000000000
+  --Mining.TargetBlockGasLimit=30000000
+  --KeyStore.BlockAuthorAccount={{mining_addresses[mining_keyi]}}
+  --KeyStore.PasswordFiles=/networkdata/keystores_password.txt
+  --KeyStore.KeyStoreDirectory=/networkdata/keystores
+  --KeyStore.UnlockAccounts={{mining_addresses[mining_keyi]}}
+  {% endif %}
+
+# run as root, the nethermind image doesn't handle running regular user well
+eth1_user_id: "0:0"

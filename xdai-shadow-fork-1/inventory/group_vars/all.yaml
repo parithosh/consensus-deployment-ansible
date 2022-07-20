@@ -1,0 +1,186 @@
+##############################################
+# generic ansible config information
+##############################################
+ansible_user: "devops"
+bootstrap_user: "devops"
+
+github_user_pubkeys:
+  - dapplion
+  - giacomolicari
+  - alebanzas
+  - riccardo-gnosis
+  - igorbarinov
+  - parithosh
+
+ansible_python_interpreter: /usr/bin/python3
+oh_my_zsh_config:
+  PROMPT: "%{$fg[yellow]%}%n%{$fg[white]%}@%{$fg[red]%}%m%{$reset_color%} ${PROMPT}"
+
+##############################################
+# eth1 endpoints
+##############################################
+# nimbus requires a websocket endpoint (http support unstable)
+# note: also used for execution engine endpoint in nimbus
+consensus_endpoint_nimbus: ws://127.0.0.1:8551
+
+eth1endpoint: http://127.0.0.1:8545
+
+beacon_api_endpoint: "http://127.0.0.1:{{beacon_api_port}}"
+
+# Merge Engine endpoints
+# TODO change IP?
+# TODO: some engines might start using the 8550 port (or 8551 for ws)
+
+##############################################
+# testnet specific information
+##############################################
+testnet_type: custom
+eth2_network_name: xdai-shadow-fork-1
+chainID: 1
+
+# 0xfffffffffffffffffffffffffffffffe difficulty / block
+#
+# xDAI TD on block 23263191 Jul 20 2022 8:14:00 GMT+0000 https://blockscout.com/xdai/mainnet/block/23263191
+# 7916053695613873374795004997235243370474523009
+
+# Projected for Jul 21 2022 12:00:00 GMT+0000
+# TTD = 7922856620693356776556564782387019280557911377
+# ```
+# node -e 'console.log(BigInt("7916053695613873374795004997235243370474523009") + BigInt((new Date("Jul 21 2022 12:00:00 GMT+0000").getTime() - new Date("Jul 20 2022 8:14:00 GMT+0000"))/5000) * BigInt("0xfffffffffffffffffffffffffffffffe"))'
+# ```
+
+terminal_total_difficulty: "7922856620693356776556564782387019280557911377"
+fee_recipient: "0x88dFc82CF71fdeb23f82C33a202f6E2D19AC0541"
+# enter bootnodes here if needed
+bootnode_enrs: []
+
+eth1_bootnode_enode: []
+
+mining_addresses: [
+  "0x88dFc82CF71fdeb23f82C33a202f6E2D19AC0541",
+  "0x1258c99E6a9F61bB29264966B45972C4C428A48F"
+]
+
+# Note: 0 is correct, but due to an underflow bug (being fixed), doesn't work.
+eth1_deposit_contract_first_block: 1
+
+##############################################
+# metric information
+##############################################
+# enter pushgateway config if needed
+prometheus_config_file: "prometheus/prometheus.yml.j2"
+push_url: "https://themerge-monitoring.gnosischainscan.com/prometheus/api/v1/write/"
+push_metrics_enabled: true
+remote_write_auth: true
+cadvisor_enabled: true
+promtail_enabled: true
+promtail_loki_server_url: "https://136217:{{loki_pusher_api_key}}@logs-prod-us-central1.grafana.net/loki/api/v1/push"
+eth2_validator_metrics_enabled: true
+eth_metrics_exporter_enabled: true
+eth_metrics_exporter_name: "metrics-exporter"
+eth_metrics_exporter_image: samcm/ethereum-metrics-exporter:0.11.0
+
+no_validator_keys: false
+ethstats_url: "ethstats.gcmergedevnet0.ethdevops.io"
+ethstats_password: "gcmergedevnet0"
+
+##############################################
+# ports to configure
+##############################################
+eth1_rpc_port: 8545
+eth1_ws_rpc_port: 8546
+eth1_engine_port_no_auth: 8550
+eth1_engine_port: 8551
+eth1_engine_snoop_port: 8560
+eth1_engine_ws_port: 8552
+nimbus_rpc_port: 4009
+beacon_api_port: 4000
+beacon_grpc_port: 4001
+beacon_metrics_port: 8000
+beacon_p2p_port: 9000
+validator_metrics_port: 8001
+validator_rpc_port: 4002
+node_exporter_web_listen_address: "0.0.0.0:9100"
+prometheus_web_listen_address: "0.0.0.0:9090"
+eth1_metrics_port: 8002
+eth_metrics_exporter_port: 8003
+cadvisor_port: 9280
+promtail_port: 9080
+public_execution_explorer: 3334
+public_beacon_explorer: 3333
+
+##############################################
+# Command for JSON RPC snooper
+##############################################
+snoop_image_name: parithoshj/json_rpc_snoop:v1.0.0-x86
+snoop_container_name: snooper
+
+##############################################
+# name of the validator to display
+##############################################
+graffiti: "{{eth2_client_name}}-{{eth1_client_name}}"
+
+##############################################
+# local data directories
+##############################################
+local_explorerdata_host_dir: "{{inventory_dir}}/../explorerdata"
+local_explorerdata_host_archive: "{{inventory_dir}}/../explorerdata.tar.gz"
+local_forkmondata_host_dir: "{{inventory_dir}}/../forkmondata"
+local_forkmondata_host_archive: "{{inventory_dir}}/../forkmondata.tar.gz"
+local_custom_config_data_host_dir: "{{inventory_dir}}/../custom_config_data"
+local_custom_config_data_host_archive: "{{inventory_dir}}/../custom_config_data.tar.gz"
+local_eth2_config_filepath: "{{local_custom_config_data_host_dir}}/config.yaml"
+local_eth1_genesis_filepath: "{{local_custom_config_data_host_dir}}/nethermind_genesis.json"
+local_mnemonics_filepath: "{{local_custom_config_data_host_dir}}/mnemonics.yaml"
+# private dirs
+# Validator assignments
+local_validator_host_dir: "{{inventory_dir}}/../validator_prep/{{inventory_hostname}}"
+local_validator_host_archive: "{{inventory_dir}}/../validator_prep/{{inventory_hostname}}.tar.gz"
+
+##############################################
+# remote host data directories
+##############################################
+home_dir: "/home/{{ansible_user}}"
+beacon_node_dir: "{{home_dir}}/beacon"
+validator_node_dir: "{{home_dir}}/validator"
+testnet_dir: "{{home_dir}}/custom_config_data"
+eth1_node_dir: "{{home_dir}}/eth1data"
+
+##############################################
+# common log config
+##############################################
+beacon_log_level: info
+common_log_options:
+  max-file: "10"
+  max-size: 500m
+  mode: non-blocking
+  max-buffer-size: 4m
+common_log_driver: json-file
+
+##############################################
+# container names
+##############################################
+beacon_container_name: beacon
+validator_container_name: validator
+execution_container_name: execution
+hi_peer_count: "{{ groups['beacon'] | length }}"
+separate_validator_process_enabled: true
+
+firewall_allowed_tcp_ports:
+  - 22
+  - 30303
+  - 9000
+  - 80
+  - 443
+  - "{{public_execution_explorer}}"
+  - "{{public_beacon_explorer}}"
+
+firewall_allowed_udp_ports:
+  - 30303
+  - 9000
+firewall_additional_rules:
+  - "iptables -A INPUT -p tcp --dport 4000 -d 0.0.0.0/0 -j ACCEPT"
+  - "iptables -A INPUT -p tcp --dport 8545 -d 0.0.0.0/0 -j ACCEPT"
+  - "iptables -A INPUT -p tcp --dport 3333 -j ACCEPT"
+  - "iptables -A INPUT -p tcp --dport 3334 -j ACCEPT"
+  - "iptables -A INPUT -p tcp --dport 3000 -d 0.0.0.0/0 -j ACCEPT"

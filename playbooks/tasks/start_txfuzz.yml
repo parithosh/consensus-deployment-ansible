@@ -1,0 +1,27 @@
+- name: Start txfuzz
+  hosts: txfuzz
+  gather_facts: false
+  serial: 20
+  tasks:
+    # To double check that the account is funded. Trigger with:
+    # ```
+    # --extra-vars "log_txfuzz_account_balance=true"
+    # ```
+    - name: Log txfuzz account balance
+      when: log_txfuzz_account_balance is defined and log_txfuzz_account_balance|bool
+      block:
+        - shell: curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBalance","params":["{{txfuzz_address}}", "latest"],"id":0}' http://localhost:8545
+          register: result
+        - debug:
+            msg: "{{result.stdout}}"
+
+    - name: Start txfuzz
+      docker_container:
+        name: "{{ txfuzz_container_name }}"
+        state: started
+        image: "{{ txfuzz_image_name }}"
+        pull: true
+        restart_policy: unless-stopped
+        network_mode: host
+        restart: "{{ explorer_require_restart | default(false) }}"
+        command: "{{txfuzz_rpc_url}} spam {{txfuzz_privkey}} {{txfuzz_address}}"

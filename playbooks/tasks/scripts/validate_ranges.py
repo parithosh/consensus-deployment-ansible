@@ -4,6 +4,7 @@ import sys
 import json
 import yaml
 import time
+import ruamel.yaml
 
 # Expect YAML or JSON first arg with a dict of keysdata by hostname
 # ```
@@ -15,7 +16,7 @@ import time
 #   mnemonic: giant issue aisle success illegal bike spike question tent bar rely arctic volcano long crawl hungry vocal artwork sniff fantasy very lucky have athlete
 # ```
 host_keysdata_str = sys.argv[1]
-host_keysdata = yaml.load(host_keysdata_str)
+host_keysdata = ruamel.yaml.round_trip_load(host_keysdata_str)
 
 # Expects as second and third arguments the paths of config.yaml, mnemonics.yaml
 # ```

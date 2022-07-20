@@ -10,6 +10,7 @@
 
 # Run all containers
 - import_playbook: setup_execution_and_consensus_full.yml
+- import_playbook: tasks/start_txfuzz.yml
 - import_playbook: setup_beacon_and_execution_explorer_full.yml
 #
 # TODO:

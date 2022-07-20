@@ -1,6 +1,6 @@
 - name: Start explorer
   hosts: explorer
-  gather_facts: true
+  gather_facts: false
   serial: 20
   tasks:
     - name: Start Eth2 explorer
@@ -10,13 +10,10 @@
         image: "{{ beacon_explorer_image_name }}"
         pull: true
         restart_policy: unless-stopped
-        network_mode: bridge
-        networks:
-          - name: "{{explorer_docker_network_name}}"
-            ipv4_address: "172.1.1.101"
+        network_mode: host
         ports:
           - "5000:9333"
-          - "3333:3333"
+          - "{{public_beacon_explorer}}:3333"
         restart: "{{ explorer_require_restart | default(false) }}"
         memory: "{{explorer_memory}}"
         command: "{{ beacon_explorer_start_args }}"

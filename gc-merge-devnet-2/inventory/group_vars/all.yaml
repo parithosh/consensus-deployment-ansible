@@ -74,6 +74,8 @@ push_url: "https://hostedmetrics.com/s/cQ4UMmFc/prometheus/remote/write/"
 push_metrics_enabled: true
 remote_write_auth: true
 cadvisor_enabled: true
+promtail_enabled: true
+promtail_loki_server_url: "https://136217:{{loki_pusher_api_key}}@logs-prod-us-central1.grafana.net/loki/api/v1/push"
 eth2_validator_metrics_enabled: true
 eth_metrics_exporter_enabled: true
 eth_metrics_exporter_name: "metrics-exporter"
@@ -104,6 +106,7 @@ prometheus_web_listen_address: "0.0.0.0:9090"
 eth1_metrics_port: 8002
 eth_metrics_exporter_port: 8003
 cadvisor_port: 9280
+promtail_port: 9080
 
 ##############################################
 # Command for JSON RPC snooper
