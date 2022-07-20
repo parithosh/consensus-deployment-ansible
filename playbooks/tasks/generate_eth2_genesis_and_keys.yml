@@ -73,8 +73,14 @@
       file:
         path: "{{validator_node_dir}}"
         state: directory
+        owner: "{{bootstrap_user}}"
+        group: "{{bootstrap_user}}"
+        state: absent
 
-    # Grab the right keys for each eth2 client
+    - name: Create validator dir for Nethermind
+      when: eth1_client_name == 'nethermind'
+      shell: |
+        mkdir -p "{{validator_node_dir}}/validators"
 
     - name: Copy keys for lighthouse
       when: eth2_client_name == 'lighthouse'
@@ -84,6 +90,8 @@
     - name: Copy keys for teku
       when: eth2_client_name == 'teku'
       shell: |
+        mkdir -p "{{validator_node_dir}}/keystores"
+        mkdir -p "{{validator_node_dir}}/secrets"
         cp -r "{{output_keys_dirpath}}/teku-keys" "{{validator_node_dir}}/keys"
         cp -r "{{output_keys_dirpath}}/teku-secrets" "{{validator_node_dir}}/secrets"
     - name: Create folders for prysm
@@ -101,6 +109,8 @@
     - name: Copy keys for lodestar
       when: eth2_client_name == 'lodestar'
       shell: |
+        mkdir -p "{{validator_node_dir}}/keystores"
+        mkdir -p "{{validator_node_dir}}/secrets"
         cp -r "{{output_keys_dirpath}}/keys" "{{validator_node_dir}}/keystores"
         cp -r "{{output_keys_dirpath}}/secrets" "{{validator_node_dir}}/secrets"
 

@@ -56,7 +56,10 @@ bootnode_enrs: []
 
 eth1_bootnode_enode: []
 
-mining_addresses: []
+mining_addresses: [
+  "0x88dFc82CF71fdeb23f82C33a202f6E2D19AC0541",
+  "0x1258c99E6a9F61bB29264966B45972C4C428A48F"
+]
 
 # Note: 0 is correct, but due to an underflow bug (being fixed), doesn't work.
 eth1_deposit_contract_first_block: 1
