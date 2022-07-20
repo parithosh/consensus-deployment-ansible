@@ -176,8 +176,8 @@ firewall_allowed_udp_ports:
   - 30303
   - 9000
 firewall_additional_rules:
-  - "iptables -A INPUT -p tcp --dport 4000 -d 165.232.93.228 -j ACCEPT"
-  - "iptables -A INPUT -p tcp --dport 8545 -d 165.232.93.228 -j ACCEPT"
+  - "iptables -A INPUT -p tcp --dport 4000 -d 0.0.0.0/0 -j ACCEPT"
+  - "iptables -A INPUT -p tcp --dport 8545 -d 0.0.0.0/0 -j ACCEPT"
   - "iptables -A INPUT -p tcp --dport 3333 -j ACCEPT"
   - "iptables -A INPUT -p tcp --dport 3334 -j ACCEPT"
-  - "iptables -A INPUT -p tcp --dport 3000 -d 165.232.93.228 -j ACCEPT"
+  - "iptables -A INPUT -p tcp --dport 3000 -d 0.0.0.0/0 -j ACCEPT"
