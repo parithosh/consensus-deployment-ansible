@@ -18,3 +18,5 @@
           - "{{dshackle_port}}:2450"
         restart: "{{ dshackle_require_restart | default(false) }}"
         volumes: "{{ dshackle_volumes }}"
+        log_options: "{{ common_log_options }}"
+        log_driver: "{{ common_log_driver }}"

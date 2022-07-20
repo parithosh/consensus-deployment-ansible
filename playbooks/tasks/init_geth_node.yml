@@ -16,3 +16,5 @@
         volumes: "{{eth1_volumes}}"
         command: "{{ geth_init_args }}"
         env: "{{ eth1_env | default({}) }}"
+        log_options: "{{ common_log_options }}"
+        log_driver: "{{ common_log_driver }}"

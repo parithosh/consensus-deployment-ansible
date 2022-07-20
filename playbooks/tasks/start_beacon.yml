@@ -23,3 +23,5 @@
         command: "{{ beacon_start_args }}"
         env: "{{ beacon_env | default({}) }}"
         user: "{{ beacon_user_id }}"
+        log_options: "{{ common_log_options }}"
+        log_driver: "{{ common_log_driver }}"

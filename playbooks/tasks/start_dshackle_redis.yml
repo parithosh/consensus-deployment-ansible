@@ -29,3 +29,5 @@
         volumes: "{{dshackle_redis_volumes}}"
         env:
           REDIS_REPLICATION_MODE: "master"
+        log_options: "{{ common_log_options }}"
+        log_driver: "{{ common_log_driver }}"

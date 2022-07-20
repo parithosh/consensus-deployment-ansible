@@ -1,12 +1,12 @@
---- 
-- name: Install node exporter agent 
+---
+- name: Install node exporter agent
   hosts: hetzner
   gather_facts: false
   serial: 20
-  vars: 
-    node_exporter_container_image: docker.io/prom/node-exporter:latest 
+  vars:
+    node_exporter_container_image: docker.io/prom/node-exporter:latest
     cadvisor_exporter_container_image: gcr.io/cadvisor/cadvisor:v0.36.0
-  tasks: 
+  tasks:
     - name: Install aptitude using apt
       apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
 
@@ -31,7 +31,7 @@
       pip:
         name: docker
 
-    - name: Pull node metrics image 
+    - name: Pull node metrics image
       docker_image:
         name: "{{ node_exporter_container_image }}"
         source: pull
@@ -41,32 +41,35 @@
         name: "node_exporter"
         image: "{{ node_exporter_container_image }}"
         state: started
-        network_mode: host 
-        pid_mode: host 
-        env: 
+        network_mode: host
+        pid_mode: host
+        log_options: "{{ common_log_options }}"
+        log_driver: "{{ common_log_driver }}"
+        env:
            path.rootfs=/host
         volumes:
             - /:/host:ro,rslave
 
-    - name: Pull cadvisor metrics container 
-      docker_image: 
+    - name: Pull cadvisor metrics container
+      docker_image:
          name: "{{ cadvisor_exporter_container_image }}"
-         source: pull 
-         
-    - name: Create cadvisor metrics exporter container 
-      docker_container: 
+         source: pull
+
+    - name: Create cadvisor metrics exporter container
+      docker_container:
         name: "cadvisor"
         image: "{{ cadvisor_exporter_container_image }}"
-        state: started 
+        state: started
+        log_options: "{{ common_log_options }}"
+        log_driver: "{{ common_log_driver }}"
         ports:
             - "8085:8080"
-        privileged: yes  
-        volumes: 
+        privileged: yes
+        volumes:
           - /:/rootfs:ro
           - /var/run:/var/run:ro
-          - /sys:/sys:ro 
+          - /sys:/sys:ro
           - /var/lib/docker/:/var/lib/docker:ro
-          - /dev/disk/:/dev/disk:ro 
-        devices: 
-          - "/dev/ksmg:/dev/ksmg:r"     
-
+          - /dev/disk/:/dev/disk:ro
+        devices:
+          - "/dev/ksmg:/dev/ksmg:r"

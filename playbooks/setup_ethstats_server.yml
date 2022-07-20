@@ -16,3 +16,5 @@
         env:
           WS_SECRET: "{{ ethstats_secret }}"
           NODE_OPTIONS: "--max-old-space-size=4096"
+        log_options: "{{ common_log_options }}"
+        log_driver: "{{ common_log_driver }}"

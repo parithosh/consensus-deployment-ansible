@@ -49,3 +49,5 @@
         volumes: "{{forkmon_volumes}}"
         env:
           RUST_LOG: "{{ forkmon_debug_level }}"
+        log_options: "{{ common_log_options }}"
+        log_driver: "{{ common_log_driver }}"
