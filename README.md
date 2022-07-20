@@ -63,6 +63,22 @@ Just set the following variables in `all.yml` or on your `secrets.yml` file:
 - `logging_auth_user=User With Permissions to push logs`
 - `logging_auth_password=User Password`
 
+Sample logging driver configurations:
+```
+## JSON file
+common_log_driver: json-file
+common_log_options:
+  max-file: "10"
+  max-size: 500m
+  mode: non-blocking
+  max-buffer-size: 4m
+
+## Fluentd
+
+common_log_driver: fluentd
+common_log_options: {}
+```
+
 That can be either an ElasticSearch or OpenSearch URL.
 
 ## Instructions to deploy testnet
