@@ -1,6 +1,6 @@
 ---
 - name: Install logging agent 
-  hosts: hetzner
+  hosts: all
   gather_facts: false
   serial: 20
   tasks:   

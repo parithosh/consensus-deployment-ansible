@@ -1,14 +1,14 @@
 ---
 - name: Configure Logging Agent
-  hosts: hetzner
+  hosts: all
   gather_facts: false
   vars_prompt:
     - name: user
       prompt: Enter the Opensearch User
     - name: password
       prompt: Enter the Opensearch Password
-    - name: host
-      prompt: Pass the fluentd host 
+    - name: host 
+      prompt: Enter the fluentd aggregator host
   serial: 20  
   tasks:
     - name: Add listener to get logs send locally
@@ -152,6 +152,7 @@
               <match es.**>
                     # https://docs.fluentd.org/output/elasticsearch#user-password-optional 
                     @type elasticsearch
+                    @log_level debug
                     host {{ host }}
                     port 443
                     scheme https
