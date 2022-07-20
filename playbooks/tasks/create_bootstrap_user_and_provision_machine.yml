@@ -1,5 +1,5 @@
 - name: Setup name and keys
-  hosts: none
+  hosts: all
   become: true
   gather_facts: false
   tasks:
@@ -44,12 +44,7 @@
   remote_user: "{{ bootstrap_user }}"
   gather_facts: true
   become: true
-  pre_tasks:
-    - name: apt-update
-      become: true
-      apt:
-        update_cache: true
-        cache_valid_time: 3600
+
   roles:
     # Prepare system to be managed by Ansible.
     - role: robertdebock.bootstrap
