@@ -1,7 +1,7 @@
 ##############################################
 # generic ansible config information
 ##############################################
-ansible_user: "root"
+ansible_user: "devops"
 bootstrap_user: "devops"
 
 github_user_pubkeys:
@@ -142,7 +142,7 @@ home_dir: "/home/{{ansible_user}}"
 beacon_node_dir: "{{home_dir}}/beacon"
 validator_node_dir: "{{home_dir}}/validator"
 testnet_dir: "{{home_dir}}/custom_config_data"
-eth1_node_dir: "{{home_dir}}/eth1data"
+execution_node_dir: "{{home_dir}}/execution"
 
 ##############################################
 # common log config
