@@ -36,8 +36,6 @@ eth1_start_args: >
   --JsonRpc.Host=0.0.0.0
   --Network.DiscoveryPort=30303
   --Network.P2PPort=30303
-  --Network.Bootnodes="{{ eth1_bootnode_enode | join(',') }}"
-  --Discovery.Bootnodes="{{ eth1_bootnode_enode | join(',') }}"
   --Merge.Enabled=true
   --Merge.TerminalTotalDifficulty={{terminal_total_difficulty}}
   --Init.DiagnosticMode="None"
@@ -53,16 +51,7 @@ eth1_start_args: >
   --Seq.MinLevel="Info"
   --Seq.ServerUrl="https://seq.nethermind.io/"
   --Seq.ApiKey="{{nethermind_seq_api_key}}"
-  {% if mining_keyi is defined %}
-  --Init.IsMining=true
-  --Mining.Enabled=true
-  --Mining.MinGasPrice=1000000000
-  --Mining.TargetBlockGasLimit=30000000
-  --KeyStore.BlockAuthorAccount={{mining_addresses[mining_keyi]}}
-  --KeyStore.PasswordFiles=/networkdata/keystores_password.txt
-  --KeyStore.KeyStoreDirectory=/networkdata/keystores
-  --KeyStore.UnlockAccounts={{mining_addresses[mining_keyi]}}
-  {% endif %}
+  --Sync.FastSync=true
 
 # run as root, the nethermind image doesn't handle running regular user well
 eth1_user_id: "0:0"
