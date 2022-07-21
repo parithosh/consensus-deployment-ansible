@@ -2,6 +2,12 @@
   hosts: all
   gather_facts: false
   tasks:
+    - name: Get VERSION_CODENAME
+      shell: . /etc/os-release && echo $VERSION_CODENAME
+      register: result
+    - name: set VERSION_CODENAME
+      set_fact:
+        release_version_codename: "{{ result.stdout }}"
     - name: Copy sources.list
       become: true
       template:
