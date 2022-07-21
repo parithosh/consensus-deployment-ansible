@@ -51,7 +51,13 @@ eth1_start_args: >
   --Seq.MinLevel="Info"
   --Seq.ServerUrl="https://seq.nethermind.io/"
   --Seq.ApiKey="{{nethermind_seq_api_key}}"
+  {% if (use_snap_sync is defined) and use_snap_sync %}
+  --Sync.SnapSync=true
+  --Sync.FastSync=false
+  {% else %}
   --Sync.FastSync=true
+  --Sync.SnapSync=false
+  {% endif %}
 
 # run as root, the nethermind image doesn't handle running regular user well
 eth1_user_id: "0:0"

@@ -6,9 +6,9 @@ COUNT=15
 for i in $(seq 1 $COUNT);
 do
   doctl compute droplet create \
-  --image ubuntu-20-04-x64 \
+  --image ubuntu-22-04-x64 \
   --region sfo3 \
-  --size s-4vcpu-8gb-amd \
+  --size s-8vcpu-16gb-amd \
   --ssh-keys 5a:2b:03:10:50:b5:26:5e:78:1d:a7:9b:04:20:6a:a2 \
   --ssh-keys d9:39:86:57:a3:09:f1:f0:27:42:00:6e:79:79:cb:ff \
   --ssh-keys 4e:22:f5:f7:88:20:0c:87:38:67:89:89:6e:7c:38:f3 \
