@@ -11,19 +11,6 @@
       prompt: Enter the fluentd aggregator host
   serial: 20  
   tasks:
-    - name: Add listener to get logs send locally
-      become: yes
-      blockinfile:
-        path: "/etc/td-agent/td-agent.conf"
-        marker: "# ANSIBLE MANAGED BLOCK - forwarding port {mark}"
-        state: present
-        block: |2
-           <source>
-             @type forward
-             port 24224
-             bind 0.0.0.0
-           </source>
-
     - name: Install td agent fluentd prometheus gem
       shell: td-agent-gem install fluent-plugin-prometheus
       become: yes
@@ -133,12 +120,25 @@
       become: yes
 
     - name: Install td agent grafana gem
-      shell: td-agent-gem install fluent-plugin-elasticsearch
+      shell: td-agent-gem install fluent-plugin-elasticsearch -v 5.2.2
       become: yes
 
     - name: Install td agent fluentd plugin 
       shell: td-agent-gem install fluent-plugin-systemd -v 1.0.3
       become: yes
+
+    - name: Add listener to get logs send locally
+      become: yes
+      blockinfile:
+        path: "/etc/td-agent/td-agent.conf"
+        marker: "# ANSIBLE MANAGED BLOCK - forwarding port {mark}"
+        state: present
+        block: |2
+           <source>
+             @type forward
+             port 24224
+             bind 0.0.0.0
+           </source>
 
     # Elasticsearch
     - name: Add elasticsearch output 

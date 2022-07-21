@@ -5,7 +5,7 @@
   vars: 
   # enter pushgateway config if needed
     prometheus_config_file: "prometheus/prometheus.yml.j2"
-    push_url: "https://themerge-monitoring.gnosischainscan.com/pushgateway/metrics/job/node_metrics/instance/gbc-merge"
+    push_url: "https://themerge-monitoring.gnosischainscan.com/prometheus/api/v1/write/"
     push_metrics_enabled: true
     remote_write_auth: true
     eth2_validator_metrics_enabled: true
