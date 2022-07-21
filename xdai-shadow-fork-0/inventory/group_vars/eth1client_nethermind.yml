@@ -55,8 +55,8 @@ eth1_start_args: >
   --Sync.SnapSync=true
   --Sync.FastSync=false
   {% else %}
-  --Sync.FastSync=true
   --Sync.SnapSync=false
+  --Sync.FastSync=true
   {% endif %}
 
 # run as root, the nethermind image doesn't handle running regular user well
