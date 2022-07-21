@@ -1,0 +1,9 @@
+- name: Replace mirros in sources
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Copy sources.list
+      become: true
+      template:
+        src: "./templates/apt_sources/sources.list_do_template"
+        dest: "/etc/apt/sources.list"

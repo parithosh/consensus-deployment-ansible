@@ -164,6 +164,10 @@ execution_container_name: execution
 hi_peer_count: "{{ groups['beacon'] | length }}"
 separate_validator_process_enabled: true
 
+# Hosts
+distro_codename: jammy
+
+# Firewall
 firewall_allowed_tcp_ports:
   - 22
   - 30303
