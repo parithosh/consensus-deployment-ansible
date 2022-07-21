@@ -11,5 +11,5 @@
     - name: Copy sources.list
       become: true
       template:
-        src: "./templates/apt_sources/sources.list_do_template"
+        src: "./templates/ubuntu/sources.list"
         dest: "/etc/apt/sources.list"

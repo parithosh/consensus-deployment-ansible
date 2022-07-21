@@ -164,8 +164,10 @@ execution_container_name: execution
 hi_peer_count: "{{ groups['beacon'] | length }}"
 separate_validator_process_enabled: true
 
-# Hosts
-distro_codename: jammy
+# To fix sources.list issues
+# Only for DO: http://mirrors.digitalocean.com/ubuntu/
+# Generic but slower: http://archive.ubuntu.com/ubuntu/
+ubuntu_archive_url: http://mirrors.digitalocean.com/ubuntu/
 
 # Firewall
 firewall_allowed_tcp_ports:
