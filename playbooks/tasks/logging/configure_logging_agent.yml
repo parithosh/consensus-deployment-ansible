@@ -11,7 +11,7 @@
       prompt: Enter the fluentd aggregator host
   serial: 20  
   tasks:
-    - name: Install td agent fluentd prometheus gem
+    - name: Install td agent fluentd prometheus metrics gem
       shell: td-agent-gem install fluent-plugin-prometheus
       become: yes
 
@@ -22,18 +22,20 @@
         marker: "# ANSIBLE MANAGED BLOCK -  metrics exposure {mark}"
         state: present
         block: |2
-            <source> 
-              @type prometheus 
-              <labels> 
-                hostname "#{Socket.gethostname}" 
-              </labels> 
-            </source> 
-            <source> 
-              @type prometheus
-              bind 0.0.0.0 
-              port 24231 
-              metrics_path /metrics
-            </source> 
+              <source>
+                @type prometheus
+                bind 0.0.0.0
+                port 24231
+                metrics_path /metrics
+              </source>
+
+              <source>
+                @type prometheus_output_monitor
+                interval 10
+                <labels>
+                  hostname ${hostname}
+                </labels>
+              </source>
           
     - name: Add transformation to logs 
       become: yes
