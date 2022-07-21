@@ -35,7 +35,7 @@ if [ "$is_syncing" == "false" ] && [ "$head_slot" -gt "0" ]; then
       docker stop {{beacon_container_name}}
       docker stop {{beacon_container_name}}
       rm -rf {{beacon_node_dir}}/*
-      rm -rf {{eth1_node_dir}}/*
+      rm -rf {{execution_node_dir}}/*
       docker start {{beacon_container_name}}
       docker start {{beacon_container_name}}
 
