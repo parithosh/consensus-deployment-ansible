@@ -3,6 +3,7 @@
 ##############################################
 ansible_user: "devops"
 bootstrap_user: "devops"
+initial_remote_user: "root"
 
 github_user_pubkeys:
   - dapplion
