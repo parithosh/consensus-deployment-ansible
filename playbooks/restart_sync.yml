@@ -1,0 +1,26 @@
+- name: Remove beacon node
+  hosts: beacon
+  gather_facts: false
+  tasks:
+    - name: Remove beacon node container
+      shell: "docker rm -f {{beacon_container_name}}"
+    - name: Remove beacon node db
+      become: true
+      file:
+        path: "{{beacon_node_dir}}"
+        state: absent
+
+- name: Remove execution node
+  hosts: execution
+  gather_facts: false
+  tasks:
+    - name: Remove execution node container
+      shell: "docker rm -f {{execution_container_name}}"
+    - name: Remove execution node db
+      become: true
+      file:
+        path: "{{eth1_node_dir}}"
+        state: absent
+
+- import_playbook: tasks/start_beacon.yml
+- import_playbook: tasks/start_execution_node.yml
