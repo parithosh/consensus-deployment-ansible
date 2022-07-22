@@ -10,8 +10,8 @@ CONFIG_NAME: "gc-merge-devnet-3"
 # The issue is with `current_epoch_attestations` offsets which instead of being empty, they have a random value:
 # Expected: (3713677,3713677), actual (3713677,4713677). The cause is unknown, not able to recreate.
 MIN_GENESIS_ACTIVE_VALIDATOR_COUNT: 8000
-# Jul 22 2022 12:00:00 GMT+0000
-MIN_GENESIS_TIME: 1658491200
+# Jul 22 2022 10:30:00 GMT+0000
+MIN_GENESIS_TIME: 1658485800
 GENESIS_DELAY: 300
 
 TERMINAL_TOTAL_DIFFICULTY: 735009912549227081080889152052619336740640
