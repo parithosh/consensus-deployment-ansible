@@ -1,12 +1,6 @@
-<<<<<<< HEAD
----
-- name: Install node exporter agent
-  hosts: hetzner
-=======
 --- 
-- name: Install node exporter agent 
+- name: Install node exporter agent
   hosts: all
->>>>>>> 5c03914 (fixing the input source)
   gather_facts: false
   serial: 20
   vars:
@@ -15,12 +9,12 @@
   tasks:
     - name: Install aptitude using apt
       apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
-      become: yes 
+      become: yes
 
     - name: Install required system packages
       apt: name={{ item }} state=latest update_cache=yes
       loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools']
-      become: yes 
+      become: yes
 
     - name: Add Docker GPG apt Key
       apt_key:
@@ -32,11 +26,11 @@
       apt_repository:
         repo: deb https://download.docker.com/linux/ubuntu bionic stable
         state: present
-      become: yes 
+      become: yes
 
     - name: Update apt and install docker-ce
       apt: update_cache=yes name=docker-ce state=latest
-      become: yes 
+      become: yes
 
     - name: Install Docker Module for Python
       pip:
