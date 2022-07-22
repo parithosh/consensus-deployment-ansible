@@ -74,7 +74,7 @@ eth1_deposit_contract_first_block: 1
 ##############################################
 # enter pushgateway config if needed
 prometheus_config_file: "prometheus/prometheus.yml.j2"
-push_url: "https://hostedmetrics.com/s/cQ4UMmFc/prometheus/remote/write/"
+remote_write_enabled: true
 push_metrics_enabled: true
 remote_write_auth: true
 eth2_validator_metrics_enabled: true

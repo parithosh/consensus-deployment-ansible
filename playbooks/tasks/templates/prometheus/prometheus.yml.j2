@@ -11,7 +11,7 @@ global:
     ip_address: "{{ ansible_host }}"
     network: "{{ eth2_network_name }}"
 
-
+{% if remote_write_enabled == true %}
 remote_write:
   - queue_config:
       batch_send_deadline: 5s
@@ -25,6 +25,7 @@ remote_write:
     basic_auth:
       username: {{remote_write_username}}
       password: {{remote_write_password}}
+{% endif %}
 {% endif %}
 
 scrape_configs:
