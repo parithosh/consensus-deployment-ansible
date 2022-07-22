@@ -1,15 +1,17 @@
 # Extends the mainnet preset
 PRESET_BASE: "gnosis"
 # needs to exist because of Prysm. Otherwise it conflicts with mainnet genesis
-CONFIG_NAME: "xdai-shadow-fork-0"
+CONFIG_NAME: "gc-merge-devnet-3"
 
 # Genesis
-MIN_GENESIS_ACTIVE_VALIDATOR_COUNT: 14000
-# Jul 20 2022 00:00:00 GMT+0000
-MIN_GENESIS_TIME: 1658275200
+# If 14000 = oK
+# If 8000 = error "Error: Offset data length not multiple of 4"
+MIN_GENESIS_ACTIVE_VALIDATOR_COUNT: 8000
+# Jul 22 2022 12:00:00 GMT+0000
+MIN_GENESIS_TIME: 1658491200
 GENESIS_DELAY: 300
 
-TERMINAL_TOTAL_DIFFICULTY: 115792089237316195423570985008687907853269984665640564039457584007913129638912
+TERMINAL_TOTAL_DIFFICULTY: 735009912549227081080889152052619336740640
 
 # Deposit contract
 # ---------------------------------------------------------------
