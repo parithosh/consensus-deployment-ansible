@@ -90,6 +90,19 @@
         group: td-agent
       become: yes
   
+    - name: Add listener to get logs send locally
+      become: yes
+      blockinfile:
+        path: "/etc/td-agent/td-agent.conf"
+        marker: "# ANSIBLE MANAGED BLOCK - forwarding port {mark}"
+        state: present
+        block: |2
+           <source>
+             @type forward
+             port 24224
+             bind 0.0.0.0
+           </source>
+
     - name: Add transformation to logs 
       become: yes
       blockinfile:
@@ -106,41 +119,6 @@
                 ip_address_agent_machine "#{Socket.ip_address_list[1].ip_address}"
               </record> 
             </filter> 
-
-    - name: Add metrics for fluentd
-      become: yes
-      blockinfile:
-        path: "/etc/td-agent/td-agent.conf"
-        marker: "# ANSIBLE MANAGED BLOCK -  metrics exposure {mark}"
-        state: present
-        block: |2
-              <source>
-                @type prometheus
-                bind 0.0.0.0
-                port 24231
-                metrics_path /metrics
-              </source>
-
-              <source>
-                @type prometheus_output_monitor
-                interval 10
-                <labels>
-                  hostname ${hostname}
-                </labels>
-              </source>
-
-    - name: Add listener to get logs send locally
-      become: yes
-      blockinfile:
-        path: "/etc/td-agent/td-agent.conf"
-        marker: "# ANSIBLE MANAGED BLOCK - forwarding port {mark}"
-        state: present
-        block: |2
-           <source>
-             @type forward
-             port 24224
-             bind 0.0.0.0
-           </source>
 
     # Elasticsearch
     - name: Add elasticsearch output 
@@ -184,5 +162,25 @@
                     log_es_400_reason false
               </match>
 
+    - name: Add metrics for fluentd
+      become: yes
+      blockinfile:
+        path: "/etc/td-agent/td-agent.conf"
+        marker: "# ANSIBLE MANAGED BLOCK -  metrics exposure {mark}"
+        state: present
+        block: |2
+              <source>
+                @type prometheus
+                bind 0.0.0.0
+                port 24231
+                metrics_path /metrics
+              </source>
 
+              <source>
+                @type prometheus_output_monitor
+                interval 10
+                <labels>
+                  hostname ${hostname}
+                </labels>
+              </source>
 
