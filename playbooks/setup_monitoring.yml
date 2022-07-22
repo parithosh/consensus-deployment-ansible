@@ -1,0 +1,3 @@
+---
+- import_playbook: tasks/metrics/setup_node_metrics.yml
+- import_playbook: tasks/setup_node_exporter_and_prometheus.yml

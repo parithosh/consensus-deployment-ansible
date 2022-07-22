@@ -11,60 +11,18 @@
       prompt: Enter the fluentd aggregator host
   serial: 20  
   tasks:
-    - name: Add listener to get logs send locally
-      become: yes
-      blockinfile:
-        path: "/etc/td-agent/td-agent.conf"
-        marker: "# ANSIBLE MANAGED BLOCK - forwarding port {mark}"
-        state: present
-        block: |2
-           <source>
-             @type forward
-             port 24224
-             bind 0.0.0.0
-           </source>
-
-    - name: Install td agent fluentd prometheus gem
+    - name: Install td agent fluentd prometheus metrics gem
       shell: td-agent-gem install fluent-plugin-prometheus
       become: yes
+    
+    - name: Install td agent grafana gem
+      shell: td-agent-gem install fluent-plugin-elasticsearch -v 5.2.2
+      become: yes
 
-    - name: Add metrics for fluentd
+    - name: Install td agent fluentd plugin 
+      shell: td-agent-gem install fluent-plugin-systemd -v 1.0.3
       become: yes
-      blockinfile:
-        path: "/etc/td-agent/td-agent.conf"
-        marker: "# ANSIBLE MANAGED BLOCK -  metrics exposure {mark}"
-        state: present
-        block: |2
-            <source> 
-              @type prometheus 
-              <labels> 
-                hostname "#{Socket.gethostname}" 
-              </labels> 
-            </source> 
-            <source> 
-              @type prometheus
-              bind 0.0.0.0 
-              port 24231 
-              metrics_path /metrics
-            </source> 
-          
-    - name: Add transformation to logs 
-      become: yes
-      blockinfile:
-        path: "/etc/td-agent/td-agent.conf"
-        marker: "# ANSIBLE MANAGED BLOCK -  log adaption {mark}"
-        state: present
-        block: |2
-            <filter es.**> 
-              @type record_transformer
-              enable_ruby
-              <record> 
-                fluentd_worker "#{worker_id}"
-                hostname_agent_machine "#{Socket.gethostname}" 
-                ip_address_agent_machine "#{Socket.ip_address_list[1].ip_address}"
-              </record> 
-            </filter> 
-      
+
     - name: Add systemd source
       become: yes
       blockinfile:
@@ -131,14 +89,36 @@
         owner: td-agent
         group: td-agent
       become: yes
-
-    - name: Install td agent grafana gem
-      shell: td-agent-gem install fluent-plugin-elasticsearch
+  
+    - name: Add listener to get logs send locally
       become: yes
+      blockinfile:
+        path: "/etc/td-agent/td-agent.conf"
+        marker: "# ANSIBLE MANAGED BLOCK - forwarding port {mark}"
+        state: present
+        block: |2
+           <source>
+             @type forward
+             port 24224
+             bind 0.0.0.0
+           </source>
 
-    - name: Install td agent fluentd plugin 
-      shell: td-agent-gem install fluent-plugin-systemd -v 1.0.3
+    - name: Add transformation to logs 
       become: yes
+      blockinfile:
+        path: "/etc/td-agent/td-agent.conf"
+        marker: "# ANSIBLE MANAGED BLOCK -  log adaption {mark}"
+        state: present
+        block: |2
+            <filter es.**> 
+              @type record_transformer
+              enable_ruby
+              <record> 
+                fluentd_worker "#{worker_id}"
+                hostname_agent_machine "#{Socket.gethostname}" 
+                ip_address_agent_machine "#{Socket.ip_address_list[1].ip_address}"
+              </record> 
+            </filter> 
 
     # Elasticsearch
     - name: Add elasticsearch output 
@@ -182,5 +162,25 @@
                     log_es_400_reason false
               </match>
 
+    - name: Add metrics for fluentd
+      become: yes
+      blockinfile:
+        path: "/etc/td-agent/td-agent.conf"
+        marker: "# ANSIBLE MANAGED BLOCK -  metrics exposure {mark}"
+        state: present
+        block: |2
+              <source>
+                @type prometheus
+                bind 0.0.0.0
+                port 24231
+                metrics_path /metrics
+              </source>
 
+              <source>
+                @type prometheus_output_monitor
+                interval 10
+                <labels>
+                  hostname ${hostname}
+                </labels>
+              </source>
 
