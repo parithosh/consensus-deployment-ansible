@@ -12,11 +12,7 @@
     - name: Validate ranges + prepare mnemonics.yaml
       delegate_to: localhost
       run_once: true
-<<<<<<< HEAD
-      script: "./scripts/validate_ranges.py '{{keys_data_dict | to_json}}' {{local_eth2_config_filepath}} {{local_mnemonics_filepath}}"
-=======
       script: "./scripts/validate_eth2_indexes.py '{{keys_data_dict | to_json}}' {{local_eth2_config_filepath}} {{local_mnemonics_filepath}}"
->>>>>>> parithosh/master
 
     - name: Load config
       delegate_to: localhost
@@ -40,7 +36,6 @@
         --mnemonics /data/mnemonics.yaml \
         --tranches-dir /data/tranches \
         --state-output /data/genesis.ssz
-
 - name: Generate validator keys
   hosts: validator
   gather_facts: false
@@ -58,10 +53,6 @@
     - name: Clear directory
       become: true
       shell: rm -rf {{output_keys_dirpath}}
-<<<<<<< HEAD
-    # {{output_keys_dirpath}} is created by the docker bind below when running the container
-=======
->>>>>>> parithosh/master
 
     - name: Generate keys
       shell: >
@@ -74,19 +65,7 @@
         --source-max={{to_index}} \
         --source-min={{from_index}} \
         --source-mnemonic="{{mnemonic}}"
-<<<<<<< HEAD
-
-    # {{validator_node_dir}} must be created manually
-    - name: Creates validator dir
-      file:
-        path: "{{validator_node_dir}}"
-        state: directory
-
     # Grab the right keys for each eth2 client
-
-=======
-    # Grab the right keys for each eth2 client
->>>>>>> parithosh/master
     - name: Copy keys for lighthouse
       when: eth2_client_name == 'lighthouse'
       shell: |
@@ -114,10 +93,6 @@
       shell: |
         cp -r "{{output_keys_dirpath}}/keys" "{{validator_node_dir}}/keystores"
         cp -r "{{output_keys_dirpath}}/secrets" "{{validator_node_dir}}/secrets"
-<<<<<<< HEAD
-
-=======
->>>>>>> parithosh/master
     - name: Modify permissions to match user-group inside docker image
       shell: chown -R "{{validator_user_id}}" "{{validator_node_dir}}"
       become: true

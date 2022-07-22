@@ -67,6 +67,7 @@ scrape_configs:
         scrape_location: exporter
       targets:
       - localhost:{{ eth_metrics_exporter_port }}
+
 {% endif %}
 
 {% if eth1_client_name is defined %}
