@@ -65,7 +65,6 @@ beacon_start_args: >
   --metrics.serverPort={{ beacon_metrics_port }}
   --eth1.depositContractDeployBlock=14675001
   --jwt-secret="/jwtsecret"
-
 validator_start_args: >
   validator
   --preset=gnosis
