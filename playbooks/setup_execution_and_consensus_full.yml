@@ -35,4 +35,4 @@
 
 # install node_exporter and metric pusher
 - import_playbook: tasks/setup_node_exporter_and_prometheus.yml
-  when: push_metrics_enabled
+  when: prometheus_enabled

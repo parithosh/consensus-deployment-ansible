@@ -42,4 +42,4 @@
 #  when: (separate_validator_process_enabled) and (no_validator_keys != 'true')
 
 #- import_playbook: tasks/setup_node_exporter_and_prometheus.yml
-#  when: push_metrics_enabled
+#  when: prometheus_enabled
