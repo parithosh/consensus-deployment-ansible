@@ -1,5 +1,5 @@
 - name: Collect enodes
-  hosts: execution
+  hosts: execution,startup
   gather_facts: false
   serial: 20
   tasks:
