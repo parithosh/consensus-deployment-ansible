@@ -4,7 +4,10 @@ global:
   scrape_timeout: 20s
 
   external_labels:
+    consensus_client: "{{ eth2_client_name }}"
+    execution_client: "{{ eth1_client_name }}"
     instance: "{{ inventory_hostname }}"
+    testnet: "{{ eth2_network_name }}"
     ip_address: "{{ ansible_host }}"
     network: "{{ eth2_network_name }}"
 
@@ -40,7 +43,6 @@ scrape_configs:
     - labels:
         instance: "{{ inventory_hostname }}"
         scrape_location: beacon
-        client_name: "{{ eth2_client_name }}"
       targets:
       - localhost:{{ beacon_metrics_port }}
 
@@ -50,7 +52,6 @@ scrape_configs:
     - labels:
         instance: "{{ inventory_hostname }}"
         scrape_location: validator
-        client_name: "{{ eth2_client_name }}"
       targets:
       - localhost:{{ validator_metrics_port }}
 {% endif %}
@@ -66,7 +67,7 @@ scrape_configs:
         scrape_location: exporter
       targets:
       - localhost:{{ eth_metrics_exporter_port }}
-      {% endif %}
+{% endif %}
 
 {% if eth1_client_name is defined %}
 
@@ -78,7 +79,6 @@ scrape_configs:
     - labels:
         instance: "{{ inventory_hostname }}"
         scrape_location: execution
-        client_name: "{{ eth1_client_name }}"
       targets:
       - localhost:{{ eth1_metrics_port }}
 
