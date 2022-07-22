@@ -1,3 +1,17 @@
+#!/bin/bash
+
+DATA_DIR=$PWD/bad_state_data
+
+mkdir -p $DATA_DIR
+
+cat <<EOT > $DATA_DIR/mnemonics.yaml
+- count: 8000
+  mnemonic:
+    nurse small net shrug resource equip trigger turkey april reunion taxi
+    detect easy anxiety stone pulp knee sunny boost coral security apart mobile come
+EOT
+
+cat <<EOT > $DATA_DIR/config.yaml
 # Extends the mainnet preset
 PRESET_BASE: "gnosis"
 # needs to exist because of Prysm. Otherwise it conflicts with mainnet genesis
@@ -6,12 +20,9 @@ CONFIG_NAME: "gc-merge-devnet-3"
 # Genesis
 # If 14000 = oK
 # If 8000 = error "Error: Offset data length not multiple of 4"
-# For some unknown reason `skylenet/ethereum-genesis-generator` produces invalid states sometimes.
-# The issue is with `current_epoch_attestations` offsets which instead of being empty, they have a random value:
-# Expected: (3713677,3713677), actual (3713677,4713677). The cause is unknown, not able to recreate.
 MIN_GENESIS_ACTIVE_VALIDATOR_COUNT: 8000
-# Jul 22 2022 12:00:00 GMT+0000
-MIN_GENESIS_TIME: 1658491200
+# Jul 19 2022 20:00:00 GMT+0000
+MIN_GENESIS_TIME: 1658260800
 GENESIS_DELAY: 300
 
 TERMINAL_TOTAL_DIFFICULTY: 735009912549227081080889152052619336740640
@@ -167,3 +178,21 @@ SYNC_COMMITTEE_SIZE: 512
 # 2**9 (= 512)
 # assert EPOCHS_PER_SYNC_COMMITTEE_PERIOD * SLOTS_PER_EPOCH <= SLOTS_PER_HISTORICAL_ROOT
 EPOCHS_PER_SYNC_COMMITTEE_PERIOD: 512
+EOT
+
+# Lighthouse needs this file
+echo "0" > $DATA_DIR/deploy_block.txt
+
+docker run --entrypoint=eth2-testnet-genesis \
+-v $DATA_DIR:/data \
+skylenet/ethereum-genesis-generator phase0 \
+--eth1-block 0x0000000000000000000000000000000000000000000000000000000000000000 \
+--timestamp 1658260800 \
+--config /data/config.yaml \
+--mnemonics /data/mnemonics.yaml \
+--tranches-dir /data/tranches \
+--state-output /data/genesis.ssz
+
+docker run \
+-v $DATA_DIR:/data \
+sigp/lighthouse lighthouse --testnet-dir="/data" beacon_node
