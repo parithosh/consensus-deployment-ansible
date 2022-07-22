@@ -1,5 +1,5 @@
 - name: Upload network data
-  hosts: beacon, validator, execution
+  hosts: beacon, validator, execution,startup
   gather_facts: true
   serial: 20
   tasks:

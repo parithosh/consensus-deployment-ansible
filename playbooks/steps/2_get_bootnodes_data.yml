@@ -1,0 +1,3 @@
+- import_playbook: ../tasks/collect_enodes.yml
+#
+- import_playbook: ../tasks/collect_enrs.yml

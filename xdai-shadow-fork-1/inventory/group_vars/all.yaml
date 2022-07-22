@@ -36,7 +36,7 @@ beacon_api_endpoint: "http://127.0.0.1:{{beacon_api_port}}"
 ##############################################
 testnet_type: custom
 eth2_network_name: xdai-shadow-fork-1
-chainID: 1
+chainID: 100
 
 # 0xfffffffffffffffffffffffffffffffe difficulty / block
 #
@@ -49,12 +49,24 @@ chainID: 1
 # node -e 'console.log(BigInt("7916053695613873374795004997235243370474523009") + BigInt((new Date("Jul 21 2022 12:00:00 GMT+0000").getTime() - new Date("Jul 20 2022 8:14:00 GMT+0000"))/5000) * BigInt("0xfffffffffffffffffffffffffffffffe"))'
 # ```
 
-terminal_total_difficulty: "7922856620693356776556564782387019280557911377"
+terminal_total_difficulty: "115792089237316195423570985008687907853269984665640564039457584007913129638912"
 fee_recipient: "0x88dFc82CF71fdeb23f82C33a202f6E2D19AC0541"
 # enter bootnodes here if needed
-bootnode_enrs: []
+bootnode_enrs: [
+    "enr:-L24QLudkL8otrjTa_q-U0so9V7MflOfZbSCoDxGeGTLnA5JaiWjvTNih30LusT2Gm5OEP9cti7L4EWuNN9Sx1TKQaaBjIdhdHRuZXRziP__________hGV0aDKQvmKQ3iIAECn__________4JpZIJ2NIJpcISn6wJUiXNlY3AyNTZrMaEDgcz7BEGuXtmyFrHajVnyzO329m9Fv9-naESVEPJKpHWIc3luY25ldHMPg3RjcIIjKIN1ZHCCIyg"
+]
 
-eth1_bootnode_enode: []
+eth1_bootnode_enode: [
+    "enode://3d947c160c7adaf77b41ce21879f258198dfc77c56d6ffee1189c6df262c968909f1a4949f3ec750cbca3121106df7fd428c0b75baa6c0801aae6e5f7429d4e8@167.235.2.84:30303"
+]
+
+# bootnode_enrs: [
+#     "enr:-L24QLudkL8otrjTa_q-U0so9V7MflOfZbSCoDxGeGTLnA5JaiWjvTNih30LusT2Gm5OEP9cti7L4EWuNN9Sx1TKQaaBjIdhdHRuZXRziP__________hGV0aDKQvmKQ3iIAECn__________4JpZIJ2NIJpcISn6wJUiXNlY3AyNTZrMaEDgcz7BEGuXtmyFrHajVnyzO329m9Fv9-naESVEPJKpHWIc3luY25ldHMPg3RjcIIjKIN1ZHCCIyg"
+# ]
+#
+# eth1_bootnode_enode: [
+#     "enode://9469f6b81fd944b0222d3434f34108b703ec724d2c8f641b6f7fe0e0de0b10f848402a9ef557075d4681dbd77db2901a2a30bda98f5ffb7d4af61976fc956245@167.235.2.84:30303"
+# ]
 
 mining_addresses: [
   "0x88dFc82CF71fdeb23f82C33a202f6E2D19AC0541",
@@ -151,14 +163,15 @@ eth1_node_dir: "{{home_dir}}/eth1data"
 ##############################################
 beacon_log_level: info
 logging_host: "search-gnosis-merge-nev36iek55lsofh2hz3evzkolq.eu-central-1.es.amazonaws.com/"
-common_log_driver: fluentd
-common_log_options: {}
-##### Not needed for fluentd driver
+common_log_driver: json-file
 # common_log_options:
-#   max-file: "10"
-#   max-size: 500m
-#   mode: non-blocking
-#   max-buffer-size: 4m
+#   tag: "es.shadow_fork_1_nethermind"
+##### Not needed for fluentd driver
+common_log_options:
+  max-file: "10"
+  max-size: 500m
+  mode: non-blocking
+  max-buffer-size: 4m
 #####
 
 
