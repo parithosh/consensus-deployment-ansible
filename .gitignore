@@ -19,11 +19,11 @@ faucet.yml
 reverse_proxy.yml
 dshackle.yml
 
-enodes.json
-enrs.json
 .vault_pass
 
 .vscode/settings.json
+enrs.json
+enodes.json
 
 bad_state_data
 

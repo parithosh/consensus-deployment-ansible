@@ -8,7 +8,6 @@
     - role: robertdebock.bootstrap
       tags: [bootstrap]
     - role: robertdebock.fail2ban
-      when: false
       tags: [fail2ban]
       vars:
         - fail2ban_loglevel: INFO
@@ -28,18 +27,7 @@
         line: '{{ item.key }}="{{ item.value }}"'
       loop: "{{ oh_my_zsh_config | dict2items }}"
 
-- name: set hostname
-  hosts: all
-  become: true
-  tasks:
-    - name: Set hostname
-      hostname:
-        name: "{{ inventory_hostname }}"
-    - name: add myself to /etc/hosts
-      lineinfile:
-        dest: /etc/hosts
-        regexp: "^{{ ansible_host }}="
-        line: "{{ ansible_host }} {{ inventory_hostname }}"
+- import_playbook: setup_hostname.yml
 
 - name: Setup general tools used and update system
   hosts:
@@ -74,9 +62,8 @@
             state: present
         - name: Add ansible user to docker group
           shell: "usermod -aG docker {{ ansible_user }}"
-        - name: Add ansible user to docker group
+        - name: Add bootstrap user to docker group
           shell: "usermod -aG docker {{ bootstrap_user }}"
-
     - name: Reload service docker, in all cases
       ansible.builtin.service:
         name: docker

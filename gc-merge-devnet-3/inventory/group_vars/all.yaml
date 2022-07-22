@@ -69,8 +69,8 @@ eth1_deposit_contract_first_block: 1
 ##############################################
 # enter pushgateway config if needed
 prometheus_config_file: "prometheus/prometheus.yml.j2"
-push_url: "https://hostedmetrics.com/s/cQ4UMmFc/prometheus/remote/write/"
-push_metrics_enabled: true
+remote_write_enabled: true
+prometheus_enabled: true
 remote_write_auth: true
 cadvisor_enabled: true
 promtail_enabled: true
@@ -163,7 +163,7 @@ common_log_driver: json-file
 beacon_container_name: beacon
 validator_container_name: validator
 execution_container_name: execution
-hi_peer_count: "{{ groups['beacon'] | length }}"
+hi_peer_count: {{ [100, groups['beacon']] | min }}
 separate_validator_process_enabled: true
 
 firewall_allowed_tcp_ports:

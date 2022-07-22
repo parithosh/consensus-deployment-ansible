@@ -46,7 +46,7 @@
   become: true
   tasks:
     - name: Disable root login over SSH
-      lineinfile: dest=/etc/ssh/sshd_config regexp="^PermitRootLogin" line="PermitRootLogin yes" state=present
+      lineinfile: dest=/etc/ssh/sshd_config regexp="^PermitRootLogin" line="PermitRootLogin no" state=present
       notify:
         - restart sshd
     - name: Disable password login
