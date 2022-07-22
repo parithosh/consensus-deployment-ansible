@@ -8,6 +8,7 @@
         path: "{{local_custom_config_data_host_dir}}/*"
         dest: "{{local_custom_config_data_host_archive}}"
       delegate_to: localhost
+      run_once: true
     - name: Creates tmp testnet dir
       file:
         path: /tmp/testnet_dir

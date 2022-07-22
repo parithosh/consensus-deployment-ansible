@@ -142,7 +142,7 @@ home_dir: "/home/{{ansible_user}}"
 beacon_node_dir: "{{home_dir}}/beacon"
 validator_node_dir: "{{home_dir}}/validator"
 testnet_dir: "{{home_dir}}/custom_config_data"
-eth1_node_dir: "{{home_dir}}/eth1data"
+execution_node_dir: "{{home_dir}}/eth1data"
 archived_logs_dir: "{{home_dir}}/archived_logs"
 
 ##############################################

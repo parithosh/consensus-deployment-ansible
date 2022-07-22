@@ -3,6 +3,7 @@
 ##############################################
 ansible_user: "devops"
 bootstrap_user: "devops"
+initial_remote_user: "root"
 
 github_user_pubkeys:
   - dapplion
@@ -34,29 +35,30 @@ beacon_api_endpoint: "http://127.0.0.1:{{beacon_api_port}}"
 # testnet specific information
 ##############################################
 testnet_type: custom
-eth2_network_name: gc-merge-devnet-2
-eth2_network_name_pretty: GC merge devnet 2
+eth2_network_name: xdai-shadow-fork-0
 chainID: 1
+
 # 0xfffffffffffffffffffffffffffffffe difficulty / block
-# 735009912549227081080889152052619336740640 = 2160 blocks = 10800 seconds = 3 hours
-terminal_total_difficulty: "735009912549227081080889152052619336740640"
-fee_recipient: "0xf97e180c050e5Ab072211Ad2C213Eb5AEE4DF134"
+#
+# xDAI TD on block 23255921 July-19-2022 9:52:45 PM UTC https://blockscout.com/xdai/mainnet/block/23255921
+# 7913579842806358152165626263839214415577252614
+
+# Projected for Jul 20 2022 12:00:00 GMT+0000
+# TTD = 7917039493630843333523658393472973202983105432 = 7913579842806358152165626263839214415577252614 + 43635/5 * 0xfffffffffffffffffffffffffffffffe
+# ```
+# node -e 'console.log(BigInt("7913579842806358152165626263839214415577252614") + BigInt((new Date("Jul 20 2022 12:00:00").getTime() - new Date("July-19-2022 9:52:45 PM"))/5000) * BigInt("0xfffffffffffffffffffffffffffffffe"))'
+# ```
+
+terminal_total_difficulty: "115792089237316195423570985008687907853269984665640564039457584007913129638912"
+fee_recipient: "0x88dFc82CF71fdeb23f82C33a202f6E2D19AC0541"
 # enter bootnodes here if needed
 bootnode_enrs:
   [
-    "enr:-Ly4QP8zEXc5zlGZfRF2QYQBQ8T5Uqk-x-L4zRNDMGHTDx1DIVESgmzsuSND-cQJ7gRE_003czOEu1poU419zlUJRjEBh2F0dG5ldHOIAAAAAAAAAACEZXRoMpAqoHgYIQAQKQEAAAAAAAAAgmlkgnY0gmlwhIm4uPqJc2VjcDI1NmsxoQJ9RF0OophkYsv5SmGXNjhoEgAfgKoqUx0zNBuOND-hTYhzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA",
-    "enr:-Ly4QOd2J2BWc6U4eA_mgm_t5vvliDEdOpcLljYhTxUAa2s5PqJkSwtlHTPhWK5JU6HDzywOWyXgh12LkLb0llWkTdsBh2F0dG5ldHOIAAAAAAAAAACEZXRoMpAqoHgYIQAQKQEAAAAAAAAAgmlkgnY0gmlwhIm4fXCJc2VjcDI1NmsxoQICHKq5uqKGoLGAhEG8s3nFB0U-cc5zjzACMOUmM8FnYohzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA",
-    "enr:-Ly4QJ3siWTTn-v5QBAuyYJFkmffmhy1yGjRJMcCOgHPyMI9d36_n3drvMYfMPF8bO_3G-uruYqZtoz1ghgjryglg44Bh2F0dG5ldHOIAAAAAAAAAACEZXRoMpAqoHgYIQAQKQEAAAAAAAAAgmlkgnY0gmlwhKRcUFSJc2VjcDI1NmsxoQOSP2ygI9CBeRTrIgYOceC_WHO-LB-8hH4R6UdWGsmjnIhzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA",
-    "enr:-Ly4QLOAaiVxnbi0rtux0vm7Z_A9Q0xz1NqLqHGcct3xqSO0eW4KJhtWPt7KFUfx7ZT3dsoZPOJSyzrggKDJrk4jZpQBh2F0dG5ldHOIAAAAAAAAAACEZXRoMpAqoHgYIQAQKQEAAAAAAAAAgmlkgnY0gmlwhKRcRjuJc2VjcDI1NmsxoQNxTiMrqZDnZnARRbiF8laTm-L20xcsA6ewNKXPQP-4xohzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA",
+    "enr:-Ly4QNNXOUvsLZ3QG9JnuwlCRppbsyOa7dWtJLGhXMH8g28Jd3H_4xKYccECtHk8tHt_00NFp29H4d1a6gOYGOjBsBwBh2F0dG5ldHOIAAAAAAAAAACEZXRoMpCnh4JzIQAQKQEAAAAAAAAAgmlkgnY0gmlwhKXoiraJc2VjcDI1NmsxoQIbLOf-mLL6x3lwdOMzmizxCt9GGmdFZVT5ms2RcIkF_4hzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA",
+    "enr:-Ly4QOD8PXoeZVdTYVrHhgBlhE4bR657lZxn5ADhNfNSg17tcbctjNwCCWo2X5ZCFkdG67eWOq655LvXskq30jpsZp0Bh2F0dG5ldHOIAAAAAAAAAACEZXRoMpCnh4JzIQAQKQEAAAAAAAAAgmlkgnY0gmlwhJK-LNiJc2VjcDI1NmsxoQMAK5jeFfubk_c4Ryuhu6LnNiWwu9SIlI-W5xLgvJetTIhzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA",
   ]
 
-eth1_bootnode_enode:
-  [
-    "enode://8cf9911df4cca9a15b8dbbca8ad5642083cf17645bb83b98962f5b3865ef7772d2f9b1305c0a9d2c811211cbc8babf0f08342b1a182d0b126cbacbfefee5d3fa@137.184.184.250:30303",
-    "enode://f9b704067670b4594f68731cbb447cd79ed9c41b5c0228c92929ca93d1b195e4330dc19c66aa88c2e8e39be29fa818456d783ea7eb3ea078d7e89391d42f54eb@137.184.125.112:30303",
-    "enode://3d80bd246ea3d4977fc7e8cf91dd244bcd9b9140c99f5f098ac2546ab4e8acd997cb9ce252e15525c0aa0e74d2234482c2c723e22ef87f457eac9272f2e5b1ff@164.92.80.84:30303",
-    "enode://22b3e17c901022729ae9a37f96a9ce59c66994a414811eb3f05463ff771c0dae694191fa9940ab72e5825218e15332d059de8e8349a20419dc204f510ff93abc@164.92.70.59:30303",
-  ]
+eth1_bootnode_enode: []
 
 mining_addresses:
   - "0x88dFc82CF71fdeb23f82C33a202f6E2D19AC0541"
@@ -70,11 +72,11 @@ eth1_deposit_contract_first_block: 1
 ##############################################
 # enter pushgateway config if needed
 prometheus_config_file: "prometheus/prometheus.yml.j2"
-remote_write_enabled: true
-prometheus_enabled: true
+push_url: "https://hostedmetrics.com/s/cQ4UMmFc/prometheus/remote/write/"
+push_metrics_enabled: true
 remote_write_auth: true
 cadvisor_enabled: true
-promtail_enabled: true
+promtail_enabled: false
 promtail_loki_server_url: "https://136217:{{loki_pusher_api_key}}@logs-prod-us-central1.grafana.net/loki/api/v1/push"
 eth2_validator_metrics_enabled: true
 eth_metrics_exporter_enabled: true
@@ -107,6 +109,8 @@ eth1_metrics_port: 8002
 eth_metrics_exporter_port: 8003
 cadvisor_port: 9280
 promtail_port: 9080
+public_execution_explorer: 3334
+public_beacon_explorer: 3333
 
 ##############################################
 # Command for JSON RPC snooper
@@ -143,7 +147,7 @@ home_dir: "/home/{{ansible_user}}"
 beacon_node_dir: "{{home_dir}}/beacon"
 validator_node_dir: "{{home_dir}}/validator"
 testnet_dir: "{{home_dir}}/custom_config_data"
-execution_node_dir: "{{home_dir}}/eth1data"
+execution_node_dir: "{{home_dir}}/execution"
 
 ##############################################
 # common log config
@@ -161,16 +165,24 @@ common_log_driver: json-file
 ##############################################
 beacon_container_name: beacon
 validator_container_name: validator
-execution_container_name: nethermind
+execution_container_name: execution
 hi_peer_count: "{{ groups['beacon'] | length }}"
 separate_validator_process_enabled: true
 
+# To fix sources.list issues
+# Only for DO: http://mirrors.digitalocean.com/ubuntu/
+# Generic but slower: http://archive.ubuntu.com/ubuntu/
+ubuntu_archive_url: http://mirrors.digitalocean.com/ubuntu/
+
+# Firewall
 firewall_allowed_tcp_ports:
   - 22
   - 30303
   - 9000
   - 80
   - 443
+  - "{{public_execution_explorer}}"
+  - "{{public_beacon_explorer}}"
 
 firewall_allowed_udp_ports:
   - 30303

@@ -19,7 +19,7 @@
     - name: Remove execution node db
       become: true
       file:
-        path: "{{eth1_node_dir}}"
+        path: "{{execution_node_dir}}"
         state: absent
 
 - import_playbook: tasks/start_beacon.yml
