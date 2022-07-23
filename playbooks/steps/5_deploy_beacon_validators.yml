@@ -1,8 +1,3 @@
-# Generate eth2 genesis + keys on remote host
-- import_playbook: ../tasks/generate_eth2_genesis_and_keys.yml
-# Upload custom config data
-- import_playbook: ../tasks/upload_custom_config_data.yml
-#
 # stars validator docker container
 - import_playbook: ../tasks/start_validator.yml
   when: separate_validator_process_enabled
