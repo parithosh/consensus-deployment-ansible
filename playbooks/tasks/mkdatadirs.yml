@@ -1,5 +1,5 @@
 - name: Init beacon data dirs for nodes
-  hosts: beacon,startup
+  hosts: beacon
   gather_facts: true
   serial: 20
   tasks:

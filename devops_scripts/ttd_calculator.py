@@ -5,10 +5,10 @@ from web3 import Web3
 
 w3 = Web3(Web3.HTTPProvider("https://rpc.gnosischain.com", request_kwargs={'timeout': 60}))
 
-target_block_number = 23300100+17280
 latest_block = w3.eth.getBlock(block_identifier='latest')
 latest_block_difficulty = latest_block['totalDifficulty']
 latest_block_number = latest_block['number']
+target_block_number = latest_block_number+16000
 
 delta_diff = latest_block_difficulty - w3.eth.getBlock(latest_block_number-1)["totalDifficulty"]
 

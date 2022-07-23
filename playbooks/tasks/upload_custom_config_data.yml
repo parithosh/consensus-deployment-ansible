@@ -1,5 +1,5 @@
 - name: Upload network data
-  hosts: beacon, validator, execution,startup
+  hosts: beacon, validator, execution
   gather_facts: true
   serial: 20
   tasks:
@@ -27,5 +27,5 @@
       become: true
       shell: cp -r /tmp/testnet_dir/* "{{testnet_dir}}"
     - name: Modify permissions to match user-group inside docker image
-      shell: chown -R 777 "{{ testnet_dir }}"
+      shell: chmod -R 777 "{{ testnet_dir }}"
       become: true

@@ -1,5 +1,5 @@
 - name: Start execution node
-  hosts: execution,startup
+  hosts: execution
   gather_facts: false
   serial: 20
   tasks:

@@ -1,10 +1,5 @@
-# # Generate eth2 genesis + keys on remote host
-#- import_playbook: ../tasks/generate_eth2_genesis_and_keys.yml
-# Upload custom config data
-- import_playbook: ../tasks/upload_custom_config_data.yml
-#
-- import_playbook: ../tasks/mkdatadirs.yml
-#
+# Inventory: inventory_startup.ini
+
 # # uploads custom chain config and genesis data if needed
 # - import_playbook: ../tasks/upload_custom_config_data.yml
 #   when: (testnet_type == 'custom') or
