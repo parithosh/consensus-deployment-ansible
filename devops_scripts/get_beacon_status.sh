@@ -3,5 +3,8 @@ do
     echo "-- $value -- " && \
     ssh -o "StrictHostKeyChecking no" \
     devops@$value \
-    "curl -H 'Content-Type: application/json' -X GET http://$value:4000/eth/v1/node/syncing -s"
+    "curl -H 'Content-Type: application/json' -X GET http://$value:4000/eth/v1/node/syncing -s &&" \
+    "echo '\nBeacon DB Size: ' &&" \
+    "du -sh /home/devops/beacon &&" \
+    "echo '\n'"
 done
