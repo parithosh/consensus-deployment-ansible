@@ -49,7 +49,7 @@ chainID: 100
 # node -e 'console.log(BigInt("7913579842806358152165626263839214415577252614") + BigInt((new Date("Jul 20 2022 12:00:00").getTime() - new Date("July-19-2022 9:52:45 PM"))/5000) * BigInt("0xfffffffffffffffffffffffffffffffe"))'
 # ```
 
-terminal_total_difficulty: "7939512081424669030589243115922374607435737382"
+terminal_total_difficulty: "7950844845372603965176427343848282215950000830"
 fee_recipient: "0x88dFc82CF71fdeb23f82C33a202f6E2D19AC0541"
 # enter bootnodes here if needed
 bootnode_enrs: [

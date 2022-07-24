@@ -1,7 +1,6 @@
 # Inventory: inventory.ini
+- import_playbook: ../tasks/mkdatadirs.yml
 
 - import_playbook: ../tasks/generate_eth2_genesis_and_keys.yml
 
 - import_playbook: ../tasks/upload_custom_config_data.yml
-
-- import_playbook: ../tasks/mkdatadirs.yml
