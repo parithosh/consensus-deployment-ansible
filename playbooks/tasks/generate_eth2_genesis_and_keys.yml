@@ -71,11 +71,13 @@
       shell: |
         cp -r "{{output_keys_dirpath}}/keys" "{{validator_node_dir}}/validators"
         cp -r "{{output_keys_dirpath}}/secrets" "{{validator_node_dir}}/secrets"
+        chown -R {{bootstrap_user}}:{{bootstrap_user}} {{validator_node_dir}}
     - name: Copy keys for teku
       when: eth2_client_name == 'teku'
       shell: |
         cp -r "{{output_keys_dirpath}}/teku-keys" "{{validator_node_dir}}/keys"
         cp -r "{{output_keys_dirpath}}/teku-secrets" "{{validator_node_dir}}/secrets"
+        chown -R {{bootstrap_user}}:{{bootstrap_user}} {{validator_node_dir}}
     - name: Create folders for prysm
       when: eth2_client_name == 'prysm'
       shell: |
@@ -83,11 +85,13 @@
         echo "prysm" > "{{validator_node_dir}}/wallet_pass.txt"
         cp -r "{{output_keys_dirpath}}/prysm/direct/accounts/all-accounts.keystore.json" "{{validator_node_dir}}/wallet/direct/accounts/all-accounts.keystore.json"
         cp -r "{{output_keys_dirpath}}/prysm/keymanageropts.json" "{{validator_node_dir}}/wallet/direct/keymanageropts.json"
+        chown -R {{bootstrap_user}}:{{bootstrap_user}} {{validator_node_dir}}
     - name: Copy keys for nimbus
       when: eth2_client_name == 'nimbus'
       shell: |
         cp -r "{{output_keys_dirpath}}/nimbus-keys" "{{validator_node_dir}}/keys"
         cp -r "{{output_keys_dirpath}}/secrets" "{{validator_node_dir}}/secrets"
+        chown -R {{bootstrap_user}}:{{bootstrap_user}} {{validator_node_dir}}
     - name: Copy keys for lodestar
       when: eth2_client_name == 'lodestar'
       shell: |

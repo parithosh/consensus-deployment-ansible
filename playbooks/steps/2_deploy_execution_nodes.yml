@@ -1,5 +1,3 @@
-# Inventory: inventory_startup.ini
-
 # # uploads custom chain config and genesis data if needed
 # - import_playbook: ../tasks/upload_custom_config_data.yml
 #   when: (testnet_type == 'custom') or
