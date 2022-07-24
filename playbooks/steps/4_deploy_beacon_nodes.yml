@@ -2,8 +2,5 @@
 
 - import_playbook: ../tasks/mkdatadirs.yml
 
-# starts the json rpc snooper
-- import_playbook: ../tasks/start_snooper.yml
-
 # stars beacon node docker container
 - import_playbook: ../tasks/start_beacon.yml

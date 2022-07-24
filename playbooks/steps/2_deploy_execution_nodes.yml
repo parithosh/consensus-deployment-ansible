@@ -9,3 +9,6 @@
 
 # starts execution container
 - import_playbook: ../tasks/start_execution_node.yml
+
+# starts the json rpc snooper
+- import_playbook: ../tasks/start_snooper.yml
