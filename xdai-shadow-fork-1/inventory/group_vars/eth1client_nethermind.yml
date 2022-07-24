@@ -20,13 +20,13 @@ eth1_kernel_memory: 5500M
 eth1endpoint_ws: http://127.0.0.1:8546
 
 eth1_volumes:
-  - "{{eth1_node_dir}}:/eth1data"
+  - "{{execution_node_dir}}:/execution"
   - "{{testnet_dir}}:/networkdata"
   - "{{home_dir}}/jwtsecret:/jwtsecret"
 
 eth1_start_args: >
   --config=/networkdata/nethermind_config.cfg
-  --datadir="/eth1data"
+  --datadir="/execution"
   --Init.ChainSpecPath="/networkdata/nethermind_genesis.json"
   --Init.WebSocketsEnabled=true
   --JsonRpc.Enabled=true
@@ -36,8 +36,6 @@ eth1_start_args: >
   --JsonRpc.Host=0.0.0.0
   --Network.DiscoveryPort=30303
   --Network.P2PPort=30303
-  --Network.Bootnodes="{{ eth1_bootnode_enode | join(',') }}"
-  --Discovery.Bootnodes="{{ eth1_bootnode_enode | join(',') }}"
   --Merge.Enabled=true
   --Merge.TerminalTotalDifficulty={{terminal_total_difficulty}}
   --Init.DiagnosticMode="None"
@@ -53,15 +51,12 @@ eth1_start_args: >
   --Seq.MinLevel="Info"
   --Seq.ServerUrl="https://seq.nethermind.io/"
   --Seq.ApiKey="{{nethermind_seq_api_key}}"
-  {% if mining_keyi is defined %}
-  --Init.IsMining=true
-  --Mining.Enabled=true
-  --Mining.MinGasPrice=1000000000
-  --Mining.TargetBlockGasLimit=30000000
-  --KeyStore.BlockAuthorAccount={{mining_addresses[mining_keyi]}}
-  --KeyStore.PasswordFiles=/networkdata/keystores_password.txt
-  --KeyStore.KeyStoreDirectory=/networkdata/keystores
-  --KeyStore.UnlockAccounts={{mining_addresses[mining_keyi]}}
+  {% if (use_snap_sync is defined) and use_snap_sync %}
+  --Sync.SnapSync=true
+  --Sync.FastSync=false
+  {% else %}
+  --Sync.SnapSync=false
+  --Sync.FastSync=true
   {% endif %}
 
 # run as root, the nethermind image doesn't handle running regular user well

@@ -23,7 +23,7 @@
   tasks:
     - name: Creates eth1 dir
       file:
-        path: "{{eth1_node_dir}}"
+        path: "{{execution_node_dir}}"
         state: directory
 - name: Init testnet data dirs for nodes
   hosts: [beacon, execution, validator]
