@@ -1,6 +1,5 @@
 external_roles/
 !external_roles/ansible-haproxy
-roles/
 
 secret.sh
 validator_prep
@@ -20,8 +19,10 @@ faucet.yml
 reverse_proxy.yml
 dshackle.yml
 
-enodes.json
-enrs.json
 .vault_pass
 
 .vscode/settings.json
+enrs.json
+enodes.json
+
+bad_state_data

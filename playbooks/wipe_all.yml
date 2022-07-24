@@ -26,7 +26,7 @@
     - name: Remove execution data
       become: true
       file:
-        path: "{{eth1_node_dir}}"
+        path: "{{execution_node_dir}}"
         state: absent
     - name: Remove testnet dir
       become: true

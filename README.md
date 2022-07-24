@@ -141,7 +141,15 @@ ansible-playbook -i $network/inventory/inventory.ini playbooks/setup_logging_cap
 
 > **Note**: AuRa does not handle well starting with multiple validating nodes. Set a single `mining_keyi=0` on first deployment. Then after some blocks (enough to sync), edit inventory to add more validating nodes and re-deploy execution.
 
-Deploy everything from scratch
+First, set `ansible_user: "root"` in `$network/inventory/group_vars/all.yaml` to gain access for the first time. Then run:
+
+```
+ansible-playbook -i $network/inventory/inventory.ini playbooks/tasks/create_bootstrap_user_only.yml
+```
+
+Then, revert `ansible_user: "devops"` in `$network/inventory/group_vars/all.yaml`.
+
+Now deploy everything from scratch
 
 ```
 ansible-playbook -i $network/inventory/inventory.ini playbooks/deploy_devnet_from_scratch.yml
