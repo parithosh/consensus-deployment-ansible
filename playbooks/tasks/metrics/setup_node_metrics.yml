@@ -1,22 +1,12 @@
-<<<<<<< HEAD
 ---
 - name: Install node exporter agent
-  hosts: hetzner
-=======
---- 
-- name: Install node exporter agent 
   hosts: all
->>>>>>> 5c03914 (fixing the input source)
   gather_facts: false
   serial: 20
   vars:
     node_exporter_container_image: docker.io/prom/node-exporter:latest
     cadvisor_exporter_container_image: gcr.io/cadvisor/cadvisor:v0.36.0
   tasks:
-    - name: Install aptitude using apt
-      apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
-      become: yes 
-
     - name: Install required system packages
       apt: name={{ item }} state=latest update_cache=yes
       loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools']
@@ -49,8 +39,6 @@
         state: started
         network_mode: host
         pid_mode: host
-        log_options: "{{ common_log_options }}"
-        log_driver: "{{ common_log_driver }}"
         env:
            path.rootfs=/host
         volumes:
@@ -66,8 +54,6 @@
         name: "cadvisor"
         image: "{{ cadvisor_exporter_container_image }}"
         state: started
-        log_options: "{{ common_log_options }}"
-        log_driver: "{{ common_log_driver }}"
         ports:
             - "8085:8080"
         privileged: yes
