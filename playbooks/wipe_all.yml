@@ -21,12 +21,12 @@
         path: "{{validator_node_dir}}"
         state: absent
     - name: Stop execution client container
-      shell: "docker rm -f {{eth1_client_name}}"
+      shell: "docker rm -f {{execution_container_name}}"
       register: stop_result
     - name: Remove execution data
       become: true
       file:
-        path: "{{eth1_node_dir}}"
+        path: "{{execution_node_dir}}"
         state: absent
     - name: Remove testnet dir
       become: true

@@ -14,6 +14,7 @@
   gather_facts: true
   tasks:
     - name: Create a map with all node's ENRs
+      when: groups.beacon is defined
       with_items: "{{ groups['beacon'] }}"
       set_fact:
         beacon_enrs: "{{ beacon_enrs|default({}) | combine( {item: hostvars[item]['beacon_enr']} ) }}"

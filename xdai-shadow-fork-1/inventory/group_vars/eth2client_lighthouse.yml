@@ -55,7 +55,7 @@ beacon_start_args: >
   --target-peers={{hi_peer_count}}
   --http-allow-sync-stalled
   --merge
-  --disable-packet-filter 
+  --disable-packet-filter
   --execution-endpoints={{execution_endpoint}}
   --eth1-endpoints={{eth1endpoint}}
   --terminal-total-difficulty-override={{terminal_total_difficulty}}

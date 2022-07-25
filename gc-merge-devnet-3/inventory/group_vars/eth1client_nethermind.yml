@@ -20,7 +20,7 @@ eth1_kernel_memory: 5500M
 eth1endpoint_ws: http://127.0.0.1:8546
 
 eth1_volumes:
-  - "{{eth1_node_dir}}:/eth1data"
+  - "{{execution_node_dir}}:/eth1data"
   - "{{testnet_dir}}:/networkdata"
   - "{{home_dir}}/jwtsecret:/jwtsecret"
 
@@ -30,7 +30,7 @@ eth1_start_args: >
   --Init.ChainSpecPath="/networkdata/nethermind_genesis.json"
   --Init.WebSocketsEnabled=true
   --JsonRpc.Enabled=true
-  --JsonRpc.EnabledModules="net,eth,consensus,subscribe,web3,admin"
+  --JsonRpc.EnabledModules="net,eth,consensus,subscribe,web3,admin,txpool"
   --JsonRpc.Port={{eth1_rpc_port}}
   --JsonRpc.WebSocketsPort={{eth1_ws_rpc_port}}
   --JsonRpc.Host=0.0.0.0

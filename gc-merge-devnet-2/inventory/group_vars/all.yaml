@@ -70,8 +70,8 @@ eth1_deposit_contract_first_block: 1
 ##############################################
 # enter pushgateway config if needed
 prometheus_config_file: "prometheus/prometheus.yml.j2"
-push_url: "https://hostedmetrics.com/s/cQ4UMmFc/prometheus/remote/write/"
-push_metrics_enabled: true
+remote_write_enabled: true
+prometheus_enabled: true
 remote_write_auth: true
 cadvisor_enabled: true
 promtail_enabled: true
@@ -143,7 +143,7 @@ home_dir: "/home/{{ansible_user}}"
 beacon_node_dir: "{{home_dir}}/beacon"
 validator_node_dir: "{{home_dir}}/validator"
 testnet_dir: "{{home_dir}}/custom_config_data"
-eth1_node_dir: "{{home_dir}}/eth1data"
+execution_node_dir: "{{home_dir}}/eth1data"
 
 ##############################################
 # common log config

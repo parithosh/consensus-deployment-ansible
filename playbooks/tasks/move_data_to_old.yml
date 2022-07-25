@@ -3,16 +3,15 @@
   gather_facts: true
   serial: 20
   tasks:
-#    - name: Rm the eth1 data dir
-#      become: true
-#      shell: "rm -rf {{eth1_node_dir}}"
-#    - name: Rm the beacon data dir
-#      become: true
-#      shell: "rm -rf {{beacon_node_dir}}"
+    #    - name: Rm the eth1 data dir
+    #      become: true
+    #      shell: "rm -rf {{execution_node_dir}}"
+    #    - name: Rm the beacon data dir
+    #      become: true
+    #      shell: "rm -rf {{beacon_node_dir}}"
     - name: Move the beacon data dir
       become: true
       shell: "mv {{beacon_node_dir}} {{beacon_node_dir}}_old"
     - name: Move the eth1 data dir
       become: true
-      shell: "mv {{eth1_node_dir}} {{eth1_node_dir}}_old"
-
+      shell: "mv {{execution_node_dir}} {{execution_node_dir}}_old"

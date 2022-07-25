@@ -3,12 +3,12 @@
 ##############################################
 ansible_user: "devops"
 bootstrap_user: "devops"
+initial_remote_user: "root"
 
 github_user_pubkeys:
   - dapplion
   - giacomolicari
   - alebanzas
-  - riccardo-gnosis
   - igorbarinov
   - parithosh
 
@@ -36,30 +36,48 @@ beacon_api_endpoint: "http://127.0.0.1:{{beacon_api_port}}"
 ##############################################
 testnet_type: custom
 eth2_network_name: xdai-shadow-fork-1
-chainID: 1
+chainID: 100
 
 # 0xfffffffffffffffffffffffffffffffe difficulty / block
 #
-# xDAI TD on block 23263191 Jul 20 2022 8:14:00 GMT+0000 https://blockscout.com/xdai/mainnet/block/23263191
-# 7916053695613873374795004997235243370474523009
+# xDAI TD on block 23255921 July-19-2022 9:52:45 PM UTC https://blockscout.com/xdai/mainnet/block/23255921
+# 7913579842806358152165626263839214415577252614
 
-# Projected for Jul 21 2022 12:00:00 GMT+0000
-# TTD = 7922856620693356776556564782387019280557911377
+# Projected for Jul 20 2022 12:00:00 GMT+0000
+# TTD = 7917039493630843333523658393472973202983105432 = 7913579842806358152165626263839214415577252614 + 43635/5 * 0xfffffffffffffffffffffffffffffffe
 # ```
-# node -e 'console.log(BigInt("7916053695613873374795004997235243370474523009") + BigInt((new Date("Jul 21 2022 12:00:00 GMT+0000").getTime() - new Date("Jul 20 2022 8:14:00 GMT+0000"))/5000) * BigInt("0xfffffffffffffffffffffffffffffffe"))'
+# node -e 'console.log(BigInt("7913579842806358152165626263839214415577252614") + BigInt((new Date("Jul 20 2022 12:00:00").getTime() - new Date("July-19-2022 9:52:45 PM"))/5000) * BigInt("0xfffffffffffffffffffffffffffffffe"))'
 # ```
 
-terminal_total_difficulty: "7922856620693356776556564782387019280557911377"
+terminal_total_difficulty: "7950844845372603965176427343848282215950000830"
 fee_recipient: "0x88dFc82CF71fdeb23f82C33a202f6E2D19AC0541"
 # enter bootnodes here if needed
-bootnode_enrs: []
-
-eth1_bootnode_enode: []
-
-mining_addresses: [
-  "0x88dFc82CF71fdeb23f82C33a202f6E2D19AC0541",
-  "0x1258c99E6a9F61bB29264966B45972C4C428A48F"
+bootnode_enrs: [
+    "enr:-Ly4QG4fmwvlGvYJSJRXV5ZOfi6nCLugIdy0uDH8EP5zH9rwNJJZvWxgABVKilXKts3smQMff2wLsh_qcVOOAOMItaABh2F0dG5ldHOIAAAAAAAAAACEZXRoMpCsvpZPIgAQKf__________gmlkgnY0gmlwhI6Ez1uJc2VjcDI1NmsxoQILMyugGyb5MBNC1UvWxCOXL9Dp-cNDkisDNyNOUp5jn4hzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA",
+    "enr:-L24QDZf4oKCq9zu8a4ouvUr2DLo_MmSobG9dmTcNblUtl3SBb5wsggrShAzWebfzAIzeu8Fo_Z1gWqfZP67nFsywLCBgodhdHRuZXRziP__________hGV0aDKQrL6WTyIAECn__________4JpZIJ2NIJpcISn6wJUiXNlY3AyNTZrMaECGXusGNBBP10C2wjmx1RMgvyg3Gw1c2_aI_5MVXB2036Ic3luY25ldHMAg3RjcIIjKIN1ZHCCIyg",
 ]
+
+eth1_bootnode_enode: [
+    "enode://d74b4bb22746d88944f0f7a601c99c2f7c97a311e7177c86757078ea885cc788b8e50e73c0c2525e9fd80934f09ce16b4c1d3280a34ef2e2a2e570605ede3311@142.132.207.91:30303",
+    "enode://9c918015ce0af63fc61c692480c1e185e5d65164f92d754c3d634e4fe3a1e97635968ce850bfe26788eeb5beaa69fb2c6ff12aa6776ea776edd07af768655b90@167.235.2.84:30303",
+    "enode://1888d4c509d4a30d114a6b33305f32d0250e955839dce073fc141d23a574591c48992c009f6d28af73285d5775c776053498888b7d2f24cd9f1186482d6b561e@142.132.249.222:30303",
+    "enode://0a651a1fede7acd554e77005749238f1910d19e379ff1b39089018620942cc304ae998086504e89d6448e58fa3cdb362ef59eba22d972e2703ddee1ec93742cc@142.132.222.208:30303",
+    "enode://f7f8b46cacd4d8bac874554efb5930bd40b555b0e0a95c8c47e85937d12588293fd94d30fb62b466278b7acce0f2fbc796f58af0fb1ee50a5e8a6b560bb01e14@46.4.64.174:30303",
+    "enode://5659e92db8c3c6f7d57976215d9989884949c36d4e1fef0f82eb6ae70fdfa1d6fec0b7f2abca561da0cb19a082e223f5ca328b3caa5a2cc718c2dd2abe5909a7@136.243.91.83:30303",
+    "enode://6bbd7beba1e6d4f4e4790bf6b1b13d330aa73b8e320acc538db6d4219947e419479c64083d8092f604668fbe8b1a598898214aaacefee18f77d9ed7f8b6980fb@142.132.155.182:30303",
+    "enode://c49c9bae5530d1db8a9434eb1103dee9859c072e8448d59eaefc5bd95787dc86b0940fdbf317e4dc037ba0ef19523d284a57ad34052b1aed59d830a1e1b191d4@142.132.200.3:30303",
+    "enode://3c16f93ce3e021dcd5ba7b9eea53c2c5e360f454e6ee4c2cad37fbf7171790eed819965df6226a70808f9a9a2bfa142a9f0d4fe7481f622ea9e69697211baaa4@142.132.249.220:30303",
+    "enode://42a1b652da9bbc25a7b6b6fe0a699271cb5a18a133b3c570393a453812ed46bb077868d0349485b7742b317e66dd27e16a4b552cf71b6f813342f453fa32b0bd@116.202.228.163:30303",
+    "enode://af92ce148af8762a9831f2aab158d152c0c1428f02e0fd978c1b322377e602c2f2995cb06dd0c3a404ded17bb1179ad0487810376d9cf1ec5861aa25f448ec64@142.132.207.164:30303",
+    "enode://8240023e64a0952919a0d0d440463dc1763ba46b5caf1a5f91dad3fd90d3c955aef10a751f4ccab22c087d3ce4f6623a85f14bfd6b87467c41fe7eb7e6829aa0@148.251.245.250:30303",
+    "enode://f2e9b29c43364abf6467b9767f309975f2fd7f576423cd040905ef17cabea7468d87cf2477855b809af70bd103afd816d66c8a1b7b366ffcfc3584142dd336ee@142.132.250.108:30303",
+    "enode://0ef5fd8d139174642fa46aa220947075b6d09da28d01bd82ca40833882cfacc556d5afb982a63ee66e75f41c2b9c811f95e0d3b2964b991c4df057cbf3d8c2a3@142.132.249.135:30303",
+    "enode://e8c16c6ed5a88ccabb37fad34b6915759fe9538f1d14459e66b29034901e194226323fed541f6f24b28ee186ba3b13bfa1bb602dd52bcacd0a02dd2063e7c8d6@65.21.127.168:30303"
+]
+
+mining_addresses:
+  - "0x88dFc82CF71fdeb23f82C33a202f6E2D19AC0541"
+  - "0x1258c99E6a9F61bB29264966B45972C4C428A48F"
 
 # Note: 0 is correct, but due to an underflow bug (being fixed), doesn't work.
 eth1_deposit_contract_first_block: 1
@@ -69,8 +87,8 @@ eth1_deposit_contract_first_block: 1
 ##############################################
 # enter pushgateway config if needed
 prometheus_config_file: "prometheus/prometheus.yml.j2"
-push_url: "https://themerge-monitoring.gnosischainscan.com/prometheus/api/v1/write/"
-push_metrics_enabled: true
+remote_write_enabled: true
+prometheus_enabled: true
 remote_write_auth: true
 cadvisor_enabled: true
 promtail_enabled: true
@@ -144,15 +162,16 @@ home_dir: "/home/{{ansible_user}}"
 beacon_node_dir: "{{home_dir}}/beacon"
 validator_node_dir: "{{home_dir}}/validator"
 testnet_dir: "{{home_dir}}/custom_config_data"
-eth1_node_dir: "{{home_dir}}/eth1data"
+execution_node_dir: "{{home_dir}}/execution"
 
 ##############################################
 # common log config
 ##############################################
 beacon_log_level: info
 logging_host: "search-gnosis-merge-nev36iek55lsofh2hz3evzkolq.eu-central-1.es.amazonaws.com/"
-common_log_driver: fluentd
-common_log_options: {}
+common_log_driver: fluentd # json-file
+common_log_options:
+  tag: "es.shadow_fork_1_nethermind"
 ##### Not needed for fluentd driver
 # common_log_options:
 #   max-file: "10"
@@ -160,7 +179,6 @@ common_log_options: {}
 #   mode: non-blocking
 #   max-buffer-size: 4m
 #####
-
 
 ##############################################
 # container names
@@ -171,6 +189,12 @@ execution_container_name: execution
 hi_peer_count: "{{ groups['beacon'] | length }}"
 separate_validator_process_enabled: true
 
+# To fix sources.list issues
+# Only for DO: http://mirrors.digitalocean.com/ubuntu/
+# Generic but slower: http://archive.ubuntu.com/ubuntu/
+ubuntu_archive_url: http://mirrors.digitalocean.com/ubuntu/
+
+# Firewall
 firewall_allowed_tcp_ports:
   - 22
   - 30303

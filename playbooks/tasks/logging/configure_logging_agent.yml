@@ -2,24 +2,17 @@
 - name: Configure Logging Agent
   hosts: all
   gather_facts: false
-  vars_prompt:
-    - name: user
-      prompt: Enter the Opensearch User
-    - name: password
-      prompt: Enter the Opensearch Password
-    - name: host 
-      prompt: Enter the Opensearch domain with no protocol
-  serial: 20  
+  serial: 20
   tasks:
     - name: Install td agent fluentd prometheus metrics gem
       shell: td-agent-gem install fluent-plugin-prometheus
       become: yes
-    
+
     - name: Install td agent grafana gem
       shell: td-agent-gem install fluent-plugin-elasticsearch -v 5.2.2
       become: yes
 
-    - name: Install td agent fluentd plugin 
+    - name: Install td agent fluentd plugin
       shell: td-agent-gem install fluent-plugin-systemd -v 1.0.3
       become: yes
 
@@ -44,7 +37,7 @@
             <entry>
               fields_strip_underscores true
               fields_lowercase true
-            </entry> 
+            </entry>
           </source>
 
     - name: Create tail position file consul
@@ -89,7 +82,7 @@
         owner: td-agent
         group: td-agent
       become: yes
-  
+
     - name: Add listener to get logs send locally
       become: yes
       blockinfile:
@@ -103,25 +96,25 @@
              bind 0.0.0.0
            </source>
 
-    - name: Add transformation to logs 
+    - name: Add transformation to logs
       become: yes
       blockinfile:
         path: "/etc/td-agent/td-agent.conf"
         marker: "# ANSIBLE MANAGED BLOCK -  log adaption {mark}"
         state: present
         block: |2
-            <filter es.**> 
+            <filter es.**>
               @type record_transformer
               enable_ruby
-              <record> 
+              <record>
                 fluentd_worker "#{worker_id}"
-                hostname_agent_machine "#{Socket.gethostname}" 
+                hostname_agent_machine "#{Socket.gethostname}"
                 ip_address_agent_machine "#{Socket.ip_address_list[1].ip_address}"
-              </record> 
-            </filter> 
+              </record>
+            </filter>
 
     # Elasticsearch
-    - name: Add elasticsearch output 
+    - name: Add elasticsearch output
       become: yes
       blockinfile:
         path: "/etc/td-agent/td-agent.conf"
@@ -130,28 +123,28 @@
         marker: "# ANSIBLE MANAGED BLOCK - elasticsearch {mark}"
         block: |2
               <match es.**>
-                    # https://docs.fluentd.org/output/elasticsearch#user-password-optional 
+                    # https://docs.fluentd.org/output/elasticsearch#user-password-optional
                     @type elasticsearch
                     @log_level debug
-                    host {{ host }}
+                    host {{ logging_url }}
                     port 443
                     scheme https
-                    user {{ user }}
-                    password {{ password }}
+                    user {{ logging_auth_user }}
+                    password {{ logging_auth_password }}
                     index_name fluentd_merge
                     type_name fluentd_merge
                     logstash_format false
                     include_tag_key true
                     tag_key _key
-                    include_timestamp true  
+                    include_timestamp true
                     bulk_message_request_threshold 8MB
-                    <buffer> 
-                        @type file 
+                    <buffer>
+                        @type file
                         path /var/log/elasticsearch_logs_buffer/
-                        flush_at_shutdown true 
-                        flush_thread_count 6 
-                        total_limit_size 10GB 
-                        chunk_limit_size 9MB 
+                        flush_at_shutdown true
+                        flush_thread_count 6
+                        total_limit_size 10GB
+                        chunk_limit_size 9MB
                     </buffer>
 
                     # Set the chunk limit the same as for fluentd-gcp.
@@ -192,4 +185,3 @@
                   hostname ${hostname}
                 </labels>
               </source>
-
