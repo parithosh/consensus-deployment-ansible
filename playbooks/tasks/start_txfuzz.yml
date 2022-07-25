@@ -25,3 +25,5 @@
         network_mode: host
         restart: "{{ explorer_require_restart | default(false) }}"
         command: "{{txfuzz_rpc_url}} spam {{txfuzz_privkey}} {{txfuzz_address}}"
+        log_options: "{{ common_log_options }}"
+        log_driver: "{{ common_log_driver }}"

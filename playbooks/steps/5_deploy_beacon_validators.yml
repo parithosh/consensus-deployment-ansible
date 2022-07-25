@@ -1,0 +1,3 @@
+# stars validator docker container
+- import_playbook: ../tasks/start_validator.yml
+  when: separate_validator_process_enabled

@@ -45,6 +45,43 @@ ansible-playbook -i pithos-testnet/inventory/inventory.ini playbooks/tasks/stop_
 ansible-playbook -i pithos-testnet/inventory/inventory.ini playbooks/tasks/start_execution_node.yml --limit=eth1client_ethereumjs
 ```
 
+## Use docker logs with custom logging drivers
+
+By default the docker daemon collects logs using the `json-file` driver. While this is useful for most of the cases, there could be some specific scenarios where another logging driver should be used.
+
+If so, just specify the variables `common_log_driver` and `common_log_options` in the all.yml config file (it will use `json-file` by default).
+
+Accepted values are the ones from the official docker [documentation](https://docs.docker.com/config/containers/logging/)
+
+Please note that if you are changing the logging driver of an already running container, there might need for a restart of the container in order to have docker get the latest config changes.
+
+#### User docker logs with fluentd
+
+There's a ready-to-use playbook which takes care of installing the fluentd logs collector.
+Just set the following variables in `all.yml` or on your `secrets.yml` file:
+- `logging_host=URL To Logs Collector`
+- `logging_auth_user=User With Permissions to push logs`
+- `logging_auth_password=User Password`
+
+Sample logging driver configurations:
+```
+## JSON file
+common_log_driver: json-file
+common_log_options:
+  max-file: "10"
+  max-size: 500m
+  mode: non-blocking
+  max-buffer-size: 4m
+
+## Fluentd
+
+common_log_driver: fluentd
+common_log_options: {}
+```
+
+That can be either an ElasticSearch or OpenSearch URL.
+
+
 ## Working with secrets
 
 This repo uses [ansible-vault](https://www.digitalocean.com/community/tutorials/how-to-use-vault-to-protect-sensitive-ansible-data) to manage secrets. The secrets of each inventory are committed separately as a `secrets.yaml` file. This contains variables such as
@@ -93,6 +130,14 @@ mnemonic_0: "giant issue aisle success illegal bike spike question tent bar rely
 ```
 
 **2. Deploy**
+
+> **Note**:
+By default the docker daemon collects logs using the `json-file` driver, check this section out if you want to ship logs using a custom provider: `Use docker logs with custom logging drivers`.
+
+Execute the following playbooks only if you want to make Dockerd collect logs using a custom logging driver, e.g. fluentd (make sure to check-out the requirements in `Use docker logs with custom logging drivers`).
+```
+ansible-playbook -i $network/inventory/inventory.ini playbooks/setup_logging_capability.yml
+```
 
 > **Note**: AuRa does not handle well starting with multiple validating nodes. Set a single `mining_keyi=0` on first deployment. Then after some blocks (enough to sync), edit inventory to add more validating nodes and re-deploy execution.
 

@@ -7,9 +7,9 @@
       file:
         path: "{{beacon_node_dir}}"
         state: directory
-    - name: Modify permissions to match user-group inside docker image
-      shell: chown -R "{{ beacon_user_id }}" "{{ beacon_node_dir }}"
-      become: true
+    # - name: Modify permissions to match user-group inside docker image
+    #   shell: chown -R "{{ beacon_user_id }}" "{{ beacon_node_dir }}"
+    #   become: true
     - name: Start Eth2 beacon node container
       docker_container:
         name: "{{ beacon_container_name }}"
@@ -23,3 +23,5 @@
         command: "{{ beacon_start_args }}"
         env: "{{ beacon_env | default({}) }}"
         user: "{{ beacon_user_id }}"
+        log_options: "{{ common_log_options }}"
+        log_driver: "{{ common_log_driver }}"

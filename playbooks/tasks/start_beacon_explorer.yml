@@ -18,3 +18,5 @@
         memory: "{{explorer_memory}}"
         command: "{{ beacon_explorer_start_args }}"
         volumes: "{{beacon_explorer_volumes}}"
+        log_options: "{{ common_log_options }}"
+        log_driver: "{{ common_log_driver }}"

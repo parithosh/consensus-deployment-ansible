@@ -28,3 +28,5 @@
           POSTGRES_PORT: "{{explorer_postgres_port}}"
           POSTGRES_DB: db
           PGDATA: "/postgresql/data"
+        log_options: "{{ common_log_options }}"
+        log_driver: "{{ common_log_driver }}"
