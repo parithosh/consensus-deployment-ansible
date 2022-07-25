@@ -1,6 +1,0 @@
-# Inventory: inventory.ini
-
-- import_playbook: ../tasks/mkdatadirs.yml
-
-# stars beacon node docker container
-- import_playbook: ../tasks/start_beacon.yml
