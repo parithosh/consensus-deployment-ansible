@@ -137,6 +137,15 @@
                     include_tag_key true
                     tag_key _key
                     include_timestamp true
+                    bulk_message_request_threshold 8MB
+                    <buffer>
+                        @type file
+                        path /var/log/elasticsearch_logs_buffer/
+                        flush_at_shutdown true
+                        flush_thread_count 6
+                        total_limit_size 10GB
+                        chunk_limit_size 9MB
+                    </buffer>
 
                     # Set the chunk limit the same as for fluentd-gcp.
                     buffer_chunk_limit 200M
