@@ -44,7 +44,10 @@ fee_recipient: "0x88dFc82CF71fdeb23f82C33a202f6E2D19AC0541"
 # enter bootnodes here if needed
 bootnode_enrs: []
 
-eth1_bootnode_enode: []
+eth1_bootnode_enode:
+  [
+    "enode://bd2416803d57271b6e64a31f2b41d0f7f7e6f1446cb163d6f5d99aa2191aa13c1037856a7762e2884d1b15185b82f0d63a4afa9c72adb62ba1005e1df26a784f@137.184.147.72:30303",
+  ]
 
 mining_addresses:
   - "0xaaa0611623f27b169557d178da5d9cd3e1044ce1"
