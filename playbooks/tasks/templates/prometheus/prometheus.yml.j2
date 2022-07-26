@@ -11,21 +11,23 @@ global:
     ip_address: "{{ ansible_host }}"
     network: "{{ eth2_network_name }}"
 
-{% if remote_write_enabled == true %}
+{% if prometheus_remote_write_configs is defined %}
 remote_write:
+{% for config in prometheus_remote_write_configs %}
   - queue_config:
       batch_send_deadline: 5s
       max_backoff: 500ms
       max_samples_per_send: 500
       min_backoff: 50ms
       max_shards: 100
-    url: {{ prometheus_push_url }}
+    url: {{ config.url }}
     remote_timeout: 10s
-{% if remote_write_auth == true %}
+{% if 'username' in config %}
     basic_auth:
-      username: {{remote_write_username}}
-      password: {{remote_write_password}}
+      username: {{config.username}}
+      password: {{config.password}}
 {% endif %}
+{% endfor %}
 {% endif %}
 
 scrape_configs:

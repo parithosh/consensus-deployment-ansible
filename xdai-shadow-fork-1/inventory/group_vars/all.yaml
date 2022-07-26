@@ -53,12 +53,14 @@ chainID: 100
 terminal_total_difficulty: "7952702787095992289186937369204859670739550208"
 fee_recipient: "0x88dFc82CF71fdeb23f82C33a202f6E2D19AC0541"
 # enter bootnodes here if needed
-bootnode_enrs: [
+bootnode_enrs:
+  [
     "enr:-Ly4QF6M5K5r1JEv6nZyYnwCyBJEZsKYFIwLJTmf429H3dp2VyTH4oi-vebQtJ-1mXOuK_LvyLC-lONuqiQDOdNmDD8Bh2F0dG5ldHOIAAAAAAAAAACEZXRoMpB8EDB0IQAQKQEAAAAAAAAAgmlkgnY0gmlwhI6Ez1uJc2VjcDI1NmsxoQK4HMCCdGQMnpKK0LOPiRV3DKC1KgK9VAycIHi5USJGmIhzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA",
-    "enr:-Ly4QGvmcBnYgloGqx61w5-bsiv3suUvAN5iLqeSatiym2tlGpy-r6Q2AfQJtfFP510BTUwPiUcaTKbZV1CEA21vPYIBh2F0dG5ldHOIAAAAAAAAAACEZXRoMpB8EDB0IQAQKQEAAAAAAAAAgmlkgnY0gmlwhKfrAlSJc2VjcDI1NmsxoQOYsEDxzZzU5b-5aLOz9lUp7WEFaaUQLr1L2zJAKHPANYhzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA"
-]
+    "enr:-Ly4QGvmcBnYgloGqx61w5-bsiv3suUvAN5iLqeSatiym2tlGpy-r6Q2AfQJtfFP510BTUwPiUcaTKbZV1CEA21vPYIBh2F0dG5ldHOIAAAAAAAAAACEZXRoMpB8EDB0IQAQKQEAAAAAAAAAgmlkgnY0gmlwhKfrAlSJc2VjcDI1NmsxoQOYsEDxzZzU5b-5aLOz9lUp7WEFaaUQLr1L2zJAKHPANYhzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA",
+  ]
 
-eth1_bootnode_enode: [
+eth1_bootnode_enode:
+  [
     "enode://d74b4bb22746d88944f0f7a601c99c2f7c97a311e7177c86757078ea885cc788b8e50e73c0c2525e9fd80934f09ce16b4c1d3280a34ef2e2a2e570605ede3311@142.132.207.91:30303",
     "enode://9c918015ce0af63fc61c692480c1e185e5d65164f92d754c3d634e4fe3a1e97635968ce850bfe26788eeb5beaa69fb2c6ff12aa6776ea776edd07af768655b90@167.235.2.84:30303",
     "enode://1888d4c509d4a30d114a6b33305f32d0250e955839dce073fc141d23a574591c48992c009f6d28af73285d5775c776053498888b7d2f24cd9f1186482d6b561e@142.132.249.222:30303",
@@ -73,8 +75,8 @@ eth1_bootnode_enode: [
     "enode://8240023e64a0952919a0d0d440463dc1763ba46b5caf1a5f91dad3fd90d3c955aef10a751f4ccab22c087d3ce4f6623a85f14bfd6b87467c41fe7eb7e6829aa0@148.251.245.250:30303",
     "enode://f2e9b29c43364abf6467b9767f309975f2fd7f576423cd040905ef17cabea7468d87cf2477855b809af70bd103afd816d66c8a1b7b366ffcfc3584142dd336ee@142.132.250.108:30303",
     "enode://0ef5fd8d139174642fa46aa220947075b6d09da28d01bd82ca40833882cfacc556d5afb982a63ee66e75f41c2b9c811f95e0d3b2964b991c4df057cbf3d8c2a3@142.132.249.135:30303",
-    "enode://e8c16c6ed5a88ccabb37fad34b6915759fe9538f1d14459e66b29034901e194226323fed541f6f24b28ee186ba3b13bfa1bb602dd52bcacd0a02dd2063e7c8d6@65.21.127.168:30303"
-]
+    "enode://e8c16c6ed5a88ccabb37fad34b6915759fe9538f1d14459e66b29034901e194226323fed541f6f24b28ee186ba3b13bfa1bb602dd52bcacd0a02dd2063e7c8d6@65.21.127.168:30303",
+  ]
 
 mining_addresses:
   - "0x88dFc82CF71fdeb23f82C33a202f6E2D19AC0541"
@@ -88,9 +90,12 @@ eth1_deposit_contract_first_block: 1
 ##############################################
 # enter pushgateway config if needed
 prometheus_config_file: "prometheus/prometheus.yml.j2"
-remote_write_enabled: true
 prometheus_enabled: true
-remote_write_auth: true
+prometheus_remote_write_configs:
+  - url: https://themerge-monitoring.gnosischainscan.com/prometheus/api/v1/write/
+    username: themergeprometheusremotewrite
+    password: "{{themergemonitoring_remote_write_password}}"
+
 cadvisor_enabled: true
 promtail_enabled: true
 promtail_loki_server_url: "https://136217:{{loki_pusher_api_key}}@logs-prod-us-central1.grafana.net/loki/api/v1/push"

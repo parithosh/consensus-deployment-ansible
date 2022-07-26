@@ -71,10 +71,16 @@ eth1_deposit_contract_first_block: 1
 ##############################################
 # enter pushgateway config if needed
 prometheus_config_file: "prometheus/prometheus.yml.j2"
-# For some reason DO hosts can't resolve themerge-monitoring.gnosischainscan.com domain
-# prometheus_push_url: https://themerge-monitoring.gnosischainscan.com/prometheus/api/v1/write/
-prometheus_push_url: http://3.72.58.244/prometheus/api/v1/write/
-remote_write_enabled: true
+
+prometheus_remote_write_configs:
+  # NOTE: For some reason DO hosts can't resolve themerge-monitoring.gnosischainscan.com domain
+  - url: https://themerge-monitoring.gnosischainscan.com/prometheus/api/v1/write/
+    username: themergeprometheusremotewrite
+    password: "{{themergemonitoring_remote_write_password}}"
+  - url: https://hostedmetrics.com/s/cQ4UMmFc/prometheus/remote/write/
+    username: cQ4UMmFc
+    password: "{{hostedmetrics_remote_write_password}}"
+
 prometheus_enabled: true
 remote_write_auth: true
 cadvisor_enabled: true
