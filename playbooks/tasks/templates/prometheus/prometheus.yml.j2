@@ -19,7 +19,7 @@ remote_write:
       max_samples_per_send: 500
       min_backoff: 50ms
       max_shards: 100
-    url: {{ push_url }}
+    url: {{ prometheus_push_url }}
     remote_timeout: 10s
 {% if remote_write_auth == true %}
     basic_auth:
