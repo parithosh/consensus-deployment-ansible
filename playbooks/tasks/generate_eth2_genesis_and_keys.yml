@@ -36,9 +36,11 @@
         --mnemonics /data/mnemonics.yaml \
         --tranches-dir /data/tranches \
         --state-output /data/genesis.ssz
+
 - name: Generate validator keys
   hosts: validator
   gather_facts: false
+  become: true
   vars:
     output_keys_dirpath: /tmp/generated_keys/validator
     output_keys_dirpath_cont: /validator_prep/validator
@@ -52,6 +54,11 @@
     - name: Clear directory
       become: true
       shell: rm -rf {{output_keys_dirpath}}
+
+    - name: Creates validator dir
+      file:
+        path: "{{validator_node_dir}}"
+        state: directory
 
     - name: Generate keys
       shell: >
