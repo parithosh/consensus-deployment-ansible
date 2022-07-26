@@ -1,7 +1,6 @@
 - name: Start execution explorer
   hosts: explorer
   gather_facts: false
-  serial: 20
   tasks:
     - name: Start execution explorer
       docker_container:

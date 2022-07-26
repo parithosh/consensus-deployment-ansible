@@ -39,7 +39,6 @@
 - name: Generate validator keys
   hosts: validator
   gather_facts: false
-  serial: 20
   vars:
     output_keys_dirpath: /tmp/generated_keys/validator
     output_keys_dirpath_cont: /validator_prep/validator

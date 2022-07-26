@@ -2,14 +2,22 @@
 - name: Install node exporter agent
   hosts: all
   gather_facts: false
-  serial: 20
   vars:
     node_exporter_container_image: docker.io/prom/node-exporter:latest
     cadvisor_exporter_container_image: gcr.io/cadvisor/cadvisor:v0.36.0
   tasks:
     - name: Install required system packages
       apt: name={{ item }} state=latest update_cache=yes
-      loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools']
+      loop:
+        [
+          "apt-transport-https",
+          "ca-certificates",
+          "curl",
+          "software-properties-common",
+          "python3-pip",
+          "virtualenv",
+          "python3-setuptools",
+        ]
       become: yes
 
     - name: Add Docker GPG apt Key
@@ -39,15 +47,14 @@
         state: started
         network_mode: host
         pid_mode: host
-        env:
-           path.rootfs=/host
+        env: path.rootfs=/host
         volumes:
-            - /:/host:ro,rslave
+          - /:/host:ro,rslave
 
     - name: Pull cadvisor metrics container
       docker_image:
-         name: "{{ cadvisor_exporter_container_image }}"
-         source: pull
+        name: "{{ cadvisor_exporter_container_image }}"
+        source: pull
 
     - name: Create cadvisor metrics exporter container
       docker_container:
@@ -55,7 +62,7 @@
         image: "{{ cadvisor_exporter_container_image }}"
         state: started
         ports:
-            - "8085:8080"
+          - "8085:8080"
         privileged: yes
         volumes:
           - /:/rootfs:ro

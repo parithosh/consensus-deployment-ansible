@@ -1,7 +1,6 @@
 - name: Init beacon data dirs for nodes
   hosts: beacon
   gather_facts: true
-  serial: 20
   tasks:
     - name: Creates beacon dir
       file:
@@ -10,7 +9,6 @@
 - name: Init validator data dirs for nodes
   hosts: validator
   gather_facts: false
-  serial: 20
   tasks:
     - name: Creates validator dir
       file:
@@ -19,7 +17,6 @@
 - name: Init eth1 data dirs for nodes
   hosts: execution
   gather_facts: false
-  serial: 20
   tasks:
     - name: Creates eth1 dir
       file:
@@ -28,7 +25,6 @@
 - name: Init testnet data dirs for nodes
   hosts: [beacon, execution, validator]
   gather_facts: false
-  serial: 20
   tasks:
     - name: Creates testnet dir
       file:
@@ -38,7 +34,6 @@
 - name: Init JWT secret
   hosts: [beacon, execution]
   gather_facts: false
-  serial: 20
   tasks:
     - name: Stat JWT path
       register: jwt_path_stat

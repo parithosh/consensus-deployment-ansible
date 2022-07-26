@@ -1,7 +1,6 @@
 - name: Start explorer postgres db
   hosts: explorer
   gather_facts: false
-  serial: 20
   tasks:
     - name: Create postgres storage dir
       file:

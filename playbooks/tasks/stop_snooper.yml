@@ -1,7 +1,6 @@
 - name: Stop json snooper
   hosts: all
   gather_facts: true
-  serial: 20
   tasks:
     - name: Stop JSON rpc snooper container
       shell: "docker stop --time=10 {{snoop_container_name}}"

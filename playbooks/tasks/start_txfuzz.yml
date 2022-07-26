@@ -1,7 +1,6 @@
 - name: Start txfuzz
   hosts: txfuzz
   gather_facts: false
-  serial: 20
   tasks:
     # To double check that the account is funded. Trigger with:
     # ```

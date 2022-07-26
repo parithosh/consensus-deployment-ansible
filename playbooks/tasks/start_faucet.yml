@@ -1,7 +1,6 @@
 - name: Start faucet
   hosts: faucet
   gather_facts: true
-  serial: 20
   tasks:
     - name: Start faucet
       docker_container:

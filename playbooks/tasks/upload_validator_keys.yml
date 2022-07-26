@@ -1,7 +1,6 @@
 - name: Upload validator keys
   hosts: validator
   gather_facts: true
-  serial: 20
   tasks:
     # TEMP
     - name: Remove validator_node_dir

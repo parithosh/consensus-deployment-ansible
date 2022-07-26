@@ -1,7 +1,6 @@
 - name: Start explorer statistics
   hosts: explorer
   gather_facts: false
-  serial: 20
   tasks:
     - name: Start Eth2 explorer statistics
       docker_container:

@@ -1,7 +1,6 @@
 - name: Collect enodes
   hosts: execution
   gather_facts: false
-  serial: 20
   tasks:
     - name: Get enode from logs
       shell: docker logs {{execution_container_name}} | grep enode:// | sed 's/.*enode:\/\///'

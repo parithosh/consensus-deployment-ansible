@@ -1,7 +1,6 @@
 - name: Init explorer sql tables
   hosts: explorer
   gather_facts: false
-  serial: 20
   tasks:
     - name: Sleep for 15 seconds and continue with play
       wait_for:

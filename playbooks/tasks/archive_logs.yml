@@ -1,7 +1,6 @@
 - name: Archive beacon logs
   hosts: beacon
   gather_facts: false
-  serial: 20
   tasks:
     - name: Creates archived_logs_dir
       file:
@@ -19,7 +18,6 @@
 - name: Archive execution logs
   hosts: execution
   gather_facts: false
-  serial: 20
   tasks:
     - name: Creates archived_logs_dir
       file:
@@ -39,7 +37,6 @@
 - name: Download archived logs
   hosts: beacon, execution
   gather_facts: false
-  serial: 20
   tasks:
     - name: Archive logs to prepare for download
       archive:

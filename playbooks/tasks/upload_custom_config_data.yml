@@ -1,7 +1,6 @@
 - name: Upload network data
   hosts: beacon, validator, execution
   gather_facts: true
-  serial: 20
   tasks:
     - name: Archive custom_config_data dir to prepare for upload
       archive:

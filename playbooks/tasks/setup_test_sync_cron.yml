@@ -1,7 +1,6 @@
 - name: Setup recurring sync_test
   hosts: sync_test
   gather_facts: false
-  serial: 20
   tasks:
     - name: Template test_sync_cron
       become: true

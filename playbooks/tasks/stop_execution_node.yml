@@ -1,7 +1,6 @@
 - name: Stop execution node
   hosts: execution
   gather_facts: true
-  serial: 20
   tasks:
     - name: Stop execution node container
       shell: "docker stop --time=500 {{ execution_container_name }}"

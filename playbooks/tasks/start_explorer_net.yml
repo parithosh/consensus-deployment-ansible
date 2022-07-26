@@ -1,7 +1,6 @@
 - name: Start explorer docker net
   hosts: "explorer"
   gather_facts: true
-  serial: 20
   tasks:
     # postgres on 172.1.1.100
     # explorer on 172.1.1.101

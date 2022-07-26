@@ -1,7 +1,6 @@
 - name: Start snooper
   hosts: all
   gather_facts: true
-  serial: 20
   tasks:
     - name: Start snooper
       docker_container:

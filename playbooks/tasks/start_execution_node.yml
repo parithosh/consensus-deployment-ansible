@@ -1,7 +1,6 @@
 - name: Start execution node
   hosts: execution
   gather_facts: false
-  serial: 20
   tasks:
     - name: Start execution node container
       docker_container:
