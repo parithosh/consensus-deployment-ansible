@@ -40,16 +40,16 @@ chainID: 1
 
 # 0xfffffffffffffffffffffffffffffffe difficulty / block
 #
-# xDAI TD on block 23255921 July-19-2022 9:52:45 PM UTC https://blockscout.com/xdai/mainnet/block/23255921
-# 7913579842806358152165626263839214415577252614
+# xDAI TD on block 23298517 Jul 22 2022 10:39:45 GMT+0000 https://blockscout.com/xdai/mainnet/block/23298517
+# 7928074510507722446955312168617378014312346030
 
-# Projected for Jul 20 2022 12:00:00 GMT+0000
-# TTD = 7917039493630843333523658393472973202983105432 = 7913579842806358152165626263839214415577252614 + 43635/5 * 0xfffffffffffffffffffffffffffffffe
+# Projected for Jul 22 2022 12:00:00 GMT+0000
+# TTD = 7928402202427067310695627398364334807099976232
 # ```
-# node -e 'console.log(BigInt("7913579842806358152165626263839214415577252614") + BigInt((new Date("Jul 20 2022 12:00:00").getTime() - new Date("July-19-2022 9:52:45 PM"))/5000) * BigInt("0xfffffffffffffffffffffffffffffffe"))'
+# node -e 'console.log(BigInt("7928074510507722446955312168617378014312346030") + BigInt((new Date("Jul 22 2022 12:00:00 GMT+0000").getTime() - new Date("Jul 22 2022 10:39:45 GMT+0000"))/5000) * BigInt("0xfffffffffffffffffffffffffffffffe"))'
 # ```
 
-terminal_total_difficulty: "115792089237316195423570985008687907853269984665640564039457584007913129638912"
+terminal_total_difficulty: "7928402202427067310695627398364334807099976232"
 fee_recipient: "0x88dFc82CF71fdeb23f82C33a202f6E2D19AC0541"
 # enter bootnodes here if needed
 bootnode_enrs:
@@ -72,7 +72,7 @@ eth1_deposit_contract_first_block: 1
 ##############################################
 # enter pushgateway config if needed
 prometheus_config_file: "prometheus/prometheus.yml.j2"
-prometheus_push_url: "https://hostedmetrics.com/s/cQ4UMmFc/prometheus/remote/write/"
+push_url: "https://hostedmetrics.com/s/cQ4UMmFc/prometheus/remote/write/"
 push_metrics_enabled: true
 remote_write_auth: true
 cadvisor_enabled: true

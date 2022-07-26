@@ -1,7 +1,7 @@
 # Extends the mainnet preset
 PRESET_BASE: "gnosis"
 # needs to exist because of Prysm. Otherwise it conflicts with mainnet genesis
-CONFIG_NAME: "gc-merge-devnet-3"
+CONFIG_NAME: "xdai-shadow-fork-0"
 
 # Genesis
 # If 14000 = oK
@@ -14,13 +14,13 @@ MIN_GENESIS_ACTIVE_VALIDATOR_COUNT: 8000
 MIN_GENESIS_TIME: 1658485800
 GENESIS_DELAY: 300
 
-TERMINAL_TOTAL_DIFFICULTY: 735009912549227081080889152052619336740640
+TERMINAL_TOTAL_DIFFICULTY: 7928402202427067310695627398364334807099976232
 
 # Deposit contract
 # ---------------------------------------------------------------
 # NOTE: Don't use a value too high, or Teku rejects it (4294906129 NOK)
-DEPOSIT_CHAIN_ID: 100993
-DEPOSIT_NETWORK_ID: 100993
+DEPOSIT_CHAIN_ID: 100
+DEPOSIT_NETWORK_ID: 100
 DEPOSIT_CONTRACT_ADDRESS: "0x4242424242424242424242424242424242424242"
 
 # Misc
