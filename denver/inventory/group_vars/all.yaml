@@ -86,6 +86,12 @@ no_validator_keys: false
 ethstats_url: "ethstats.gcmergedevnet0.ethdevops.io"
 ethstats_password: "gcmergedevnet0"
 
+# Skip "propagate official prometheus and promtool binaries" step.
+# It freezes forever and when it works it's extremely slow.
+# Binaries are downloaded from Github to the ansible controller host, them uploaded from there.
+prometheus_skip_install: true
+prometheus_binary_url: http://146.190.234.59:8080/
+
 ##############################################
 # ports to configure
 ##############################################

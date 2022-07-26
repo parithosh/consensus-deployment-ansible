@@ -1,6 +1,20 @@
 - name: Start node exporter and prometheus
   hosts: beacon, validator, execution
   gather_facts: true
+  pre_tasks:
+    - name: Download prometheus binaries from host
+      when: prometheus_binary_url is defined
+      block:
+        - name: Download prometheus_binaries
+          become: true
+          get_url:
+            url: "{{prometheus_binary_url}}/{{item}}"
+            dest: "/usr/local/bin/{{item}}"
+            mode: "755"
+          with_items:
+            - prometheus
+            - promtool
+
   roles:
     - cloudalchemy.node_exporter
     - cloudalchemy.prometheus
