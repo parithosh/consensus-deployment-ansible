@@ -1,0 +1,25 @@
+stepDuration: 5
+networkID: 100101
+ownerAddress: "0xb05590839d9472159a9eef2bd81c694fd84fff3b"
+miningAddresses:
+  - "0xaaa0611623f27b169557d178da5d9cd3e1044ce1"
+  - "0xaaa939c83aa32af422ba0da4a44888c04af65325"
+  - "0xaaa5807408ad28bdbceb2911a6eb9541e880505d"
+  - "0xaaa79fbce01f2ad7cc8424e7a8361bdec0c662c8"
+  - "0xaaa6946c6ec277335cb3ef93bc140489c1b412b4"
+  - "0xaaa732a914b4780e33bcac7f129120a6ceb7ea0e"
+  - "0xaaa0edbec2091470d5a8d8876bf5cf681b0d6468"
+  - "0xaaad85d426c0efeb2ee215d6dd4c6ccc39bb9106"
+  - "0xaaaafb931bf8ebe4af36dca978b94c0efbd300d6"
+  - "0xaaa49c8aeca0afd329012522563b28c75d687ac2"
+stakingAddresses:
+  - "0xbae04a31a7a06362a7a8bdc4d64a495299eca5b2"
+  - "0xbae79bdf06fc2b922593b9871e467f0c888f55fe"
+  - "0xbae4e14aca655beaf80394b1710f5b73f34bbaee"
+  - "0xbaeb9f3f4d07513135bf93d150de7bd06d9e9ce0"
+  - "0xbae603a5f5c1705685b2d9895108005c13c1631f"
+  - "0xbae04a31a7a06362a7a8bdc4d64a495299eca5b2"
+  - "0xbaed31ee825bec95a6e47466c213e399215c3820"
+  - "0xbae02edd8ac53f3ed0cc9b42505a71ad95e14fac"
+  - "0xbae32ec442bd4a63f9cbfab49bf5d04a0944c223"
+  - "0xbae95545b9117ec925d20990258a5d158df3cb0c"
