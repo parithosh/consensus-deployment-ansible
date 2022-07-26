@@ -53,7 +53,7 @@ eth1_start_args: >
   --Mining.MinGasPrice=1000000000
   --Mining.TargetBlockGasLimit=30000000
   --KeyStore.BlockAuthorAccount={{mining_addresses[mining_keyi]}}
-  --KeyStore.PasswordFiles=/networkdata/keystores_password.txt
+  --KeyStore.PasswordFiles=/networkdata/{{keystore_password_filename}}
   --KeyStore.KeyStoreDirectory=/networkdata/miner_keystores
   --KeyStore.UnlockAccounts={{mining_addresses[mining_keyi]}}
   {% endif %}

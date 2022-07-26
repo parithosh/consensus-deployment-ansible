@@ -58,6 +58,8 @@ mining_addresses:
   - "0xaaaafb931bf8ebe4af36dca978b94c0efbd300d6"
   - "0xaaa49c8aeca0afd329012522563b28c75d687ac2"
 
+keystores_password: "{{denver_keystores_password}}"
+
 # Note: 0 is correct, but due to an underflow bug (being fixed), doesn't work.
 eth1_deposit_contract_first_block: 1
 
@@ -142,6 +144,7 @@ beacon_node_dir: "{{home_dir}}/beacon"
 validator_node_dir: "{{home_dir}}/validator"
 testnet_dir: "{{home_dir}}/custom_config_data"
 execution_node_dir: "{{home_dir}}/eth1data"
+keystore_password_filename: "keystores_password.txt"
 
 ##############################################
 # common log config
