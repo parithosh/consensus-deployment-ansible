@@ -58,8 +58,16 @@ eth1_bootnode_enode:
   ]
 
 mining_addresses:
-  - "0x88dFc82CF71fdeb23f82C33a202f6E2D19AC0541"
-  - "0x1258c99E6a9F61bB29264966B45972C4C428A48F"
+  - "0xaaa0611623f27b169557d178da5d9cd3e1044ce1"
+  - "0xaaa939c83aa32af422ba0da4a44888c04af65325"
+  - "0xaaa5807408ad28bdbceb2911a6eb9541e880505d"
+  - "0xaaa79fbce01f2ad7cc8424e7a8361bdec0c662c8"
+  - "0xaaa6946c6ec277335cb3ef93bc140489c1b412b4"
+  - "0xaaa732a914b4780e33bcac7f129120a6ceb7ea0e"
+  - "0xaaa0edbec2091470d5a8d8876bf5cf681b0d6468"
+  - "0xaaad85d426c0efeb2ee215d6dd4c6ccc39bb9106"
+  - "0xaaaafb931bf8ebe4af36dca978b94c0efbd300d6"
+  - "0xaaa49c8aeca0afd329012522563b28c75d687ac2"
 
 # Note: 0 is correct, but due to an underflow bug (being fixed), doesn't work.
 eth1_deposit_contract_first_block: 1
@@ -178,9 +186,4 @@ firewall_allowed_tcp_ports:
 firewall_allowed_udp_ports:
   - 30303
   - 9000
-firewall_additional_rules:
-  - "iptables -A INPUT -p tcp --dport 4000 -d 165.232.93.228 -j ACCEPT"
-  - "iptables -A INPUT -p tcp --dport 8545 -d 165.232.93.228 -j ACCEPT"
-  - "iptables -A INPUT -p tcp --dport 3333 -j ACCEPT"
-  - "iptables -A INPUT -p tcp --dport 3334 -j ACCEPT"
-  - "iptables -A INPUT -p tcp --dport 3000 -d 165.232.93.228 -j ACCEPT"
+
