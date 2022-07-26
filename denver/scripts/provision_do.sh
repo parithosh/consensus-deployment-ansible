@@ -1,7 +1,7 @@
 #!/bin/bash
 
-TAG=gc-merge-devnet-3
-COUNT=15
+TAG=denver
+COUNT=10
 
 for i in $(seq 1 $COUNT);
 do
