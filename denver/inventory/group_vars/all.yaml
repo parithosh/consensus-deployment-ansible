@@ -3,6 +3,7 @@
 ##############################################
 ansible_user: "devops"
 bootstrap_user: "devops"
+initial_remote_user: "root"
 
 github_user_pubkeys:
   - dapplion
@@ -159,7 +160,7 @@ common_log_driver: json-file
 beacon_container_name: beacon
 validator_container_name: validator
 execution_container_name: execution
-hi_peer_count: {{ [100, groups['beacon']] | min }}
+hi_peer_count: "{{ [100, groups['beacon']] | min }}"
 separate_validator_process_enabled: true
 
 firewall_allowed_tcp_ports:
@@ -174,4 +175,3 @@ firewall_allowed_tcp_ports:
 firewall_allowed_udp_ports:
   - 30303
   - 9000
-
