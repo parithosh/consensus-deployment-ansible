@@ -11,8 +11,6 @@
         pull: true
         restart_policy: unless-stopped
         network_mode: host
-        ports:
-          - "{{public_execution_explorer}}:4000"
         restart: "{{ explorer_require_restart | default(false) }}"
         memory: "{{explorer_memory}}"
         command: "{{ execution_explorer_start_args }}"
