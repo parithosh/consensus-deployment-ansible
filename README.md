@@ -183,3 +183,26 @@ ansible-playbook -i $network/inventory/inventory.ini playbooks/tasks/start_execu
 * Deploy ethstats
 * Deploy faucet
 * Deploy landing page
+
+
+- **7. Metrics Interpretation**
+
+`beacon_head_slot`
+MIN_GENESIS_TIME is the moment when the beacon chain will start, by this time all the beacon node shows latest logs, ideally all the beacon node should be nearly behind the maximum one and following. Until the genesis the head slot should be 0 after that should increase linearly. clock * 5 metrics shows how many seconds are left until genesis will happen. Beacon started up if after genesis time the head slot increases, clock is increasing until 0.
+
+`libp2p_peers`
+amount of peers connected to the specific beacon chain, it is important that as much as possible peers get connected. If you do not have peers it means that beacon nodes are not communicating, in our case 12 is good 0 is bad.
+
+`nethermind_blocks`
+should increase nearly linearly, we expect the blockchain to produce one block each 5 seconds based on our configs. Blocks should keep increasing to demonstrate that the execution layer is working properly.
+
+`nethermind_sync_peers`
+every execution layer node must be peered and not lose connection.
+
+`participation_rate`
+it measures how effectively the beacon validators, those that validates transactions (not nodes, nodes just keeps the status of the blockchain) are participating in the consensus process, a good partecipation rate is between 90% and 100%.
+
+
+- **8. beacon API docs**
+
+https://ethereum.github.io/beacon-APIs/#/Node
