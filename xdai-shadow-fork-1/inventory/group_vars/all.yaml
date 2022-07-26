@@ -50,12 +50,12 @@ chainID: 100
 # node -e 'console.log(BigInt("7913579842806358152165626263839214415577252614") + BigInt((new Date("Jul 20 2022 12:00:00").getTime() - new Date("July-19-2022 9:52:45 PM"))/5000) * BigInt("0xfffffffffffffffffffffffffffffffe"))'
 # ```
 
-terminal_total_difficulty: "7950844845372603965176427343848282215950000830"
+terminal_total_difficulty: "7952702787095992289186937369204859670739550208"
 fee_recipient: "0x88dFc82CF71fdeb23f82C33a202f6E2D19AC0541"
 # enter bootnodes here if needed
 bootnode_enrs: [
-    "enr:-Ly4QG9SULFkNGt5Gqyeeyp7u0h7pngnL-vaacVpvy4-lUlGOoQ3yRIGv7K-jUoVE-7Z5SI-PlUmy2aIA9E3KeVnvrQBh2F0dG5ldHOIAAAAAAAAAACEZXRoMpCsvpZPIgAQKf__________gmlkgnY0gmlwhI6Ez1uJc2VjcDI1NmsxoQJD7UWrd1bhAytlj60bDbigvLH8kFqjUX9zqR40Gdy-x4hzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA",
-    "enr:-Ly4QMtdguHp-JHb1Zd2MjGWKicYNkf2Rn4wJBPPijxlli7OTOjRaTenkH1LuPPQTk9HoOQuJobGLjmopZwcTTaFOCVBh2F0dG5ldHOI__________-EZXRoMpCsvpZPIgAQKf__________gmlkgnY0gmlwhKfrAlSJc2VjcDI1NmsxoQKdD_9DXjNLKzxt4ZruHouLDOz7H9VwarNUSGqjCfJmlIhzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA"
+    "enr:-Ly4QF6M5K5r1JEv6nZyYnwCyBJEZsKYFIwLJTmf429H3dp2VyTH4oi-vebQtJ-1mXOuK_LvyLC-lONuqiQDOdNmDD8Bh2F0dG5ldHOIAAAAAAAAAACEZXRoMpB8EDB0IQAQKQEAAAAAAAAAgmlkgnY0gmlwhI6Ez1uJc2VjcDI1NmsxoQK4HMCCdGQMnpKK0LOPiRV3DKC1KgK9VAycIHi5USJGmIhzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA",
+    "enr:-Ly4QGvmcBnYgloGqx61w5-bsiv3suUvAN5iLqeSatiym2tlGpy-r6Q2AfQJtfFP510BTUwPiUcaTKbZV1CEA21vPYIBh2F0dG5ldHOIAAAAAAAAAACEZXRoMpB8EDB0IQAQKQEAAAAAAAAAgmlkgnY0gmlwhKfrAlSJc2VjcDI1NmsxoQOYsEDxzZzU5b-5aLOz9lUp7WEFaaUQLr1L2zJAKHPANYhzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA"
 ]
 
 eth1_bootnode_enode: [
