@@ -11,9 +11,6 @@
         pull: true
         restart_policy: unless-stopped
         network_mode: host
-        ports:
-          - "5000:9333"
-          - "{{public_beacon_explorer}}:3333"
         restart: "{{ explorer_require_restart | default(false) }}"
         memory: "{{explorer_memory}}"
         command: "{{ beacon_explorer_start_args }}"
