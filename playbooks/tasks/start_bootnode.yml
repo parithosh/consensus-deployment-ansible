@@ -14,7 +14,6 @@
         restart: "{{ bootnode_require_restart | default(false) }}"
         memory: "{{bootnode_memory}}"
         command: "{{ bootnode_start_args }}"
-        volumes:
-          - "{{bootnode_host_dir}}:/data"
+        volumes: "{{ bootnode_volumes }}"
         log_options: "{{ common_log_options }}"
         log_driver: "{{ common_log_driver }}"

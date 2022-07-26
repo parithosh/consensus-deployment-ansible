@@ -1,3 +1,7 @@
+# Setup hosts from scatch
+- import_playbook: ../../tasks/setup_machine.yml
+- import_playbook: ../../tasks/start_firewall.yml
+
 - name: Setup Google DNS resolver
   hosts: all
   gather_facts: false
@@ -13,9 +17,9 @@
           echo 'nameserver 8.8.4.4' >> /etc/resolv.conf
       fi
 
-- import_playbook: ../tasks/metrics/setup_node_metrics.yml
-- import_playbook: ../tasks/setup_node_exporter_and_prometheus.yml
-- import_playbook: ../setup_logging_capability.yml
+- import_playbook: ../../tasks/metrics/setup_node_metrics.yml
+- import_playbook: ../../tasks/setup_node_exporter_and_prometheus.yml
+- import_playbook: ../../setup_logging_capability.yml
 
 # - hosts: all
 #   gather_facts: false
