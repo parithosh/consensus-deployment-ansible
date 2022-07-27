@@ -17,7 +17,8 @@ explorer_postgres_memory: 9000m
 explorer_postgres_port: "5432"
 explorer_postgres_ip: "127.0.0.1"
 explorer_postgres_user: postgres
-is_execution_explorer: True
+# Disable until provisioning a more powerful host
+is_execution_explorer: False
 
 # Set in secrets.yaml
 # explorer_postgres_password: "{{ lookup('pipe', 'keybase fs read /keybase/team/ethereum.devops/eth2/merge-devnets/merge-devnet-3/explorer-postgres') }}"
