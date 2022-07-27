@@ -51,7 +51,13 @@ chainID: 1
 terminal_total_difficulty: "7955842572495571788389313926707632595671626792"
 fee_recipient: "0x88dFc82CF71fdeb23f82C33a202f6E2D19AC0541"
 # enter bootnodes here if needed
-bootnode_enrs: []
+bootnode_enrs:
+  [
+    "enr:-Ly4QEQErufWhySHJXijRXH96n0dClvHCnXqtqGK2cFJkyX-AkPSgS6Qff6zQQ-NgEq0ybI-SEYDETjGB5dw42KCf84Bh2F0dG5ldHOIAAAAAAAAAACEZXRoMpDyKbnGIQAQKQEAAAAAAAAAgmlkgnY0gmlwhJK-PPOJc2VjcDI1NmsxoQJrSuxw7VDNZpLxzVeo3i3mPBPygC8KhgSmefCNE7SEfYhzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA",
+    "enr:-Ly4QIWLYYlu9uJJ_A6xBVru8AaobRru7K6XEi_7y3zyB2XAQrkgoLxuglSQZi2Mb27wXwAIh2dLfH1J36DIXeGsEegBh2F0dG5ldHOIAAAAAAAAAACEZXRoMpDyKbnGIQAQKQEAAAAAAAAAgmlkgnY0gmlwhJK-PPKJc2VjcDI1NmsxoQN3TKMtvVFYdvsHGZULtFPyhnL6W5GSmGZ-TxtqXcmraohzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA",
+    "enr:-Ly4QG0yiBqkqbvU_xPU5TLtKS7ks1F89Xujc54Gl1gj1SOKTb8lf9rSJoPn5lF-16I6rJDsezxyjewmkOfkwFMb2dQBh2F0dG5ldHOIAAAAAAAAAACEZXRoMpDyKbnGIQAQKQEAAAAAAAAAgmlkgnY0gmlwhJK-IgKJc2VjcDI1NmsxoQP32i2UyZ1uOlcDUH6g-xq-wJd5Og3x6mv41AGAC3nKqohzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA",
+    "enr:-Ly4QM0JR41hrjzN_ssqx7xX7jPjMiMUjXyBaxz17ADODkJgLaUTy7mdcQlWq2WL5sVzuRre8t_c4sKe-2y1PhfWLXcBh2F0dG5ldHOIAAAAAAAAAACEZXRoMpDyKbnGIQAQKQEAAAAAAAAAgmlkgnY0gmlwhJK-PPWJc2VjcDI1NmsxoQL77wBY2teLnUXm0h5-wifUamUOLXeZREXyeIszbDq9p4hzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA",
+  ]
 
 eth1_bootnode_enode: []
 
@@ -65,9 +71,16 @@ eth1_deposit_contract_first_block: 1
 ##############################################
 # enter pushgateway config if needed
 prometheus_config_file: "prometheus/prometheus.yml.j2"
-push_url: "https://hostedmetrics.com/s/cQ4UMmFc/prometheus/remote/write/"
-push_metrics_enabled: true
-remote_write_auth: true
+prometheus_enabled: true
+prometheus_remote_write_configs:
+  # NOTE: For some reason DO hosts can't resolve themerge-monitoring.gnosischainscan.com domain
+  - url: https://themerge-monitoring.gnosischainscan.com/prometheus/api/v1/write/
+    username: themergeprometheusremotewrite
+    password: "{{themergemonitoring_remote_write_password}}"
+  - url: https://hostedmetrics.com/s/cQ4UMmFc/prometheus/remote/write/
+    username: cQ4UMmFc
+    password: "{{hostedmetrics_remote_write_password}}"
+
 cadvisor_enabled: true
 promtail_enabled: false
 promtail_loki_server_url: "https://136217:{{loki_pusher_api_key}}@logs-prod-us-central1.grafana.net/loki/api/v1/push"
