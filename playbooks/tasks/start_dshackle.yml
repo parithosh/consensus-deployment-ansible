@@ -1,7 +1,6 @@
 - name: Start dshackle
   hosts: dshackle
   gather_facts: true
-  serial: 20
   tasks:
     - name: Start dshackle
       docker_container:

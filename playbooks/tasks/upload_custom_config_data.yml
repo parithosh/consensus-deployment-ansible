@@ -1,7 +1,6 @@
 - name: Upload network data
   hosts: beacon, validator, execution
   gather_facts: true
-  serial: 20
   tasks:
     - name: Archive custom_config_data dir to prepare for upload
       archive:
@@ -27,13 +26,16 @@
       delegate_to: "{{ inventory_hostname }}"
       become: true
       shell: cp -r /tmp/testnet_dir/* "{{testnet_dir}}"
-    - name: Modify permissions to match user-group inside docker image
-      shell: chown -R 777 "{{ testnet_dir }}"
-      become: true
 
     - name: Copy keystore password
-      when: "inventory_hostname in groups['execution']"
+      when:
+        - keystore_password_filename is defined
+        - "inventory_hostname in groups['execution']"
       become: true
       copy:
         dest: "{{testnet_dir}}/{{keystore_password_filename}}"
         content: "{{keystores_password}}"
+
+    - name: Modify permissions to match user-group inside docker image
+      shell: chown -R 777 "{{ testnet_dir }}"
+      become: true

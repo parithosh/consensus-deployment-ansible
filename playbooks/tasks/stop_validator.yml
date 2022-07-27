@@ -1,7 +1,6 @@
 - name: Stop validator client
   hosts: validator
   gather_facts: true
-  serial: 20
   tasks:
     - name: Stop Eth2 validator client container
       shell: "docker stop --time=10 {{validator_container_name}}"

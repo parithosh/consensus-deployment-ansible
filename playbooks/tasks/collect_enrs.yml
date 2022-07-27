@@ -1,7 +1,6 @@
 - name: Collect ENRs
   hosts: beacon
   gather_facts: false
-  serial: 20
   tasks:
     - name: Get node identity
       shell: curl http://localhost:{{beacon_api_port}}/eth/v1/node/identity

@@ -1,7 +1,6 @@
 - name: Start beacon node
   hosts: beacon
   gather_facts: false
-  serial: 20
   tasks:
     - name: Creates beacon dir
       file:

@@ -1,7 +1,6 @@
 - name: Start bootnodes
   hosts: bootnode
   gather_facts: true
-  serial: 20
   tasks:
     - name: Start Eth2 bootnode
       docker_container:

@@ -1,7 +1,6 @@
 - name: Move data dirs to backup, get ready for resync
   hosts: beacon
   gather_facts: true
-  serial: 20
   tasks:
     #    - name: Rm the eth1 data dir
     #      become: true

@@ -1,9 +1,8 @@
 ---
-- name: Install logging agent 
+- name: Install logging agent
   hosts: all
   gather_facts: false
-  serial: 20
-  tasks:   
+  tasks:
     - name: Set facts
       set_fact:
         user_group: "sudo"
@@ -26,19 +25,19 @@
         state: present
       become: yes
 
-    - name: Install fluentd as td-agent 
+    - name: Install fluentd as td-agent
       apt:
         name: td-agent
         state: present
       become: yes
       register: install
 
-    - name: Add fluentd log agent to os groups 
+    - name: Add fluentd log agent to os groups
       shell: usermod -aG "{{ item | default('root') }}" td-agent
       become: yes
       ignore_errors: yes
       with_items:
-        - root 
+        - root
         - syslog
         - adm
         - systemd-journal
@@ -63,12 +62,12 @@
         path: /etc/td-agent/td-agent.conf
         state: touch
       become: yes
-      
+
     - name: Create tail position directory
       file:
         path: /var/tmp/td-agent/tail
         state: directory
-        owner: td-agent 
-        group: td-agent 
-      become: yes 
+        owner: td-agent
+        group: td-agent
+      become: yes
       #notify: restart td-agent
