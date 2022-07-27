@@ -1,0 +1,199 @@
+##############################################
+# generic ansible config information
+##############################################
+ansible_user: "devops"
+bootstrap_user: "devops"
+initial_remote_user: "root"
+
+github_user_pubkeys:
+  - dapplion
+  - giacomolicari
+  - alebanzas
+  - igorbarinov
+  - parithosh
+
+ansible_python_interpreter: /usr/bin/python3
+oh_my_zsh_config:
+  PROMPT: "%{$fg[yellow]%}%n%{$fg[white]%}@%{$fg[red]%}%m%{$reset_color%} ${PROMPT}"
+
+##############################################
+# eth1 endpoints
+##############################################
+# nimbus requires a websocket endpoint (http support unstable)
+# note: also used for execution engine endpoint in nimbus
+consensus_endpoint_nimbus: ws://127.0.0.1:8551
+
+eth1endpoint: http://127.0.0.1:8545
+
+beacon_api_endpoint: "http://127.0.0.1:{{beacon_api_port}}"
+
+# Merge Engine endpoints
+# TODO change IP?
+# TODO: some engines might start using the 8550 port (or 8551 for ws)
+
+##############################################
+# testnet specific information
+##############################################
+testnet_type: custom
+eth2_network_name: chiado
+chainID: 100102
+
+# 0xfffffffffffffffffffffffffffffffe difficulty / block
+terminal_total_difficulty: "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+fee_recipient: "0x88dFc82CF71fdeb23f82C33a202f6E2D19AC0541"
+# enter bootnodes here if needed
+bootnode_enrs: []
+
+eth1_bootnode_enode: []
+
+mining_addresses:
+  - "0xaaa0611623f27b169557d178da5d9cd3e1044ce1"
+  - "0xaaa939c83aa32af422ba0da4a44888c04af65325"
+  - "0xaaa5807408ad28bdbceb2911a6eb9541e880505d"
+  - "0xaaa79fbce01f2ad7cc8424e7a8361bdec0c662c8"
+  - "0xaaa6946c6ec277335cb3ef93bc140489c1b412b4"
+  - "0xaaa732a914b4780e33bcac7f129120a6ceb7ea0e"
+  - "0xaaa0edbec2091470d5a8d8876bf5cf681b0d6468"
+  - "0xaaad85d426c0efeb2ee215d6dd4c6ccc39bb9106"
+  - "0xaaaafb931bf8ebe4af36dca978b94c0efbd300d6"
+  - "0xaaa49c8aeca0afd329012522563b28c75d687ac2"
+
+keystores_password: "{{denver_keystores_password}}"
+
+# Genesis. chiado_mnemonics is stored in `denver/inventory/group_vars/secrets.yaml`
+genesis_mnemonics: "{{chiado_mnemonics}}"
+mnemonic_0: "{{chiado_mnemonics[0].mnemonic}}"
+
+# Note: 0 is correct, but due to an underflow bug (being fixed), doesn't work.
+eth1_deposit_contract_first_block: 1
+
+##############################################
+# metric information
+##############################################
+# enter pushgateway config if needed
+prometheus_config_file: "prometheus/prometheus.yml.j2"
+
+prometheus_remote_write_configs:
+  # NOTE: For some reason DO hosts can't resolve themerge-monitoring.gnosischainscan.com domain
+  - url: https://themerge-monitoring.gnosischainscan.com/prometheus/api/v1/write/
+    username: themergeprometheusremotewrite
+    password: "{{themergemonitoring_remote_write_password}}"
+  - url: https://hostedmetrics.com/s/cQ4UMmFc/prometheus/remote/write/
+    username: cQ4UMmFc
+    password: "{{hostedmetrics_remote_write_password}}"
+
+prometheus_enabled: true
+remote_write_auth: true
+cadvisor_enabled: true
+promtail_enabled: true
+promtail_loki_server_url: "https://136217:{{loki_pusher_api_key}}@logs-prod-us-central1.grafana.net/loki/api/v1/push"
+eth2_validator_metrics_enabled: true
+eth_metrics_exporter_enabled: true
+eth_metrics_exporter_name: "metrics-exporter"
+eth_metrics_exporter_image: samcm/ethereum-metrics-exporter:0.11.0
+
+no_validator_keys: false
+ethstats_url: "ethstats.gcmergedevnet0.ethdevops.io"
+ethstats_password: "gcmergedevnet0"
+
+# Skip "propagate official prometheus and promtool binaries" step.
+# It freezes forever and when it works it's extremely slow.
+# Binaries are downloaded from Github to the ansible controller host, them uploaded from there.
+prometheus_skip_install: true
+prometheus_binary_url: http://146.190.234.59:8080/
+
+##############################################
+# ports to configure
+##############################################
+eth1_rpc_port: 8545
+eth1_ws_rpc_port: 8546
+eth1_engine_port_no_auth: 8550
+eth1_engine_port: 8551
+eth1_engine_snoop_port: 8560
+eth1_engine_ws_port: 8552
+nimbus_rpc_port: 4009
+beacon_api_port: 4000
+beacon_grpc_port: 4001
+beacon_metrics_port: 8000
+beacon_p2p_port: 9000
+validator_metrics_port: 8001
+validator_rpc_port: 4002
+node_exporter_web_listen_address: "0.0.0.0:9100"
+prometheus_web_listen_address: "0.0.0.0:9090"
+eth1_metrics_port: 8002
+eth_metrics_exporter_port: 8003
+cadvisor_port: 9280
+promtail_port: 9080
+public_execution_explorer: 3334
+public_beacon_explorer: 3333
+
+##############################################
+# Command for JSON RPC snooper
+##############################################
+snoop_image_name: parithoshj/json_rpc_snoop:v1.0.0-x86
+snoop_container_name: snooper
+
+##############################################
+# name of the validator to display
+##############################################
+graffiti: "{{eth2_client_name}}-{{eth1_client_name}}"
+
+##############################################
+# local data directories
+##############################################
+local_explorerdata_host_dir: "{{inventory_dir}}/../explorerdata"
+local_explorerdata_host_archive: "{{inventory_dir}}/../explorerdata.tar.gz"
+local_forkmondata_host_dir: "{{inventory_dir}}/../forkmondata"
+local_forkmondata_host_archive: "{{inventory_dir}}/../forkmondata.tar.gz"
+local_custom_config_data_host_dir: "{{inventory_dir}}/../custom_config_data"
+local_custom_config_data_host_archive: "{{inventory_dir}}/../custom_config_data.tar.gz"
+local_eth2_config_filepath: "{{local_custom_config_data_host_dir}}/config.yaml"
+local_eth1_genesis_filepath: "{{local_custom_config_data_host_dir}}/nethermind_genesis.json"
+local_mnemonics_filepath: "{{local_custom_config_data_host_dir}}/mnemonics.yaml"
+# private dirs
+# Validator assignments
+local_validator_host_dir: "{{inventory_dir}}/../validator_prep/{{inventory_hostname}}"
+local_validator_host_archive: "{{inventory_dir}}/../validator_prep/{{inventory_hostname}}.tar.gz"
+
+##############################################
+# remote host data directories
+##############################################
+home_dir: "/home/{{ansible_user}}"
+beacon_node_dir: "{{home_dir}}/beacon"
+validator_node_dir: "{{home_dir}}/validator"
+testnet_dir: "{{home_dir}}/custom_config_data"
+execution_node_dir: "{{home_dir}}/eth1data"
+keystore_password_filename: "keystores_password.txt"
+
+##############################################
+# common log config
+##############################################
+beacon_log_level: info
+common_log_options:
+  max-file: "10"
+  max-size: 500m
+  mode: non-blocking
+  max-buffer-size: 4m
+common_log_driver: json-file
+
+##############################################
+# container names
+##############################################
+beacon_container_name: beacon
+validator_container_name: validator
+execution_container_name: execution
+hi_peer_count: "{{ [100, groups['beacon'] | length] | min }}"
+separate_validator_process_enabled: true
+
+firewall_allowed_tcp_ports:
+  - 22
+  - 30303
+  - 9000
+  - 80
+  - 443
+  - "{{public_execution_explorer}}"
+  - "{{public_beacon_explorer}}"
+
+firewall_allowed_udp_ports:
+  - 30303
+  - 9000

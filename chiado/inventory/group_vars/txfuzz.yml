@@ -1,0 +1,6 @@
+txfuzz_container_name: tx-fuzz
+txfuzz_image_name: kurtosistech/tx-fuzz:0.2.0
+
+txfuzz_rpc_url: http://127.0.0.1:{{eth1_rpc_port}}
+txfuzz_address: "0xfff6aA79E941418218EBEB8718740Ed0f234E1A3"
+# txfuzz_privkey: Defined in secrets.yml
