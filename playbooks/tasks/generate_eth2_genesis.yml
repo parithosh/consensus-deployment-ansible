@@ -1,0 +1,48 @@
+- name: Generate eth2 genesis
+  hosts: validator
+  gather_facts: false
+  tasks:
+    - name: Write mnemonics.yaml from inventory
+      when: genesis_mnemonics is not defined
+      block:
+        - name: Grab validator keys data
+          delegate_to: localhost
+          run_once: true
+          with_items: "{{ groups['validator'] }}"
+          set_fact:
+            keys_data_dict: "{{ keys_data_dict|default({}) | combine( {item: {'indexes': hostvars[item]['indexes'], 'mnemonic': hostvars[item]['mnemonic']}} ) }}"
+
+        - name: Validate ranges + prepare mnemonics.yaml
+          delegate_to: localhost
+          run_once: true
+          script: "./scripts/validate_eth2_indexes.py '{{keys_data_dict | to_json}}' {{local_eth2_config_filepath}} {{local_mnemonics_filepath}}"
+
+    - name: Write mnemonics.yaml from genesis_mnemonics
+      when: genesis_mnemonics is defined
+      delegate_to: localhost
+      copy:
+        content: "{{genesis_mnemonics | to_nice_yaml}}"
+        dest: "{{local_mnemonics_filepath}}"
+
+    - name: Load config
+      delegate_to: localhost
+      run_once: true
+      set_fact:
+        eth2_config: "{{ lookup('file', local_eth2_config_filepath) | from_yaml }}"
+
+    # Note the genesis time persisted in genesis.ssz = MIN_GENESIS_TIME + GENESIS_DELAY
+    - name: Generate genesis
+      delegate_to: localhost
+      run_once: true
+      vars:
+        cl_genesis_eth1_block: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      shell: >
+        docker run --rm --entrypoint=eth2-testnet-genesis \
+        -v {{local_custom_config_data_host_dir}}:/data \
+        skylenet/ethereum-genesis-generator phase0 \
+        --eth1-block "{{cl_genesis_eth1_block}}" \
+        --timestamp "{{eth2_config['MIN_GENESIS_TIME']}}" \
+        --config /data/config.yaml \
+        --mnemonics /data/mnemonics.yaml \
+        --tranches-dir /data/tranches \
+        --state-output /data/genesis.ssz
