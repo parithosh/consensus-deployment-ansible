@@ -228,3 +228,23 @@ denver-lighthouse-nethermind-04 | CHANGED | rc=0 >>
 "476"
 "0x2b29f765768332bebfd09c87d757bc0ccab0ec21c536583f4fe048c4fb33a62e"
 ```
+
+## Execution head of all nodes
+
+```
+ansible -i denver/inventory/inventory.ini execution -m shell -a "curl -X POST --data '{\"jsonrpc\":\"2.0\",\"method\":\"eth_getBlockByNumber\",\"params\":[\"latest\"],\"id\":0}' http://localhost:8545 | jq '.result.number | tonumber, .result.hash'"
+```
+
+Print current head of each node, slot + root
+
+```
+denver-lighthouse-nethermind-05 | CHANGED | rc=0 >>
+"476"
+"0x2b29f765768332bebfd09c87d757bc0ccab0ec21c536583f4fe048c4fb33a62e"
+denver-explorer-lighthouse-nethermind | CHANGED | rc=0 >>
+"476"
+"0x2b29f765768332bebfd09c87d757bc0ccab0ec21c536583f4fe048c4fb33a62e"
+denver-lighthouse-nethermind-04 | CHANGED | rc=0 >>
+"476"
+"0x2b29f765768332bebfd09c87d757bc0ccab0ec21c536583f4fe048c4fb33a62e"
+```
