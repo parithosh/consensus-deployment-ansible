@@ -22,8 +22,9 @@
         state: directory
 
     - name: Generate keys
+      # Do not --rm to allow the auditing of params
       shell: >
-        docker run --rm --entrypoint=eth2-val-tools \
+        docker run --entrypoint=eth2-val-tools --name eth2_keys_generator \
         -v {{output_keys_dirpath_volume}} \
         skylenet/ethereum-genesis-generator keystores \
         --insecure \

@@ -59,11 +59,13 @@ Please note that if you are changing the logging driver of an already running co
 
 There's a ready-to-use playbook which takes care of installing the fluentd logs collector.
 Just set the following variables in `all.yml` or on your `secrets.yml` file:
+
 - `logging_host=URL To Logs Collector`
 - `logging_auth_user=User With Permissions to push logs`
 - `logging_auth_password=User Password`
 
 Sample logging driver configurations:
+
 ```
 ## JSON file
 common_log_driver: json-file
@@ -80,7 +82,6 @@ common_log_options: {}
 ```
 
 That can be either an ElasticSearch or OpenSearch URL.
-
 
 ## Working with secrets
 
@@ -132,9 +133,10 @@ mnemonic_0: "giant issue aisle success illegal bike spike question tent bar rely
 **2. Deploy**
 
 > **Note**:
-By default the docker daemon collects logs using the `json-file` driver, check this section out if you want to ship logs using a custom provider: `Use docker logs with custom logging drivers`.
+> By default the docker daemon collects logs using the `json-file` driver, check this section out if you want to ship logs using a custom provider: `Use docker logs with custom logging drivers`.
 
 Execute the following playbooks only if you want to make Dockerd collect logs using a custom logging driver, e.g. fluentd (make sure to check-out the requirements in `Use docker logs with custom logging drivers`).
+
 ```
 ansible-playbook -i $network/inventory/inventory.ini playbooks/setup_logging_capability.yml
 ```
@@ -184,11 +186,10 @@ ansible-playbook -i $network/inventory/inventory.ini playbooks/tasks/start_execu
 * Deploy faucet
 * Deploy landing page
 
-
 - **7. Metrics Interpretation**
 
 `beacon_head_slot`
-MIN_GENESIS_TIME is the moment when the beacon chain will start, by this time all the beacon node shows latest logs, ideally all the beacon node should be nearly behind the maximum one and following. Until the genesis the head slot should be 0 after that should increase linearly. clock * 5 metrics shows how many seconds are left until genesis will happen. Beacon started up if after genesis time the head slot increases, clock is increasing until 0.
+MIN_GENESIS_TIME is the moment when the beacon chain will start, by this time all the beacon node shows latest logs, ideally all the beacon node should be nearly behind the maximum one and following. Until the genesis the head slot should be 0 after that should increase linearly. clock \* 5 metrics shows how many seconds are left until genesis will happen. Beacon started up if after genesis time the head slot increases, clock is increasing until 0.
 
 `libp2p_peers`
 amount of peers connected to the specific beacon chain, it is important that as much as possible peers get connected. If you do not have peers it means that beacon nodes are not communicating, in our case 12 is good 0 is bad.
@@ -202,7 +203,28 @@ every execution layer node must be peered and not lose connection.
 `participation_rate`
 it measures how effectively the beacon validators, those that validates transactions (not nodes, nodes just keeps the status of the blockchain) are participating in the consensus process, a good partecipation rate is between 90% and 100%.
 
-
 - **8. beacon API docs**
 
 https://ethereum.github.io/beacon-APIs/#/Node
+
+# Debug tools
+
+## Consensus head of all nodes
+
+```
+ansible -i denver/inventory/inventory.ini beacon -m shell -a "curl -s localhost:4000/eth/v1/beacon/headers/head | jq '.data.header.message.slot, .data.root'"
+```
+
+Print current head of each node, slot + root
+
+```
+denver-lighthouse-nethermind-05 | CHANGED | rc=0 >>
+"476"
+"0x2b29f765768332bebfd09c87d757bc0ccab0ec21c536583f4fe048c4fb33a62e"
+denver-explorer-lighthouse-nethermind | CHANGED | rc=0 >>
+"476"
+"0x2b29f765768332bebfd09c87d757bc0ccab0ec21c536583f4fe048c4fb33a62e"
+denver-lighthouse-nethermind-04 | CHANGED | rc=0 >>
+"476"
+"0x2b29f765768332bebfd09c87d757bc0ccab0ec21c536583f4fe048c4fb33a62e"
+```

@@ -66,9 +66,11 @@ beacon_start_args: >
   --grpc-gateway-port={{beacon_api_port}}
   --enable-debug-rpc-endpoints
   --jwt-secret=/jwtsecret
-  --suggested-fee-recipient={{ fee_recipient }}
-  --contract-deployment-block=14675001
+  --suggested-fee-recipient={{fee_recipient}}
+  --contract-deployment-block={{eth1_deposit_contract_first_block}}
+  --grpc-max-msg-size 153877500
 
+# --grpc-max-msg-size 153877500 required to poll indexes on more than 2.5k keys
 validator_start_args: >
   --accept-terms-of-use=true
   --datadir="/validatordata"
@@ -78,6 +80,7 @@ validator_start_args: >
   --graffiti="{{graffiti}}"
   --wallet-dir=/validatordata/wallet
   --wallet-password-file="/validatordata/wallet_pass.txt"
+  --grpc-max-msg-size 153877500
 
 ##############################################
 # file permissions and user ids
