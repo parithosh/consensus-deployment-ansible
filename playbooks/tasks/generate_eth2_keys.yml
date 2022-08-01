@@ -23,16 +23,23 @@
 
     - name: Generate keys
       # Do not --rm to allow the auditing of params
-      shell: >
-        docker run --entrypoint=eth2-val-tools --name eth2_keys_generator \
-        -v {{output_keys_dirpath_volume}} \
-        skylenet/ethereum-genesis-generator keystores \
-        --insecure \
-        --prysm-pass="prysm" \
-        --out-loc="{{output_keys_dirpath_cont}}" \
-        --source-max={{to_index}} \
-        --source-min={{from_index}} \
-        --source-mnemonic="{{mnemonic}}"
+      docker_container:
+        name: eth2_keys_generator
+        state: started
+        image: skylenet/ethereum-genesis-generator
+        volumes:
+          - "{{output_keys_dirpath_volume}}"
+        recreate: true
+        entrypoint: eth2-val-tools
+        command: >
+          keystores
+          --insecure
+          --prysm-pass="prysm"
+          --out-loc="{{output_keys_dirpath_cont}}"
+          --source-max={{to_index}}
+          --source-min={{from_index}}
+          --source-mnemonic="{{mnemonic}}"
+
     # Grab the right keys for each eth2 client
     - name: Copy keys for lighthouse
       when: eth2_client_name == 'lighthouse'
