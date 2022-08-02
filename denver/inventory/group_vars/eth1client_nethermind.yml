@@ -51,7 +51,7 @@ eth1_start_args: >
   {% if mining_keyi is defined %}
   --Init.IsMining=true
   --Mining.Enabled=true
-  --Mining.MinGasPrice=1000000000
+  --Mining.MinGasPrice={{ min_gas_price | default('1000000000') }}
   --Mining.TargetBlockGasLimit=30000000
   --KeyStore.BlockAuthorAccount={{mining_addresses[mining_keyi]}}
   --KeyStore.PasswordFiles=/networkdata/{{keystore_password_filename}}

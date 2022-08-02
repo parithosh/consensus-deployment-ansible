@@ -4,3 +4,6 @@ txfuzz_image_name: kurtosistech/tx-fuzz:0.2.0
 txfuzz_rpc_url: http://127.0.0.1:{{eth1_rpc_port}}
 txfuzz_address: "0xfff6aA79E941418218EBEB8718740Ed0f234E1A3"
 # txfuzz_privkey: Defined in secrets.yml
+
+# Recomendation from Marek (Nethermind) to hopefully fix that most of txfuzzer transactions are rejected.
+min_gas_price: 1
