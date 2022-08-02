@@ -30,6 +30,7 @@
         volumes:
           - "{{output_keys_dirpath_volume}}"
         recreate: true
+        detach: false
         entrypoint: eth2-val-tools
         command: >
           keystores
