@@ -16,7 +16,7 @@
       when: groups.beacon is defined
       with_items: "{{ groups['beacon'] }}"
       set_fact:
-        beacon_enrs: "{{ beacon_enrs|default({}) | combine( {item: hostvars[item]['beacon_enr']} ) }}"
+        beacon_enrs: "{{ beacon_enrs|default({}) | combine( {item: hostvars[item]['beacon_enr'] | default('not_found')} ) }}"
     - name: Write ENRs
       copy:
         content: "{{ beacon_enrs.values() | list | to_nice_json }}"
