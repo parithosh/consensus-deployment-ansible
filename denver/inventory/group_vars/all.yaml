@@ -48,6 +48,9 @@ testnet_type: custom
 eth2_network_name: denver
 chainID: 100101
 
+# To allow using the deposit contract
+eth2_genesis_eth1data_blockhash: "0x203e164cf3b6f6765abf2f0355a4d09e5eaf6a777243bc4407b569431cd95cb3"
+
 # 0xfffffffffffffffffffffffffffffffe difficulty / block
 # 735009912549227081080889152052619336740640 = 2160 blocks = 10800 seconds = 3 hours
 terminal_total_difficulty: "115792089237316195423570985008687907853269984665640564039457584007913129639935"
@@ -225,7 +228,7 @@ common_log_driver: json-file
 beacon_container_name: beacon
 validator_container_name: validator
 execution_container_name: execution
-hi_peer_count: "{{ [100, groups['beacon'] | length] | min }}"
+hi_peer_count: 100
 separate_validator_process_enabled: true
 
 firewall_allowed_tcp_ports:

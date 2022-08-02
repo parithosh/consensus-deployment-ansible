@@ -34,13 +34,11 @@
     - name: Generate genesis
       delegate_to: localhost
       run_once: true
-      vars:
-        cl_genesis_eth1_block: "0x0000000000000000000000000000000000000000000000000000000000000000"
       shell: >
         docker run --rm --entrypoint=eth2-testnet-genesis \
         -v {{local_custom_config_data_host_dir}}:/data \
         skylenet/ethereum-genesis-generator phase0 \
-        --eth1-block "{{cl_genesis_eth1_block}}" \
+        --eth1-block "{{eth2_genesis_eth1data_blockhash | default("0x0000000000000000000000000000000000000000000000000000000000000000")}}" \
         --timestamp "{{eth2_config['MIN_GENESIS_TIME']}}" \
         --config /data/config.yaml \
         --mnemonics /data/mnemonics.yaml \
