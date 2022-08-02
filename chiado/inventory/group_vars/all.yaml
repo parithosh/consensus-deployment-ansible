@@ -103,8 +103,7 @@ eth_metrics_exporter_name: "metrics-exporter"
 eth_metrics_exporter_image: samcm/ethereum-metrics-exporter:0.11.0
 
 no_validator_keys: false
-ethstats_url: "ethstats.gcmergedevnet0.ethdevops.io"
-ethstats_password: "gcmergedevnet0"
+ethstats_url: ""
 
 # Skip "propagate official prometheus and promtool binaries" step.
 # It freezes forever and when it works it's extremely slow.

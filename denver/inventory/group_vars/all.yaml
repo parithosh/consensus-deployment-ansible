@@ -133,8 +133,7 @@ eth_metrics_exporter_name: "metrics-exporter"
 eth_metrics_exporter_image: samcm/ethereum-metrics-exporter:0.11.0
 
 no_validator_keys: false
-ethstats_url: "ethstats.gcmergedevnet0.ethdevops.io"
-ethstats_password: "gcmergedevnet0"
+ethstats_url: "http://64.227.39.248:3000/"
 
 # Skip "propagate official prometheus and promtool binaries" step.
 # It freezes forever and when it works it's extremely slow.
@@ -169,6 +168,7 @@ cadvisor_port: 9280
 promtail_port: 9080
 public_execution_explorer: 3334
 public_beacon_explorer: 3333
+public_ethstats: 3000
 
 ##############################################
 # Command for JSON RPC snooper
@@ -236,6 +236,7 @@ firewall_allowed_tcp_ports:
   - 443
   - "{{public_execution_explorer}}"
   - "{{public_beacon_explorer}}"
+  - "{{public_ethstats}}"
 
 firewall_allowed_udp_ports:
   - 30303

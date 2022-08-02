@@ -8,3 +8,6 @@
 # Execution
 - import_playbook: ../../tasks/upload_execution_explorer_data.yml
 - import_playbook: ../../tasks/start_execution_explorer.yml
+
+- import_playbook: ../../setup_ethstats_server.yml
+

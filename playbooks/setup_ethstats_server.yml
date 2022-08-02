@@ -11,7 +11,7 @@
         restart_policy: unless-stopped
         network_mode: bridge
         published_ports:
-          - "3000:3000" # just the container port exposed within the host, for the nginx setup
+          - "{{ public_ethstats }}:{{ public_ethstats }}" # just the container port exposed within the host, for the nginx setup
         env:
           WS_SECRET: "{{ ethstats_secret }}"
           NODE_OPTIONS: "--max-old-space-size=4096"
