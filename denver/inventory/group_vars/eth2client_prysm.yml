@@ -47,8 +47,8 @@ beacon_start_args: >
   --genesis-state="/custom_config_data/genesis.ssz"
   --http-web3provider="{{execution_endpoint}}"
     {% if (bootnode_enrs is defined) and bootnode_enrs %}
-    {% for bootnode_enrs in bootnode_enrs %}
-    --bootstrap-node="{{ bootnode_enrs }}"
+    {% for bootnode_enr in bootnode_enrs %}
+    --bootstrap-node="{{ bootnode_enr }}"
     {% endfor %}
     {% endif %}
   --verbosity="{{ beacon_log_level | lower }}"
