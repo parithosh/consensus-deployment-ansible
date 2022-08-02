@@ -200,8 +200,11 @@ firewall_allowed_tcp_ports:
   - 9000
   - 80
   - 443
+  - 8080
+  - 8545
   - "{{public_execution_explorer}}"
   - "{{public_beacon_explorer}}"
+  - "{{public_ethstats}}"
 
 firewall_allowed_udp_ports:
   - 30303
