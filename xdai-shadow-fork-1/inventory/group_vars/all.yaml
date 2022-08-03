@@ -105,7 +105,7 @@ eth_metrics_exporter_name: "metrics-exporter"
 eth_metrics_exporter_image: samcm/ethereum-metrics-exporter:0.11.0
 
 no_validator_keys: false
-ethstats_url: "ethstats.gcmergedevnet0.ethdevops.io"
+ethstats_host: "ethstats.gcmergedevnet0.ethdevops.io"
 
 ##############################################
 # ports to configure

@@ -44,7 +44,7 @@ eth1_start_args: >
   --EthStats.Enabled={{ethstats_nethermind_enabled}}
   --EthStats.Name={{inventory_hostname}}
   --EthStats.Secret={{ethstats_password}}
-  --EthStats.Server=wss://{{ethstats_url}}/api/
+  --EthStats.Server=wss://{{ethstats_host}}/api/
   --Metrics.ExposePort={{eth1_metrics_port}}
   --Metrics.Enabled=true
   --Seq.MinLevel="Info"

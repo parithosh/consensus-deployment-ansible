@@ -1,5 +1,6 @@
 - name: Start execution node
   hosts: execution
+  serial: 1
   gather_facts: false
   tasks:
     - name: Start execution node container
