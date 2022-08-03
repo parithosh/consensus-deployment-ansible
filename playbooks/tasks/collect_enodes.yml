@@ -16,7 +16,7 @@
       when: groups.execution is defined
       with_items: "{{ groups['execution'] }}"
       set_fact:
-        execution_enodes: "{{ execution_enodes|default({}) | combine( {item: hostvars[item]['execution_enode']} ) }}"
+        execution_enodes: "{{ execution_enodes|default({}) | combine( {item: hostvars[item]['execution_enode'] | default('not_found')} ) }}"
     - name: Write enodes
       copy:
         content: "{{ execution_enodes.values() | list | to_nice_json }}"
