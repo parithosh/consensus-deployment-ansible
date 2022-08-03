@@ -144,7 +144,7 @@ eth_metrics_exporter_name: "metrics-exporter"
 eth_metrics_exporter_image: samcm/ethereum-metrics-exporter:0.11.0
 
 no_validator_keys: false
-ethstats_url: "http://64.227.39.248:3000"
+ethstats_host: "64.227.39.248:3000"
 ethstats_nethermind_enabled: true
 ethstats_besu_enabled: false
 ethstats_erigon_enabled: false
