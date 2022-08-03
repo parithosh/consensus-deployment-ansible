@@ -46,7 +46,7 @@ beacon_api_endpoint: "http://127.0.0.1:{{beacon_api_port}}"
 ##############################################
 testnet_type: custom
 eth2_network_name: chiado
-chainID: 100102
+chainID: 100100
 
 # 0xfffffffffffffffffffffffffffffffe difficulty / block
 terminal_total_difficulty: "115792089237316195423570985008687907853269984665640564039457584007913129639935"

@@ -1,5 +1,5 @@
 stepDuration: 5
-networkID: 100101
+networkID: 100100
 ownerAddress: "0xb05590839d9472159a9eef2bd81c694fd84fff3b"
 miningAddresses:
   - "0xaaa0611623f27b169557d178da5d9cd3e1044ce1"

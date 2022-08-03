@@ -28,7 +28,7 @@
     }
   },
   "params": {
-    "networkID": 100102,
+    "networkID": 100100,
     "gasLimitBoundDivisor": "0x400",
     "maximumExtraDataSize": "0x20",
     "minGasLimit": "0x1388",
