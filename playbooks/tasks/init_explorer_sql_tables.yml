@@ -1,5 +1,5 @@
 - name: Init explorer sql tables
-  hosts: explorer
+  hosts: explorer_beacon
   gather_facts: false
   tasks:
     - name: Sleep for 15 seconds and continue with play
@@ -10,15 +10,15 @@
       docker_container:
         name: "postgres_tmp"
         state: started
-        image: "{{ explorer_postgres_image_name }}"
+        image: "{{ explorer_beacon_postgres_image_name }}"
         pull: true
         restart_policy: no
         auto_remove: false
         detach: no
         network_mode: host
-        volumes: "{{ explorer_postgres_init_volumes }}"
-        command: "{{ explorer_postgres_init_args }}"
+        volumes: "{{ explorer_beacon_postgres_init_volumes }}"
+        command: "{{ explorer_beacon_postgres_init_args }}"
         env:
-          PGPASSWORD: "{{ explorer_postgres_password }}"
+          PGPASSWORD: "{{ explorer_beacon_postgres_password }}"
         log_options: "{{ common_log_options }}"
         log_driver: "{{ common_log_driver }}"

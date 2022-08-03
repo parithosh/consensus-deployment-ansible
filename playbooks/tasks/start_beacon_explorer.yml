@@ -1,18 +1,18 @@
-- name: Start explorer
-  hosts: explorer
+- name: Start beacon explorer
+  hosts: explorer_beacon
   gather_facts: false
   tasks:
-    - name: Start Eth2 explorer
+    - name: Start beacon explorer
       docker_container:
-        name: "{{ beacon_explorer_container_name }}"
+        name: "{{ explorer_beacon_container_name }}"
         state: started
-        image: "{{ beacon_explorer_image_name }}"
+        image: "{{ explorer_beacon_image_name }}"
         pull: true
         restart_policy: unless-stopped
         network_mode: host
         restart: "{{ explorer_require_restart | default(false) }}"
-        memory: "{{explorer_memory}}"
-        command: "{{ beacon_explorer_start_args }}"
-        volumes: "{{beacon_explorer_volumes}}"
+        memory: "{{ explorer_beacon_memory }}"
+        command: "{{ explorer_beacon_start_args }}"
+        volumes: "{{explorer_beacon_volumes}}"
         log_options: "{{ common_log_options }}"
         log_driver: "{{ common_log_driver }}"

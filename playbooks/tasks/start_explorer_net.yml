@@ -1,5 +1,5 @@
 - name: Start explorer docker net
-  hosts: "explorer"
+  hosts: explorer_beacon, explorer_execution
   gather_facts: true
   tasks:
     # postgres on 172.1.1.100

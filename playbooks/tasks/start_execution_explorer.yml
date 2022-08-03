@@ -1,19 +1,19 @@
 - name: Start execution explorer
-  hosts: explorer
+  hosts: explorer_execution
   gather_facts: false
   tasks:
     - name: Start execution explorer
       docker_container:
-        name: "{{ execution_explorer_container_name }}"
+        name: "{{ explorer_execution_container_name }}"
         state: started
-        image: "{{ execution_explorer_image_name }}"
+        image: "{{ explorer_execution_image_name }}"
         pull: true
         restart_policy: unless-stopped
         network_mode: host
         restart: "{{ explorer_require_restart | default(false) }}"
-        memory: "{{explorer_memory}}"
-        command: "{{ execution_explorer_start_args }}"
-        volumes: "{{execution_explorer_volumes}}"
-        env_file: "{{explorer_host_dir}}/blockscout.env"
+        memory: "{{ explorer_execution_memory }}"
+        command: "{{ explorer_execution_start_args }}"
+        volumes: "{{ explorer_execution_volumes }}"
+        env_file: "{{explorer_execution_host_dir}}/blockscout.env"
         log_options: "{{ common_log_options }}"
         log_driver: "{{ common_log_driver }}"

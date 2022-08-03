@@ -1,0 +1,37 @@
+# Execution explorer only needs to connect to an execution node
+explorer_source_node_execution_ip_address: "127.0.0.1"
+
+explorer_docker_network_name: explorernet
+explorer_execution_container_name: blockscout
+explorer_execution_memory: 9000m
+explorer_execution_image_name: "skylenet/blockscout:v4.0.0-beta"
+
+# Paths
+explorer_execution_host_dir: "{{home_dir}}/explorer_execution_data"
+explorer_execution_postgres_host_dir: "{{home_dir}}/explorer_execution_postgres_data"
+
+# Blockscout explorer
+
+explorer_execution_genesis_host_path: "{{explorer_execution_host_dir}}/genesis.json"
+explorer_execution_genesis_cont_path: /data/genesis.json
+explorer_execution_volumes:
+  - "{{explorer_execution_host_dir}}:/data"
+explorer_execution_start_args: 'sh -c "echo $DATABASE_URL &&
+  mix do ecto.create, ecto.migrate &&
+  exec mix phx.server" '
+
+# Postgress dedicated to blockscout
+
+explorer_execution_postgres_container_name: postgres_explorer_execution
+explorer_execution_postgres_image_name: "postgres:12.0"
+explorer_execution_postgres_memory: 9000m
+explorer_execution_postgres_port: "5432"
+explorer_execution_postgres_ip: "127.0.0.1"
+explorer_execution_postgres_user: postgres
+explorer_execution_postgres_volumes:
+  - "{{explorer_execution_postgres_host_dir}}:/postgresql/data"
+explorer_execution_postgres_start_args: "-i -h {{explorer_execution_postgres_ip}}"
+explorer_execution_postgres_init_volumes:
+  - "{{explorer_execution_host_dir}}:/src"
+# Set in secrets.yaml
+# explorer_execution_postgres_password: "{{ lookup('pipe', 'keybase fs read /keybase/team/ethereum.devops/eth2/merge-devnets/merge-devnet-3/explorer-postgres') }}"

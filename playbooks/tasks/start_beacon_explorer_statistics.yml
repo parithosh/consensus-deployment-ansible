@@ -1,0 +1,17 @@
+- name: Start beacon explorer statistics
+  hosts: explorer_beacon
+  gather_facts: false
+  tasks:
+    - name: Start beacon explorer statistics
+      docker_container:
+        name: "{{ explorer_beacon_stats_container_name }}"
+        state: started
+        image: "{{ explorer_beacon_image_name }}"
+        pull: true
+        restart_policy: unless-stopped
+        network_mode: host
+        restart: "{{ explorer_beacon_stats_require_restart | default(false) }}"
+        command: "{{ explorer_beacon_stats_start_args }}"
+        volumes: "{{explorer_beacon_stats_volumes}}"
+        log_options: "{{ common_log_options }}"
+        log_driver: "{{ common_log_driver }}"

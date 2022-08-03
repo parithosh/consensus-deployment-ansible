@@ -1,0 +1,52 @@
+# Beacon explorer needs to connect to both execution node and consensus node
+explorer_source_node_execution_ip_address: "127.0.0.1"
+explorer_source_node_consensus_ip_address: "127.0.0.1"
+
+explorer_docker_network_name: explorernet
+explorer_beacon_container_name: explorer
+explorer_beacon_memory: 9000m
+explorer_beacon_image_name: "parithoshj/beacon-explorer:print-chain-id"
+
+# Paths
+explorer_beacon_host_dir: "{{home_dir}}/explorer_beacon_data"
+explorer_beacon_postgres_host_dir: "{{home_dir}}/explorer_beacon_postgres_data"
+
+# beaconcha.in explorer
+
+explorer_beacon_postgres_init_args: >
+  psql
+  -f /src/tables.sql
+  -d db
+  -h {{explorer_beacon_postgres_ip}}
+  -p {{explorer_beacon_postgres_port}}
+  -U {{explorer_beacon_postgres_user}}
+
+explorer_beacon_config_host_path: "{{explorer_beacon_host_dir}}/eth2_config.yaml"
+explorer_beacon_config_cont_path: /data/eth2_config.yaml
+explorer_beacon_volumes:
+  - "{{explorer_beacon_host_dir}}:/data"
+explorer_beacon_start_args: "./explorer --config=/data/config.yaml"
+
+# Stats to support explorer
+
+explorer_beacon_stats_container_name: explorerstats
+explorer_beacon_stats_volumes:
+  - "{{explorer_beacon_host_dir}}:/data"
+explorer_beacon_stats_start_args: "./statistics --config=/data/config.yaml"
+explorer_beacon_extra_args: "--slots-per-archive-point=64"
+
+# Postgress dedicated to beacon explorer
+
+explorer_beacon_postgres_container_name: postgres_explorer_beacon
+explorer_beacon_postgres_image_name: "postgres:12.0"
+explorer_beacon_postgres_memory: 9000m
+explorer_beacon_postgres_port: "5432"
+explorer_beacon_postgres_ip: "127.0.0.1"
+explorer_beacon_postgres_user: postgres
+explorer_beacon_postgres_volumes:
+  - "{{explorer_beacon_postgres_host_dir}}:/postgresql/data"
+explorer_beacon_postgres_start_args: "-i -h {{explorer_beacon_postgres_ip}}"
+explorer_beacon_postgres_init_volumes:
+  - "{{explorer_beacon_host_dir}}:/src"
+# Set in secrets.yaml
+# explorer_beacon_postgres_password: "{{ lookup('pipe', 'keybase fs read /keybase/team/ethereum.devops/eth2/merge-devnets/merge-devnet-3/explorer-postgres') }}"

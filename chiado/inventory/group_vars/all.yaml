@@ -76,6 +76,8 @@ mnemonic_0: "{{chiado_mnemonics[0].mnemonic}}"
 
 # Note: 0 is correct, but due to an underflow bug (being fixed), doesn't work.
 eth1_deposit_contract_first_block: 1
+# Block from which to start indexing. Set to a higher value for shadow-forks
+explorer_execution_first_block: 1
 
 ##############################################
 # metric information
@@ -137,8 +139,9 @@ eth1_metrics_port: 8002
 eth_metrics_exporter_port: 8003
 cadvisor_port: 9280
 promtail_port: 9080
-public_execution_explorer: 3334
-public_beacon_explorer: 3333
+explorer_execution_public_port: 3334
+explorer_beacon_public_port: 3333
+public_ethstats: 3000
 
 ##############################################
 # Command for JSON RPC snooper
@@ -206,8 +209,8 @@ firewall_allowed_tcp_ports:
   - 443
   - 8080
   - 8545
-  - "{{public_execution_explorer}}"
-  - "{{public_beacon_explorer}}"
+  - "{{explorer_execution_port}}"
+  - "{{explorer_beacon_public_port}}"
   - "{{public_ethstats}}"
 
 firewall_allowed_udp_ports:
