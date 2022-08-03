@@ -1,9 +1,9 @@
 - name: Start execution node
   hosts: execution
-  serial: 1
   gather_facts: false
   tasks:
     - name: Start execution node container
+      when: disable_prunning is defined and disable_prunning
       docker_container:
         name: "{{ execution_container_name }}"
         state: started
