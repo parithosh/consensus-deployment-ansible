@@ -2,7 +2,9 @@
 
 Quick links:
 
-- **Chiado testnet**: [Guides and how to get keys](chiado/README.md), [config files](chiado/custom_config_data)
+- **Chiado testnet**
+  - [Guides and how to get keys](chiado/README.md)
+  - [Genesis and config files](chiado/custom_config_data)
 
 ## General information
 

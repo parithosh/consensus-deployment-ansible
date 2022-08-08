@@ -16,18 +16,18 @@ eth1_data:
   block_hash: 0x203e164cf3b6f6765abf2f0355a4d09e5eaf6a777243bc4407b569431cd95cb3
 ```
 
-All config files available [here](chiado/custom_config_data)
+All config files available [here](custom_config_data)
 
 Consensus layer files:
 
-- [nethermind_genesis.json](chiado/custom_config_data/nethermind_genesis.json)
-- [bootnodes_execution.txt](chiado/custom_config_data/bootnodes_execution.txt)
+- [nethermind_genesis.json](custom_config_data/nethermind_genesis.json)
+- [bootnodes_execution.txt](custom_config_data/bootnodes_execution.txt)
 
 Execution layer files:
 
-- [config.yaml](chiado/custom_config_data/config.yaml)
-- [chiado/custom_config_data/genesis.ssz](chiado/custom_config_data/genesis.ssz)
-- [bootnodes_consensus.txt](chiado/custom_config_data/bootnodes_consensus.txt)
+- [config.yaml](custom_config_data/config.yaml)
+- [genesis.ssz](custom_config_data/genesis.ssz)
+- [bootnodes_consensus.txt](custom_config_data/bootnodes_consensus.txt)
 
 # Guides to run clients
 
