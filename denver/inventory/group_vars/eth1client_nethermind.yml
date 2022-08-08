@@ -51,6 +51,9 @@ eth1_start_args: >
   --Seq.MinLevel="Info"
   --Seq.ServerUrl="https://seq.nethermind.io/"
   --Seq.ApiKey="{{nethermind_seq_api_key}}"
+  --Metrics.NodeName={{inventory_hostname}}
+  --Metrics.PushGatewayUrl="{{nethermind_push_gateway_url}}"
+  --Metrics.IntervalSeconds=5
   {% if mining_keyi is defined %}
   --Init.IsMining=true
   --Mining.Enabled=true
