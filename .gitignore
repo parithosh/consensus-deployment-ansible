@@ -1,6 +1,7 @@
 external_roles/
 !external_roles/ansible-haproxy
 
+mnemonic_keys
 secret.sh
 validator_prep
 *.tar.gz
