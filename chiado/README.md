@@ -71,11 +71,11 @@ All config files available [here](custom_config_data)
 
 Consensus layer files:
 
-- [nethermind_genesis.json](custom_config_data/nethermind_genesis.json)
-- [bootnodes_execution.txt](custom_config_data/bootnodes_execution.txt)
-
-Execution layer files:
-
 - [config.yaml](custom_config_data/config.yaml)
 - [genesis.ssz](custom_config_data/genesis.ssz)
 - [bootnodes_consensus.txt](custom_config_data/bootnodes_consensus.txt)
+
+Execution layer files:
+
+- [nethermind_genesis.json](custom_config_data/nethermind_genesis.json)
+- [bootnodes_execution.txt](custom_config_data/bootnodes_execution.txt)
