@@ -1,9 +1,13 @@
-# Testnet ansible files + Config
+# Gnosis chain testnet deployments
+
+Quick links:
+
+- **Chiado testnet**: [Guides and how to get keys](chiado/README.md), [config files](chiado/custom_config_data)
+
+## General information
 
 This repository is a minimal set of playbooks and inventories required to set up the merge devnets consisting of execution and
 consensus nodes.
-
-## General information
 
 - General folder structure: All testnet relevant configs are under the testnet names. Generic config variables are set under
   `<name>-testnet/inventory/group_vars/all.yaml`. Client specific variables are set under e.g `<name>-testnet/inventory/group_vars/eth2client_xxxxxx.yaml`.
