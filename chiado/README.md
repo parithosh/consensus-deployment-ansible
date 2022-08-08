@@ -1,35 +1,19 @@
 # Chiado testnet
 
+Chiado testnet is meant to prepare the staking community of the Gnosis Beacon Chain for the upcoming merge.
+
 - TTD: `70560951604725799783765358597051456327101440`. Projected for Aug 15th ~16h UTC (207360 blocks)
-- Conensus layer genesis: `1660132800` Aug 10 2022 12:00:00 GMT+0000
+- Conensus layer genesis: `1660132800` Aug 10 2022 12:00:00 GMT+0000, root `0x71eb8c2b9d7ad58733bfdd1008e7a35f70303833f1ac308fd53d1b4799f15db7`
 - Altair fork: epoch 90 (2h after CL genesis)
 - Bellatrix fork: epoch 180 (4h after CL genesis)
 
-```yaml
-genesis_time: 1660132800
-genesis_state_root: 0x71eb8c2b9d7ad58733bfdd1008e7a35f70303833f1ac308fd53d1b4799f15db7
-genesis_validators_count: 70000
+# How to run a staking validator
 
-eth1_data:
-  deposit_root: 0xd70a234731285c6804c2a4f56711ddb8c82c99740f207854891028af34e27e5e
-  deposit_count: 0
-  block_hash: 0x203e164cf3b6f6765abf2f0355a4d09e5eaf6a777243bc4407b569431cd95cb3
-```
+All existing guides for running validators in Ethereum merge testnets apply.
 
-All config files available [here](custom_config_data)
+## Pre-bundled clients
 
-Consensus layer files:
-
-- [nethermind_genesis.json](custom_config_data/nethermind_genesis.json)
-- [bootnodes_execution.txt](custom_config_data/bootnodes_execution.txt)
-
-Execution layer files:
-
-- [config.yaml](custom_config_data/config.yaml)
-- [genesis.ssz](custom_config_data/genesis.ssz)
-- [bootnodes_consensus.txt](custom_config_data/bootnodes_consensus.txt)
-
-# Guides to run clients
+We have bundled the Chiado genesis and config files into custom docker images so you don't have to worry about importing them. Check repo's below for dockerhub image tags + guides and how configure them
 
 Execution clients
 
@@ -42,7 +26,7 @@ Consensus clients
 - [gnosischain/prysm-client](https://github.com/gnosischain/prysm-client)
 - [gnosischain/teku-client](https://github.com/gnosischain/teku-client)
 
-# Key distribution
+## Getting staking keys
 
 Keystores already part of the genesis state will be distribute **on demand** to anyone that requests them. To request:
 
@@ -69,3 +53,29 @@ Keystores already part of the genesis state will be distribute **on demand** to 
 | 67000 - 68000 | chiado_mnemonic_13 | borrow   | -                                 |
 | 68000 - 69000 | chiado_mnemonic_14 | amount   | external - Open distr by dapplion |
 | 69000 - 70000 | chiado_mnemonic_15 | jump     | external - Open distr by DAppNode |
+
+# Testnet data
+
+```yaml
+genesis_time: 1660132800
+genesis_state_root: 0x71eb8c2b9d7ad58733bfdd1008e7a35f70303833f1ac308fd53d1b4799f15db7
+genesis_validators_count: 70000
+
+eth1_data:
+  deposit_root: 0xd70a234731285c6804c2a4f56711ddb8c82c99740f207854891028af34e27e5e
+  deposit_count: 0
+  block_hash: 0x203e164cf3b6f6765abf2f0355a4d09e5eaf6a777243bc4407b569431cd95cb3
+```
+
+All config files available [here](custom_config_data)
+
+Consensus layer files:
+
+- [nethermind_genesis.json](custom_config_data/nethermind_genesis.json)
+- [bootnodes_execution.txt](custom_config_data/bootnodes_execution.txt)
+
+Execution layer files:
+
+- [config.yaml](custom_config_data/config.yaml)
+- [genesis.ssz](custom_config_data/genesis.ssz)
+- [bootnodes_consensus.txt](custom_config_data/bootnodes_consensus.txt)
