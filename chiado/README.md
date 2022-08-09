@@ -26,6 +26,17 @@ Consensus clients
 - [gnosischain/prysm-client](https://github.com/gnosischain/prysm-client)
 - [gnosischain/teku-client](https://github.com/gnosischain/teku-client)
 
+## DAppNode Packages
+
+Execution clients
+
+- Nethermind ([repo](https://github.com/dappnode/DAppNodePackage-Chiado-Nethermind)) - install link http://my.dappnode/#/installer/%2Fipfs%2FQmZ38eZ2yWUndyUf4xwzDQChMkcN7D55peiR3dfVcvHnnY
+
+Consensus clients
+
+- Lighthouse ([repo](https://github.com/dappnode/DAppNodePackage-lighthouse-chiado)) - install link http://my.dappnode/#/installer/%2Fipfs%2FQmSHWFcsanJUCKGwJb3FYuygtu2wVkGmwXY2CQDs2mHX67
+- Teku ([repo](https://github.com/dappnode/DAppNodePackage-teku-chiado)) - install link http://my.dappnode/#/installer/%2Fipfs%2FQmPGjRAyAsLPNM1jrpu1kQxj6gcRy5aDLw8jcnxNQSuThD
+
 ## Getting staking keys
 
 Keystores already part of the genesis state will be distribute **on demand** to anyone that requests them. To request:
