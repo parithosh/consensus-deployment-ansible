@@ -39,7 +39,7 @@ Keystores already part of the genesis state will be distribute **on demand** to 
 | ------------- | ------------------ | -------- | --------------------------------- |
 | 00000 - 10000 | chiado_mnemonic_00 | multiply | external - Stakewise              |
 | 10000 - 20000 | chiado_mnemonic_01 | pilot    | external - Stakewise              |
-| 20000 - 30000 | chiado_mnemonic_02 | arctic   | -                                 |
+| 20000 - 30000 | chiado_mnemonic_02 | arctic   | external - Kleros.io              |
 | 30000 - 40000 | chiado_mnemonic_03 | discover | -                                 |
 | 40000 - 50000 | chiado_mnemonic_04 | sentence | -                                 |
 | 50000 - 60000 | chiado_mnemonic_05 | rural    | -                                 |
