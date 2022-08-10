@@ -99,6 +99,21 @@ keystores_password: "{{denver_keystores_password}}"
 # Genesis. chiado_mnemonics is stored in `denver/inventory/group_vars/secrets.yaml`
 genesis_mnemonics: "{{chiado_mnemonics}}"
 mnemonic_0: "{{chiado_mnemonics[0].mnemonic}}"
+mnemonic_1: "{{chiado_mnemonics[1].mnemonic}}"
+mnemonic_2: "{{chiado_mnemonics[2].mnemonic}}"
+mnemonic_3: "{{chiado_mnemonics[3].mnemonic}}"
+mnemonic_4: "{{chiado_mnemonics[4].mnemonic}}"
+mnemonic_5: "{{chiado_mnemonics[5].mnemonic}}"
+mnemonic_6: "{{chiado_mnemonics[6].mnemonic}}"
+mnemonic_7: "{{chiado_mnemonics[7].mnemonic}}"
+mnemonic_8: "{{chiado_mnemonics[8].mnemonic}}"
+mnemonic_9: "{{chiado_mnemonics[9].mnemonic}}"
+mnemonic_10: "{{chiado_mnemonics[10].mnemonic}}"
+mnemonic_11: "{{chiado_mnemonics[11].mnemonic}}"
+mnemonic_12: "{{chiado_mnemonics[12].mnemonic}}"
+mnemonic_13: "{{chiado_mnemonics[13].mnemonic}}"
+mnemonic_14: "{{chiado_mnemonics[14].mnemonic}}"
+mnemonic_15: "{{chiado_mnemonics[15].mnemonic}}"
 
 # Note: 0 is correct, but due to an underflow bug (being fixed), doesn't work.
 eth1_deposit_contract_first_block: 1
