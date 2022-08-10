@@ -81,7 +81,7 @@ genesis_validators_count: 70000
 eth1_data:
   deposit_root: 0xd70a234731285c6804c2a4f56711ddb8c82c99740f207854891028af34e27e5e
   deposit_count: 0
-  block_hash: 0x203e164cf3b6f6765abf2f0355a4d09e5eaf6a777243bc4407b569431cd95cb3
+  block_hash: 0x0000000000000000000000000000000000000000000000000000000000000000
 ```
 
 All config files available [here](custom_config_data)
