@@ -37,6 +37,10 @@ Consensus clients
 - Lighthouse ([repo](https://github.com/dappnode/DAppNodePackage-lighthouse-chiado)) - install link http://my.dappnode/#/installer/%2Fipfs%2FQmSHWFcsanJUCKGwJb3FYuygtu2wVkGmwXY2CQDs2mHX67
 - Teku ([repo](https://github.com/dappnode/DAppNodePackage-teku-chiado)) - install link http://my.dappnode/#/installer/%2Fipfs%2FQmPGjRAyAsLPNM1jrpu1kQxj6gcRy5aDLw8jcnxNQSuThD
 
+Web3Signer package to add keys
+
+- Web3Signer ([repo](https://github.com/dappnode/DAppNodePackage-web3signer-chiado)) - install link http://my.dappnode/#/installer/%2Fipfs%2FQmQ3nAB7zKAsjZzf5cN6kg8Xm1upzyQbnFyW8oqLRwUYyE
+
 ## Getting staking keys
 
 Keystores already part of the genesis state will be distribute **on demand** to anyone that requests them. To request:
