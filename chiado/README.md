@@ -46,24 +46,26 @@ Keystores already part of the genesis state will be distribute **on demand** to 
 - Join DAppNode discord ([invite](https://discord.gg/c28an8dA5k)) and request in the #gnosis-beacon-chain channel
 - Join Gnosis Chain discord ([invite](https://discord.com/invite/3CtNAqVMRV)) and request there
 
-| Index range   | mnemonic           | first    | hosts, clients                    |
-| ------------- | ------------------ | -------- | --------------------------------- |
-| 00000 - 10000 | chiado_mnemonic_00 | multiply | external - Stakewise              |
-| 10000 - 20000 | chiado_mnemonic_01 | pilot    | external - Stakewise              |
-| 20000 - 30000 | chiado_mnemonic_02 | arctic   | external - Kleros.io              |
-| 30000 - 40000 | chiado_mnemonic_03 | discover | external - Gateway                |
-| 40000 - 50000 | chiado_mnemonic_04 | sentence | -                                 |
-| 50000 - 60000 | chiado_mnemonic_05 | rural    | -                                 |
-| 60000 - 61000 | chiado_mnemonic_06 | clerk    | external - Stakewise              |
-| 61000 - 62000 | chiado_mnemonic_07 | region   | external - Stakewise              |
-| 62000 - 63000 | chiado_mnemonic_08 | situate  | -                                 |
-| 63000 - 64000 | chiado_mnemonic_09 | carry    | -                                 |
-| 64000 - 65000 | chiado_mnemonic_10 | remove   | -                                 |
-| 65000 - 66000 | chiado_mnemonic_11 | unknown  | -                                 |
-| 66000 - 67000 | chiado_mnemonic_12 | rice     | -                                 |
-| 67000 - 68000 | chiado_mnemonic_13 | borrow   | -                                 |
-| 68000 - 69000 | chiado_mnemonic_14 | amount   | external - Open distr by dapplion |
-| 69000 - 70000 | chiado_mnemonic_15 | jump     | external - Open distr by DAppNode |
+| Index range   | mnemonic           | first    | hosts, clients                                                           |
+| ------------- | ------------------ | -------- | ------------------------------------------------------------------------ |
+| 00000 - 10000 | chiado_mnemonic_00 | multiply | external - Stakewise                                                     |
+| 10000 - 20000 | chiado_mnemonic_01 | pilot    | external - Stakewise                                                     |
+| 20000 - 30000 | chiado_mnemonic_02 | arctic   | external - Kleros.io                                                     |
+| 30000 - 40000 | chiado_mnemonic_03 | discover | external - Gateway                                                       |
+| 40000 - 50000 | chiado_mnemonic_04 | sentence | local - chiado-lighthouse-nethermind-{00:09}                             |
+| 50000 - 60000 | chiado_mnemonic_05 | rural    | local - chiado-prysm-nethermind-{00:09}                                  |
+| 60000 - 61000 | chiado_mnemonic_06 | clerk    | external - Stakewise                                                     |
+| 61000 - 62000 | chiado_mnemonic_07 | region   | external - Stakewise                                                     |
+| 62000 - 63000 | chiado_mnemonic_08 | situate  | local - denver-teku-nethermind-00                                        |
+| 63000 - 64000 | chiado_mnemonic_09 | carry    | local - denver-teku-nethermind-01                                        |
+| 64000 - 65000 | chiado_mnemonic_10 | remove   | local - denver-teku-nethermind-02                                        |
+| 65000 - 66000 | chiado_mnemonic_11 | unknown  | local - denver-teku-nethermind-03                                        |
+| 66000 - 67000 | chiado_mnemonic_12 | rice     | local - denver-teku-nethermind-04                                        |
+| 67000 - 68000 | chiado_mnemonic_13 | borrow   | local - denver-lodestar-nethermind-00                                    |
+| 68000 - 69000 | chiado_mnemonic_14 | amount   | external - Open distr by dapplion / \*else denver-lodestar-nethermind-00 |
+| 69000 - 70000 | chiado_mnemonic_15 | jump     | external - Open distr by DAppNode / \*else denver-lodestar-nethermind-01 |
+
+_\*else: keys not assigned already in the open distribution_
 
 # Testnet data
 
