@@ -249,7 +249,8 @@ firewall_allowed_tcp_ports:
   - 80
   - 443
   - 8080
-  - 8545
+  - "{{eth1_rpc_port}}"
+  - "{{eth1_metrics_port}}"
   - "{{explorer_execution_public_port}}"
   - "{{explorer_beacon_public_port}}"
   - "{{public_ethstats}}"
