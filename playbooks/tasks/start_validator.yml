@@ -1,6 +1,6 @@
 - name: Start validator client
   hosts: validator
-  gather_facts: true
+  gather_facts: false
   tasks:
     - name: Start Eth2 validator client container
       docker_container:
