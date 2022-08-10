@@ -63,6 +63,10 @@ eth1_start_args: >
   --KeyStore.KeyStoreDirectory=/networkdata/miner_keystores
   --KeyStore.UnlockAccounts={{mining_addresses[mining_keyi]}}
   {% endif %}
+  {% if (prunning_none is defined) and prunning_none %}
+  --Pruning.Mode=None
+  {% endif %}
+  --Sync.FastSync=true
 
 # run as root, the nethermind image doesn't handle running regular user well
 eth1_user_id: "0:0"
