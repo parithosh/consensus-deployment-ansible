@@ -31,7 +31,7 @@ eth1_start_args: >
   --Init.WebSocketsEnabled=true
   --Merge.TerminalTotalDifficulty={{terminal_total_difficulty}}
   --JsonRpc.Enabled=true
-  --JsonRpc.EnabledModules="net,eth,consensus,subscribe,web3,admin,txpool,debug"
+  --JsonRpc.EnabledModules="net,eth,consensus,subscribe,web3,admin,txpool,debug,tracing,parity"
   --JsonRpc.Port={{eth1_rpc_port}}
   --JsonRpc.WebSocketsPort={{eth1_ws_rpc_port}}
   --JsonRpc.Host=0.0.0.0
