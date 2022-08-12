@@ -1,0 +1,114 @@
+---
+# DOCKER 
+- name: Install node exporter agent
+  hosts: all
+  become: yes
+  gather_facts: false
+  tasks:
+    - name: update apt packages
+      apt:
+        update_cache: yes
+      become: yes 
+    
+    - name: Install required system packages
+      apt: name={{ item }} state=latest update_cache=yes
+      loop:
+        [
+          "apt-transport-https",
+          "ca-certificates",
+          "curl",
+          "software-properties-common",
+          "python3-pip",
+          "virtualenv",
+          "python3-setuptools",
+        ]
+      become: yes
+
+    - name: Add Docker repository key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+        validate_certs: yes
+      become: yes
+
+    - name: Get release
+      command: lsb_release -cs
+      register: lsb_release
+
+    - name: Add Docker repository
+      apt_repository:
+        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu "{{ lsb_release.stdout }}" stable
+        state: present
+        update_cache: yes
+        mode: 0644
+        validate_certs: yes
+      become: yes
+
+    - name: Install Docker
+      apt:
+        name: docker-ce
+        state: present
+      become: yes
+
+    - name: Install Docker Module for Python
+      pip:
+        name: docker
+
+    - name: Add user to the docker group
+      user:
+        name: "{{ ansible_user }}"
+        groups: docker
+        append: yes
+      become: yes
+      register: dockeruseradded
+
+    - name: reset ssh connection
+      meta: reset_connection
+
+    - name: Configures cron job to remove unused images
+      cron:
+        name: "remove unused docker images"
+        hour: "12"
+        minute: "0"
+        job: "bash -c 'docker rmi -f $(docker images -q)  || true'"
+      become: yes
+
+    - name: Configures cron job to remove unused containers
+      cron:
+        name: "remove unused docker containers"
+        hour: "*/2"
+        minute: "0"
+        job: "bash -c 'docker rm $(docker ps -qa)  || true'"
+      become: yes
+
+    - name: Configures cron job to remove unused docker stuff
+      cron:
+        name: "remove unused docker unused stuffs"
+        hour: "*/2  "
+        minute: "0"
+        job: "bash -c 'docker system prune -f --all --volumes  || true'"
+      become: yes
+
+    - name: Ensures docker is started
+      systemd:
+        name: docker
+        state: started
+        enabled: yes
+      become: yes
+
+    - name: Run a docker command
+      command: docker ps
+      register: dockerps
+
+    - name: assert
+      assert:
+        that:
+          - "'while trying to connect to the Docker daemon' not in dockerps.stderr"
+
+    - name: Install Docker Compose
+      pip:
+        name: docker-compose
+      become: yes
+
+    - name: Unconditionally reboot the machine with all defaults
+      reboot:
