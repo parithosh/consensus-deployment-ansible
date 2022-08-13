@@ -1,0 +1,30 @@
+# docker rm -f beacon validator
+# rm -rf beacon validator
+# Upload keys
+# Start beacon
+# Start validator
+
+- name: Stop beacon node
+  hosts: beacon
+  gather_facts: false
+  tasks:
+    - name: rm beacon node container
+      shell: "docker rm -f {{beacon_container_name}}"
+    - name: rm beacon dir
+      shell: "rm -f beacon"
+      become: true
+
+- name: Stop validator client
+  hosts: validator
+  gather_facts: false
+  tasks:
+    - name: rm validator client container
+      shell: "docker rm -f {{validator_container_name}}"
+    - name: rm validator dir
+      shell: "rm -f validator"
+      become: true
+
+- import_playbook: tasks/generate_eth2_keys.yml
+- import_playbook: tasks/start_beacon.yml
+- import_playbook: tasks/start_validator.yml
+  when: separate_validator_process_enabled
