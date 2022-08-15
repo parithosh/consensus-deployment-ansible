@@ -158,6 +158,7 @@ ethstats_nethermind_enabled: true
 ethstats_besu_enabled: false
 ethstats_erigon_enabled: false
 ethstats_geth_enabled: false
+ethstats_password: "ethstats_chiado"
 
 # Skip "propagate official prometheus and promtool binaries" step.
 # It freezes forever and when it works it's extremely slow.

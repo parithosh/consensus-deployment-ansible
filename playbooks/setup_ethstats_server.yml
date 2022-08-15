@@ -9,11 +9,12 @@
         image: "{{ ethstats_image_name }}"
         pull: true
         restart_policy: unless-stopped
-        network_mode: bridge
-        published_ports:
-          - "{{ public_ethstats }}:{{ public_ethstats }}" # just the container port exposed within the host, for the nginx setup
+        network_mode: host
+        #published_ports:
+        #  - "{{ public_ethstats }}:{{ public_ethstats }}" # just the container port exposed within the host, for the nginx setup
         env:
           WS_SECRET: "{{ ethstats_secret }}"
           NODE_OPTIONS: "--max-old-space-size=4096"
+          BEACON_ADDR: "0.0.0.0:3000"
         log_options: "{{ common_log_options }}"
         log_driver: "{{ common_log_driver }}"
