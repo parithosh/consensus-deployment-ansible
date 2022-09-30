@@ -1,0 +1,136 @@
+##############################################
+# generic ansible config information
+##############################################
+ansible_user: "devops"
+bootstrap_user: "devops"
+
+github_user_pubkeys:
+  - parithosh
+  - protolambda
+  - ralexstokes
+  - djrtwo
+  - skylenet
+
+ansible_python_interpreter: /usr/bin/python3
+oh_my_zsh_config:
+  PROMPT: "%{$fg[yellow]%}%n%{$fg[white]%}@%{$fg[red]%}%m%{$reset_color%} ${PROMPT}"
+
+##############################################
+# eth1 endpoints
+##############################################
+# nimbus requires a websocket endpoint (http support unstable)
+# note: also used for execution engine endpoint in nimbus
+consensus_endpoint_nimbus: ws://127.0.0.1:8546
+# lighthouse uses this
+execution_engine_endpoint: http://127.0.0.1:8545
+
+eth1endpoint: http://127.0.0.1:8545
+
+# Merge Engine endpoints
+# TODO change IP?
+# TODO: some engines might start using the 8550 port (or 8551 for ws)
+
+##############################################
+# testnet specific information
+##############################################
+testnet_type: custom
+eth2_network_name: goerli-shadow-fork
+chainID: 5
+terminal_total_difficulty: "9149384"
+
+# enter bootnodes here if needed
+bootnode_enrs:
+  - "enr:-Iq4QKuNB_wHmWon7hv5HntHiSsyE1a6cUTK1aT7xDSU_hNTLW3R4mowUboCsqYoh1kN9v3ZoSu_WuvW9Aw0tQ0Dxv6GAXxQ7Nv5gmlkgnY0gmlwhLKAlv6Jc2VjcDI1NmsxoQK6S-Cii_KmfFdUJL2TANL3ksaKUnNXvTCv1tLwXs0QgIN1ZHCCIyk"
+  - "enr:-L64QESYteGfjEpTmnnQDvQl6UI_WMUAEIn3oC_miMQVXzQQENWZwTKT3FeAgo1DUKu9p_EWmw4GByM8ggOraVK0WBqCAQqHYXR0bmV0c4j__________4RldGgykHHQNQYCABAg__________-CaWSCdjSCaXCEaPiNZolzZWNwMjU2azGhAs1UIGZrcQiv1zOlaM84DsXs67g5UqW-B9kPKl5QfHjNiHN5bmNuZXRzAIN0Y3CCIyiDdWRwgiMo"
+  - "enr:-L64QMp3KHe6E0B3zcV___10HBkNzJPU7p75UAiGIFp_h44Vb44lKjU5uw67bs2MImkS76tF4v1LYTlONw3LNYWqwBaCAUuHYXR0bmV0c4j__________4RldGgykHHQNQYCABAg__________-CaWSCdjSCaXCEzr03N4lzZWNwMjU2azGhA4QHmAG65extBHUlEhWWLp1dqf34LNS__hm2cnkkNpuziHN5bmNuZXRzAIN0Y3CCIyiDdWRwgiMo"
+  - "enr:-L64QA1iIbPH93nwUhyCTedIxEV9S-s15jBNqBUKr9_7MAUyDfp38Aq08QsPa6GKH86GdGjhiWOjai5invSvb_MtB0GCAUuHYXR0bmV0c4j__________4RldGgykHHQNQYCABAg__________-CaWSCdjSCaXCEaPiG04lzZWNwMjU2azGhAl0ZY8gHSSceBt7xmVXMUIaxbXzMzIxym8sajAV83_T9iHN5bmNuZXRzAIN0Y3CCIyiDdWRwgiMo"
+
+eth1_bootnode_enode:
+  - "enode://5d51b95d7aa2ebbafa0e82f3360ef8612a7db660cf4103b9b667715b9328ea4d5a44dfdb5d385d40aa471068d6196c58264a28d4b7863d0e6039d72d5933311c@77.190.163.236:30303"
+  - "enode://1438482e6cf2d4abeb31b212815b7b397b123cff69038dc09f9128af9417132ccc4191de8316f382d05021139b10f5f2ac20822f4ba3e056b0eb70c533de4369@206.189.55.55:30303"
+  - "enode://f763b6f87e3908e0f10e6ddf311a2fb4b9e1adba7ee13c9eeafc6fc73a2fd2a1cd5b7ccf9afd6d1807b17c4da8b03e513d62b9fbb4953942201f34c9581ad9e6@104.248.141.102:30303"
+  - "enode://2ffe8f75722d8223dbe5a97f6426fc2b432e837acb853879e3ef6b1706eb21c20e8a38fc305ab7229c417593201e9d43e42d7f66f8c564b7b4b8633dace481d1@104.248.134.211:30303"
+  - "enode://011f758e6552d105183b1761c5e2dea0111bc20fd5f6422bc7f91e0fabbec9a6595caf6239b37feb773dddd3f87240d99d859431891e4a642cf2a0a9e6cbb98a@51.141.78.53:30303"
+
+##############################################
+# metric information
+##############################################
+# enter pushgateway config if needed
+prometheus_config_file: "prometheus/prometheus.yml.j2"
+thanos_url: "http://thanos.ethdevops.io:19291/api/v1/receive/"
+push_metrics_enabled: true
+
+##############################################
+# ports to configure
+##############################################
+eth1_rpc_port: 8545
+eth1_ws_rpc_port: 8546
+nimbus_rpc_port: 4009
+beacon_api_port: 4000
+beacon_grpc_port: 4001
+beacon_metrics_port: 8000
+beacon_p2p_port: 9000
+validator_metrics_port: 8001
+validator_rpc_port: 4002
+node_exporter_web_listen_address: "0.0.0.0:9100"
+
+##############################################
+# name of the validator to display
+##############################################
+graffiti: "{{eth2_client_name}}-{{eth1_client_name}}"
+
+##############################################
+# local data directories
+##############################################
+local_explorerdata_host_dir: "{{inventory_dir}}/../explorerdata"
+local_explorerdata_host_archive: "{{inventory_dir}}/../explorerdata.tar.gz"
+local_forkmondata_host_dir: "{{inventory_dir}}/../forkmondata"
+local_forkmondata_host_archive: "{{inventory_dir}}/../forkmondata.tar.gz"
+local_custom_config_data_host_dir: "{{inventory_dir}}/../custom_config_data"
+local_custom_config_data_host_archive: "{{inventory_dir}}/../custom_config_data.tar.gz"
+# private dirs
+# Validator assignments
+local_validator_host_dir: "{{inventory_dir}}/../validator_prep/{{ansible_hostname}}"
+local_validator_host_archive: "{{inventory_dir}}/../validator_prep/{{ansible_hostname}}.tar.gz"
+
+##############################################
+# remote host data directories
+##############################################
+home_dir: "/home/{{ ansible_user }}"
+beacon_node_dir: "{{home_dir}}/beacon"
+validator_node_dir: "{{home_dir}}/validator"
+testnet_dir: "{{home_dir}}/custom_config_data"
+eth1_node_dir: "{{home_dir}}/eth1data"
+
+##############################################
+# common log config
+##############################################
+common_log_options:
+  max-file: "10"
+  max-size: 30m
+  mode: non-blocking
+  max-buffer-size: 4m
+common_log_driver: json-file
+beacon_log_level: info
+
+##############################################
+# container names
+##############################################
+beacon_container_name: beacon
+validator_container_name: validator
+hi_peer_count: 10
+separate_validator_process_enabled: true
+
+firewall_allowed_tcp_ports:
+  - 22
+  - 30303
+  - 9000
+  - 80
+  - 443
+
+firewall_allowed_udp_ports:
+  - 30303
+  - 9000
+firewall_additional_rules:
+  - "iptables -A INPUT -p tcp --dport 4000 -s 161.35.67.219 -j ACCEPT"
+  - "iptables -A INPUT -p tcp --dport 8545 -s 161.35.67.219 -j ACCEPT"
